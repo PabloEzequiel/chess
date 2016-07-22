@@ -39,7 +39,7 @@ Esta política de privacidad establece el uso de aplicativos móviles <b>Chess l
 <br>El aplicativo no requiere ningún tipo de registro con <b>Chess Lab</b>, pero si requiere que el usuario mantenga una cuenta de Apple App Store (iOS) y/o una cuenta de Google Play Store (Android) para descargar el o las aplicaciones.
 
 <br>
-<br>Información obtenida automáticamente
+# Información obtenida automáticamente!
 
 
 
