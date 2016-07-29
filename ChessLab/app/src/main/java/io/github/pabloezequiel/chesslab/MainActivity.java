@@ -145,7 +145,13 @@ public class MainActivity extends AppCompatActivity
             MainContentSingleton.getInstance().doInit_Training(this, ChessModules.KEY_TRAIN_01_COLLECTION, 0);
 
 
-        } else if (id == R.id.train_store) {
+
+            // TODO: Follow there ...
+
+         // } else if (id == R.id.train_store) {
+
+
+
 
     //  } else if (id == R.id.nav_share) {
 

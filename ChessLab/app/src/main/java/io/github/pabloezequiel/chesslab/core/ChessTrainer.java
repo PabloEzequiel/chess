@@ -271,7 +271,7 @@ public class ChessTrainer {
         String mail   = "chesslab.mobile@gmail.com";
         String titulo =  "El Titulo";
 
-        String asunto =  "Chess Lab: Módulo de Entramiento 01";
+        String asunto =  "Chess Lab: Módulo de Entrenamiento 01";
         String texto_mail = "Sus respuestas a los ejercicios: \n\n" +ChessTrainer.getMail_UserSolution();
 
 
