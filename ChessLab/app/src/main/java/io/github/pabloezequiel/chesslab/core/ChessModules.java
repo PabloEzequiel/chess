@@ -123,4 +123,23 @@ public class ChessModules {
 
     }
 
+
+    /**
+     * An standar key name for each proble
+     * @param MATE_COLLECTION
+     * @param idx
+     * @return
+     */
+    public static String getKeyName(String MATE_COLLECTION, int idx) {
+
+        String sidx = String.format("%05d", idx);
+
+
+        if (MATE_COLLECTION.equals(ChessModules.KEY_TRAIN_01_COLLECTION)) {
+            return "Problem " + sidx + ":";
+        }
+
+        return "chess_mate1_" + sidx;
+    }
+
 }

@@ -57,8 +57,21 @@ public class ChessTrainer {
         this.userSolutions  = new HashMap<String, String>();
 
         this.module  = new Module();
+
+        init();
     }
 
+    /**
+     * I do some initialization to clean the collection
+     */
+    private void init() {
+
+        for (int i=0; i<module.getSizeCollection(); i++) {
+
+            String key = getKeyName(this.KEY_COLLECTION, i);
+            this.userSolutions.put(key, "-");
+        }
+    }
 
     public Map<String, String> getUserSolutions() {
 
@@ -78,15 +91,22 @@ public class ChessTrainer {
 
 
         private String name;
-        private int    size;
+        private int    sizeCollection;
 
         private String mailSubject;
 
         public Module() {
 
-            //this.name = ChessModules.getImageName(KEY_COLLECTION);
+
+            this.name = KEY_COLLECTION;
+
+            this.sizeCollection = ChessModules.getMAX_Mate(KEY_COLLECTION);
         }
 
+
+        public int getSizeCollection() {
+            return sizeCollection;
+        }
 
         public String getName() {
             return name;
@@ -157,6 +177,17 @@ public class ChessTrainer {
 
         String texto_mail = "";
 
+        Module module = ChessTrainer.getInstance().getModule();
+
+        for (int i=0; i< module.getSizeCollection(); i++) {
+
+            String key   = getKeyName(module.getName(), i);
+            String value = (String) userSolutions.get(key);
+
+            texto_mail += "\n" + key + ": " + value;
+        }
+
+        /*
         for (Map.Entry<String, String> entry : userSolutions.entrySet()) {
 
             String key   = entry.getKey();
@@ -165,6 +196,7 @@ public class ChessTrainer {
             texto_mail += "\n" + key + ": " + value;
 
         }
+        */
 
         Log.d(TAG, "Texto del Mail: " + texto_mail);
 
@@ -205,5 +237,17 @@ public class ChessTrainer {
         }
     }
 
+
+    private static String getKeyName(String MATE_COLLECTION, int idx) {
+
+        String sidx = String.format("%02d", idx);
+
+
+        if (MATE_COLLECTION.equals(ChessModules.KEY_TRAIN_01_COLLECTION)) {
+            return "Problem " + sidx + ":";
+        }
+
+        return "Problem " + sidx;
+    }
 
 }
