@@ -21,23 +21,102 @@ public class ChessTrainer {
 
     public static String TAG = ChessTrainer.class.getSimpleName();
 
-    private static String txt_soluciones = "Las soluciones son: ";
+    private Map<String, String> userSolutions;
 
-    private static Map<String, String> userSolutions;
+    private Module module;
+
+    private String KEY_COLLECTION;
+
+    private static ChessTrainer instance;
+
 
     /**
      * @return getInstance()
      */
-    public static Map getInstance() {
+    private static ChessTrainer getInstance() {
 
-        if( userSolutions == null ) {
+        return getInstance(ChessModules.KEY_TRAIN_01_COLLECTION);   // Default Train Coll
+    }
 
-            userSolutions  = new HashMap<String, String>();
+    public static ChessTrainer getInstance(String KEY_COLLECTION) {
+
+        if( instance == null ) {
+
+            instance  = new ChessTrainer(KEY_COLLECTION);
+
         }
+
+        return instance;
+    }
+
+
+    private ChessTrainer (String KEY_COLLECTION) {
+
+        this.KEY_COLLECTION = KEY_COLLECTION;
+
+        this.userSolutions  = new HashMap<String, String>();
+
+        this.module  = new Module();
+    }
+
+
+    public Map<String, String> getUserSolutions() {
 
         return userSolutions;
     }
 
+    public Module getModule() {
+
+        return module;
+    }
+
+
+    /**
+     * Modulo
+     **/
+    class Module {
+
+
+        private String name;
+        private int    size;
+
+        private String mailSubject;
+
+        public Module() {
+
+            //this.name = ChessModules.getImageName(KEY_COLLECTION);
+        }
+
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getMailSubject() {
+            return mailSubject;
+        }
+
+        public void setMailSubject(String mailSubject) {
+            this.mailSubject = mailSubject;
+        }
+
+        @Override
+        public String toString() {
+            return "ChessTrainerModule{" +
+                    "name='" + name + '\'' +
+                    ", mailSubject='" + mailSubject + '\'' +
+                    '}';
+        }
+
+        @Override
+        public int hashCode() {
+            return super.hashCode();
+        }
+    }
 
     /**
      * @param problema_nro
@@ -45,11 +124,11 @@ public class ChessTrainer {
      */
     public static void addUserSolution(int problema_nro, String problema_solution) {
 
-        Map<String, String> solutions = io.github.pabloezequiel.chesslab.core.ChessTrainer.getInstance();
+        Map<String, String> userSolutions = ChessTrainer.getInstance().getUserSolutions();
 
         String key = "PROBLEM_NRO_" + problema_nro;
 
-        solutions.put(key, problema_solution);
+        userSolutions.put(key, problema_solution);
     }
 
     /**
@@ -58,11 +137,11 @@ public class ChessTrainer {
      */
     public static String getUserSolution(int problema_nro) {
 
-        Map<String, String> solutions = io.github.pabloezequiel.chesslab.core.ChessTrainer.getInstance();
+        Map<String, String> userSolutions = ChessTrainer.getInstance().getUserSolutions();
 
         String key = "PROBLEM_NRO_" + problema_nro;
 
-        String user_solution = (String)solutions.get(key);
+        String user_solution = (String)userSolutions.get(key);
 
         return user_solution;
     }
@@ -74,11 +153,11 @@ public class ChessTrainer {
 
         Log.d(TAG, "Texto del Mail");
 
-        Map<String, String>  solutions = io.github.pabloezequiel.chesslab.core.ChessTrainer.getInstance();
+        Map<String, String>  userSolutions = ChessTrainer.getInstance().getUserSolutions();
 
         String texto_mail = "";
 
-        for (Map.Entry<String, String> entry : solutions.entrySet()) {
+        for (Map.Entry<String, String> entry : userSolutions.entrySet()) {
 
             String key   = entry.getKey();
             Object value = entry.getValue();
@@ -91,6 +170,7 @@ public class ChessTrainer {
 
         return texto_mail;
     }
+
 
     /**
      * @param activity

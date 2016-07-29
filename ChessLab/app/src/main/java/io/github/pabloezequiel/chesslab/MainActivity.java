@@ -15,6 +15,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import io.github.pabloezequiel.chesslab.core.ChessModules;
+
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -128,19 +130,19 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_mate1) {
-            MainContentSingleton.getInstance().doInit(this, MainContentSingleton.KEY_MATE_1_COLLECTION, 0);
+            MainContentSingleton.getInstance().doInit(this, ChessModules.KEY_MATE_1_COLLECTION, 0);
             // Handle the camera action
         } else if (id == R.id.nav_mate2) {
-            MainContentSingleton.getInstance().doInit(this, MainContentSingleton.KEY_MATE_2_COLLECTION, 0);
+            MainContentSingleton.getInstance().doInit(this, ChessModules.KEY_MATE_2_COLLECTION, 0);
 
         } else if (id == R.id.nav_mate3) {
-            MainContentSingleton.getInstance().doInit(this, MainContentSingleton.KEY_MATE_3_COLLECTION, 0);
+            MainContentSingleton.getInstance().doInit(this, ChessModules.KEY_MATE_3_COLLECTION, 0);
 
         } else if (id == R.id.nav_mate4) {
-            MainContentSingleton.getInstance().doInit(this, MainContentSingleton.KEY_MATE_4_COLLECTION, 0);
+            MainContentSingleton.getInstance().doInit(this, ChessModules.KEY_MATE_4_COLLECTION, 0);
 
         } else if (id == R.id.train_001) {
-            MainContentSingleton.getInstance().doInit_Training(this, MainContentSingleton.KEY_TRAIN_01_COLLECTION, 0);
+            MainContentSingleton.getInstance().doInit_Training(this, ChessModules.KEY_TRAIN_01_COLLECTION, 0);
 
     //  } else if (id == R.id.nav_share) {
 

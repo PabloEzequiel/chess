@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
@@ -22,6 +23,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import io.github.pabloezequiel.chesslab.core.ChessModules;
 import io.github.pabloezequiel.chesslab.core.ChessSolutions;
 import io.github.pabloezequiel.chesslab.core.ChessTrainer;
 
@@ -43,24 +45,14 @@ public class MainContentSingleton {
     public static String THEME_STYLE_GREEN  = "THEME_STYLE_GREEN";
 
 
-    public static String KEY_MATE_1_COLLECTION = "KEY_MATE_1_COLLECTION";
-    public static String KEY_MATE_2_COLLECTION = "KEY_MATE_2_COLLECTION";
-    public static String KEY_MATE_3_COLLECTION = "KEY_MATE_3_COLLECTION";
-    public static String KEY_MATE_4_COLLECTION = "KEY_MATE_4_COLLECTION";
 
-    public static String KEY_TRAIN_01_COLLECTION = "KEY_TRAIN_01_COLLECTION";
+
 
 
     // puntero
-    private static String MATE_COLLECTION = KEY_MATE_1_COLLECTION;
+    private static String MATE_COLLECTION = ChessModules.KEY_MATE_1_COLLECTION;
     private static int idx = 0;
 
-    private static int MAX_MateEn1 = 8;    // Numeros de "00000" a "00008";
-    private static int MAX_MateEn2 = 11;   // Numeros de "00000" a "00011";
-    private static int MAX_MateEn3 = 16;   // Numeros de "00000" a "00016";
-    private static int MAX_MateEn4 = 15;   // Numeros de "00000" a "00015";
-
-    private static int MAX_Train_01 =17;   // Numeros de "00000" a "00017";   // chess_train_001_00003.png
 
     private MainContent mainContent;
 
@@ -193,7 +185,7 @@ public class MainContentSingleton {
 
         SharedPreferences mySettings = activity.getSharedPreferences(MY_SETTINGS_NAME, Context.MODE_PRIVATE);
 
-        String SAVED_COLLECTION = mySettings.getString(MY_SETTINGS_KEY_COLLECTION, KEY_MATE_1_COLLECTION);
+        String SAVED_COLLECTION = mySettings.getString(MY_SETTINGS_KEY_COLLECTION, ChessModules.KEY_MATE_1_COLLECTION);
         int    SAVED_IDX        = mySettings.getInt(MY_SETTINGS_KEY_IDX, 0);
 
         Log.d(TAG, "doState_recover(): ["+SAVED_COLLECTION+", "+SAVED_IDX+"]");
@@ -224,6 +216,9 @@ public class MainContentSingleton {
         MATE_COLLECTION = MATE_COLLECTION_SELECTED;
         idx = SAVED_IDX;
 
+        // Setup
+        ChessTrainer trainerModulo = (ChessTrainer) ChessTrainer.getInstance(ChessModules.KEY_TRAIN_01_COLLECTION);
+
         doInit_ChessLab(activity);
 
     }
@@ -236,13 +231,17 @@ public class MainContentSingleton {
         mainContent = new MainContentSingleton.MainContent(activity);
 
 
+
+
         Drawable thumb = getImageCollection();
         mainContent.getSeekBar().setThumb(thumb);
         mainContent.getSeekBar().setProgress(idx);
-        mainContent.getSeekBar().setMax(getMAX_Mate(MATE_COLLECTION));
+        mainContent.getSeekBar().setMax(ChessModules.getMAX_Mate(MATE_COLLECTION));
 
 
-        mainContent.getTextViewLeft().setText(getTextCollectionName(MATE_COLLECTION));
+        Resources resources = mainContent.getActivity().getResources();
+
+        mainContent.getTextViewLeft().setText(ChessModules.getTextCollectionName(resources, MATE_COLLECTION));
         mainContent.getTextView().setText(getTextProgressBar(MATE_COLLECTION, idx));
 
 
@@ -316,7 +315,7 @@ public class MainContentSingleton {
                     String userSolution = s.toString();
                     Log.d(TAG, "TRAIN user[Problem "+idx+"]:"  + userSolution);
 
-                    io.github.pabloezequiel.chesslab.core.ChessTrainer.addUserSolution(idx, userSolution);
+                    ChessTrainer.addUserSolution(idx, userSolution);
 
                 }
             });
@@ -416,7 +415,7 @@ public class MainContentSingleton {
 
         Log.d(TAG, "lastProblem("+MATE_COLLECTION+"): " + idx);
 
-        idx = getMAX_Mate(MATE_COLLECTION);
+        idx = ChessModules.getMAX_Mate(MATE_COLLECTION);
         navigate();
     }
 
@@ -444,7 +443,7 @@ public class MainContentSingleton {
 
     private boolean hayNextProblem() {
 
-        boolean hayNext = (idx < getMAX_Mate(MATE_COLLECTION));
+        boolean hayNext = (idx < ChessModules.getMAX_Mate(MATE_COLLECTION));
 
         return hayNext;
     }
@@ -479,12 +478,27 @@ public class MainContentSingleton {
             return;
         }
 
+        Resources resources = mainContent.getActivity().getResources();
+
         // TOAST: LLego al final ...
         // showAviso("LLego al Final");
-        showAvisoDialog("", i18n(R.string.txt_finish), getImageFromId(R.drawable.pieza05_caballo), THEME_STYLE_GREEN);
+        showAvisoDialog("", i18n(resources, R.string.txt_finish), getImageFromId(R.drawable.pieza05_caballo), THEME_STYLE_GREEN);
 
         Log.d(TAG, "LLEGO AL FINAL");
         return;
+    }
+
+
+        /*
+     * Pensando en el futuro
+     * */
+
+    private static String i18n(Resources resources, int id) {
+
+
+        String texto = resources.getString(id);
+
+        return texto;
     }
 
 
@@ -503,7 +517,7 @@ public class MainContentSingleton {
     private void setImageResource(String MATE_COLLECTION, int idx)
     {
 
-        String imagename = getImageName(MATE_COLLECTION, idx);
+        String imagename = ChessModules.getImageName(MATE_COLLECTION, idx);
 
         int res = mainContent.getActivity().getResources().getIdentifier(imagename, "drawable",
                 mainContent.getActivity().getPackageName());
@@ -524,63 +538,19 @@ public class MainContentSingleton {
 
 
     private String getTextCollectionName() {
-        return getTextCollectionName(MATE_COLLECTION);
+
+        Resources resources = mainContent.getActivity().getResources();
+
+        return ChessModules.getTextCollectionName(resources, MATE_COLLECTION);
     }
 
-    private String getTextCollectionName(String MATE_COLLECTION) {
 
-
-        if (MATE_COLLECTION.equals(KEY_MATE_1_COLLECTION)) {
-            return i18n(R.string.menu_mate_en_1);
-        }
-
-        if (MATE_COLLECTION.equals(KEY_MATE_2_COLLECTION)) {
-            return i18n(R.string.menu_mate_en_2);
-        }
-
-        if (MATE_COLLECTION.equals(KEY_MATE_3_COLLECTION)) {
-            return i18n(R.string.menu_mate_en_3);
-        }
-
-        if (MATE_COLLECTION.equals(KEY_MATE_4_COLLECTION)) {
-            return i18n(R.string.menu_mate_en_4);
-        }
-
-        return "";
-
-    }
 
     private String getImageName() {
 
-        return getImageName(MATE_COLLECTION, idx);
+        return ChessModules.getImageName(MATE_COLLECTION, idx);
     }
 
-    private String getImageName(String MATE_COLLECTION, int idx) {
-
-        String sidx = String.format("%05d", idx);
-
-        if (MATE_COLLECTION.equals(KEY_MATE_1_COLLECTION)) {
-            return "chess_mate1_" + sidx;
-        }
-
-        if (MATE_COLLECTION.equals(KEY_MATE_2_COLLECTION)) {
-            return "chess_mate2_" + sidx;
-        }
-
-        if (MATE_COLLECTION.equals(KEY_MATE_3_COLLECTION)) {
-            return "chess_mate3_" + sidx;
-        }
-
-        if (MATE_COLLECTION.equals(KEY_MATE_4_COLLECTION)) {
-            return "chess_mate4_" + sidx;
-        }
-
-        if (MATE_COLLECTION.equals(KEY_TRAIN_01_COLLECTION)) {
-            return "chess_train_001_" + sidx;
-        }
-
-        return "chess_mate1_" + sidx;
-    }
 
 
     /**
@@ -592,27 +562,27 @@ public class MainContentSingleton {
 
         Log.d(TAG, "getNext_MATE_COLLECTION("+MATE_COLLECTION+") ");
 
-        if (MATE_COLLECTION.equals(KEY_MATE_1_COLLECTION)) {
-            return KEY_MATE_2_COLLECTION;
+        if (MATE_COLLECTION.equals(ChessModules.KEY_MATE_1_COLLECTION)) {
+            return ChessModules.KEY_MATE_2_COLLECTION;
         }
 
-        if (MATE_COLLECTION.equals(KEY_MATE_2_COLLECTION)) {
-            return KEY_MATE_3_COLLECTION;
+        if (MATE_COLLECTION.equals(ChessModules.KEY_MATE_2_COLLECTION)) {
+            return ChessModules.KEY_MATE_3_COLLECTION;
         }
 
-        if (MATE_COLLECTION.equals(KEY_MATE_3_COLLECTION)) {
-            return KEY_MATE_4_COLLECTION;
+        if (MATE_COLLECTION.equals(ChessModules.KEY_MATE_3_COLLECTION)) {
+            return ChessModules.KEY_MATE_4_COLLECTION;
         }
 
-        if (MATE_COLLECTION.equals(KEY_MATE_4_COLLECTION)) {
-            return KEY_MATE_4_COLLECTION;
+        if (MATE_COLLECTION.equals(ChessModules.KEY_MATE_4_COLLECTION)) {
+            return ChessModules.KEY_MATE_4_COLLECTION;
         }
 
-        if (MATE_COLLECTION.equals(KEY_TRAIN_01_COLLECTION)) {
-            return KEY_TRAIN_01_COLLECTION;
+        if (MATE_COLLECTION.equals(ChessModules.KEY_TRAIN_01_COLLECTION)) {
+            return ChessModules.KEY_TRAIN_01_COLLECTION;
         }
 
-        return KEY_MATE_1_COLLECTION;
+        return ChessModules.KEY_MATE_1_COLLECTION;
     }
 
 
@@ -626,34 +596,6 @@ public class MainContentSingleton {
     }
 
 
-    /*
-    * Le sumo 1 porque arranco en cero
-    * */
-    private int getMAX_Mate(String MATE_COLLECTION) {
-
-        if (MATE_COLLECTION.equals(KEY_MATE_1_COLLECTION)) {
-            return MAX_MateEn1;
-        }
-
-        if (MATE_COLLECTION.equals(KEY_MATE_2_COLLECTION)) {
-            return MAX_MateEn2;
-        }
-
-        if (MATE_COLLECTION.equals(KEY_MATE_3_COLLECTION)) {
-            return MAX_MateEn3 ;
-        }
-
-        if (MATE_COLLECTION.equals(KEY_MATE_4_COLLECTION)) {
-            return MAX_MateEn4;
-        }
-
-        if (MATE_COLLECTION.equals(KEY_TRAIN_01_COLLECTION)) {
-            return MAX_Train_01;
-        }
-
-        return MAX_MateEn1;
-
-    }
 
 
     private Drawable getImageCollection() {
@@ -667,32 +609,32 @@ public class MainContentSingleton {
         int r_draw = R.drawable.seekbar_24_peon;
 
 
-        if (MATE_COLLECTION.equals(KEY_MATE_1_COLLECTION)) {
+        if (MATE_COLLECTION.equals(ChessModules.KEY_MATE_1_COLLECTION)) {
             r_draw = (small)
                     ? R.drawable.seekbar_24_peon
                     : R.drawable.pieza06_peon;
         }
 
-        if (MATE_COLLECTION.equals(KEY_MATE_2_COLLECTION)) {
+        if (MATE_COLLECTION.equals(ChessModules.KEY_MATE_2_COLLECTION)) {
             r_draw = (small)
                     ? R.drawable.seekbar_32_torre
                     : R.drawable.pieza03_torre;
         }
 
-        if (MATE_COLLECTION.equals(KEY_MATE_3_COLLECTION)) {
+        if (MATE_COLLECTION.equals(ChessModules.KEY_MATE_3_COLLECTION)) {
             r_draw = (small)
                     ? R.drawable.seekbar_34_dama
                     : R.drawable.pieza02_dama;
 
         }
 
-        if (MATE_COLLECTION.equals(KEY_MATE_4_COLLECTION)) {
+        if (MATE_COLLECTION.equals(ChessModules.KEY_MATE_4_COLLECTION)) {
             r_draw = (small)
                     ? R.drawable.seekbar_36_rey
                     : R.drawable.pieza01_rey;
         }
 
-        if (MATE_COLLECTION.equals(KEY_TRAIN_01_COLLECTION)) {
+        if (MATE_COLLECTION.equals(ChessModules.KEY_TRAIN_01_COLLECTION)) {
             r_draw = (small)
                     ? R.drawable.seekbar_36_rey
                     : R.drawable.pieza01_rey;
@@ -711,16 +653,7 @@ public class MainContentSingleton {
         return thumb;
     }
 
-    /*
-    * Pensando en el futuro
-    * */
 
-    private String i18n(int id) {
-
-        String texto = mainContent.getActivity().getResources().getString(id);
-
-        return texto;
-    }
 
 
 
@@ -825,12 +758,14 @@ public class MainContentSingleton {
      */
     private boolean esTraining() {
 
-        if (MATE_COLLECTION.equals(KEY_TRAIN_01_COLLECTION)) {
+        if (MATE_COLLECTION.equals(ChessModules.KEY_TRAIN_01_COLLECTION)) {
             return true;
         }
 
         return false;
     }
+
+
 
 
 }
