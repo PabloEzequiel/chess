@@ -69,7 +69,7 @@ public class ChessTrainer {
         for (int i=0; i<module.getSizeCollection(); i++) {
 
             String key = module.getKeyToHashMap(i);
-            this.userSolutions.put(key, "-");
+            this.userSolutions.put(key, "");
         }
     }
 
@@ -117,7 +117,8 @@ public class ChessTrainer {
             String sidx = String.format("%05d", idx);
 
             String keyName = getName() + "_" + sidx;
-            return name;
+
+            return keyName;
         }
 
 
@@ -174,11 +175,31 @@ public class ChessTrainer {
      */
     public static void addUserSolution(int problema_nro, String problema_solution) {
 
-        Map<String, String> userSolutions = ChessTrainer.getInstance().getUserSolutions();
+        ChessTrainer instance = ChessTrainer.getInstance();
 
-        String key = ChessTrainer.getInstance().getModule().getKeyToHashMap(problema_nro);
+        addUserSolution(instance, problema_nro,  problema_solution);
+    }
+
+    public static void addUserSolution(String KEY_COLLECTION, int problema_nro, String problema_solution) {
+
+        ChessTrainer instance = ChessTrainer.getInstance(KEY_COLLECTION);
+
+        addUserSolution(instance, problema_nro,  problema_solution);
+    }
+
+    private static void addUserSolution(ChessTrainer instance, int problema_nro, String problema_solution) {
+
+        Map<String, String> userSolutions =instance.getUserSolutions();
+
+        String key = instance.getModule().getKeyToHashMap(problema_nro);
+
+        Log.d(TAG, "addUserSolution(key="+key+", "+problema_nro+", "+problema_solution+")");
 
         userSolutions.put(key, problema_solution);
+
+
+        // Loggin
+        getMail_UserSolution(); // logg
     }
 
     /**
@@ -187,7 +208,21 @@ public class ChessTrainer {
      */
     public static String getUserSolution(int problema_nro) {
 
-        Map<String, String> userSolutions = ChessTrainer.getInstance().getUserSolutions();
+        ChessTrainer instance = ChessTrainer.getInstance();
+
+        return getUserSolution(instance, problema_nro);
+    }
+
+    public static String getUserSolution(String KEY_COLLECTION, int problema_nro) {
+
+        ChessTrainer instance = ChessTrainer.getInstance(KEY_COLLECTION);
+
+        return getUserSolution(instance, problema_nro);
+    }
+
+    private static String getUserSolution(ChessTrainer instance, int problema_nro) {
+
+        Map<String, String> userSolutions = instance.getUserSolutions();
 
         String key = ChessTrainer.getInstance().getModule().getKeyToHashMap(problema_nro);
 
@@ -200,8 +235,6 @@ public class ChessTrainer {
      * Texto del Mail con todas las soluciones ingresadas por los usuarios
      */
     public static String getMail_UserSolution() {
-
-        Log.d(TAG, "getMail_UserSolution()");
 
         Map<String, String>  userSolutions = ChessTrainer.getInstance().getUserSolutions();
 
@@ -217,10 +250,14 @@ public class ChessTrainer {
 
             String problem =  (String) module.getProblemName(i);
 
+            if ("".equals(value.trim())) {
+                value = "-";
+            }
+
             texto_mail += "\n" + problem + ": " + value;
         }
 
-        Log.d(TAG, "Texto del Mail: " + texto_mail);
+        // Log.d(TAG, "Texto del Mail: " + texto_mail);
 
         return texto_mail;
     }
@@ -231,24 +268,29 @@ public class ChessTrainer {
      */
     public static void enviarEmail(AppCompatActivity activity){
 
+        String mail   = "chesslab.mobile@gmail.com";
+        String titulo =  "El Titulo";
+
+        String asunto =  "Chess Lab: Módulo de Entramiento 01";
+        String texto_mail = "Sus respuestas a los ejercicios: \n\n" +ChessTrainer.getMail_UserSolution();
+
+
         //Instanciamos un Intent del tipo ACTION_SEND
         Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
         //Definimos la tipologia de datos del contenido dle Email en este caso text/html
         emailIntent.setType("text/html");
         // Indicamos con un Array de tipo String las direcciones de correo a las cuales enviar
-        emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"chesslab.mobile@gmail.com"});
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{ mail });
         // Definimos un titulo para el Email
-        emailIntent.putExtra(android.content.Intent.EXTRA_TITLE, "El Titulo");
+        emailIntent.putExtra(android.content.Intent.EXTRA_TITLE, titulo);
         // Definimos un Asunto para el Email
-        emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "El Asunto");
+        emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, asunto);
 
 
         // Obtenemos la referencia al texto y lo pasamos al Email Intent
         // emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, activity.getString(R.string.chess_txt_mail));
 
-        String texto_mail = io.github.pabloezequiel.chesslab.core.ChessTrainer.getMail_UserSolution();
-
-        emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "Texto extra para el mail ..." +texto_mail);
+        emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, texto_mail);
 
 
         try {

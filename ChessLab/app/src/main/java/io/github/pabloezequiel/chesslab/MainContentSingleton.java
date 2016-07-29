@@ -38,7 +38,6 @@ import io.github.pabloezequiel.chesslab.core.ChessTrainer;
 public class MainContentSingleton {
 
     public static String TAG = MainContentSingleton.class.getSimpleName();
-    // public static String TAG = "MainContentSingleton";
 
 
     public static String THEME_STYLE_INDIGO = "THEME_STYLE_INDIGO";
@@ -69,6 +68,7 @@ public class MainContentSingleton {
         private  ImageView buttonSolution;    // Icon Question Solution
         private  TextView  chessSolution;
 
+        private  TextView  userSolution_lbl;     // Only for training mode
         private  EditText  userSolution;        // Only for training mode
         private  ImageView sendMailSolution;    // Icon Send Mail with Solutions
 
@@ -86,6 +86,8 @@ public class MainContentSingleton {
             chessSolution  = (TextView)  activity.findViewById(R.id.chess_solution);
 
 
+
+            userSolution_lbl  = (TextView)  activity.findViewById(R.id.chess_txt_mail_label);
             userSolution      = (EditText)  activity.findViewById(R.id.chess_txt_mail);
             sendMailSolution  = (ImageView) activity.findViewById(R.id.send_mail);
 
@@ -126,6 +128,11 @@ public class MainContentSingleton {
 
 
         // Training Mode
+
+        public TextView  getUserSolution_Label() {
+            return userSolution_lbl;
+        }
+
         public EditText  getUserSolution() {
             return userSolution;
         }
@@ -231,8 +238,6 @@ public class MainContentSingleton {
         mainContent = new MainContentSingleton.MainContent(activity);
 
 
-
-
         Drawable thumb = getImageCollection();
         mainContent.getSeekBar().setThumb(thumb);
         mainContent.getSeekBar().setProgress(idx);
@@ -243,11 +248,6 @@ public class MainContentSingleton {
 
         mainContent.getTextViewLeft().setText(ChessModules.getTextCollectionName(resources, MATE_COLLECTION));
         mainContent.getTextView().setText(getTextProgressBar(MATE_COLLECTION, idx));
-
-
-
-        //Al final parece que no lo uso ...
-        mainContent.getChessSolution().setText("");
 
 
         // listener
@@ -292,9 +292,12 @@ public class MainContentSingleton {
 
             switchTrainigMode(true);
 
+
             // Edit text
             EditText editText = mainContent.getUserSolution();
 
+            // Set user preload text
+            setUserSolution(MATE_COLLECTION, idx);
 
             editText.addTextChangedListener(new TextWatcher() {
                 @Override
@@ -315,7 +318,7 @@ public class MainContentSingleton {
                     String userSolution = s.toString();
                     Log.d(TAG, "TRAIN user[Problem "+idx+"]:"  + userSolution);
 
-                    ChessTrainer.addUserSolution(idx, userSolution);
+                    ChessTrainer.addUserSolution(MATE_COLLECTION, idx, userSolution);
 
                 }
             });
@@ -374,6 +377,7 @@ public class MainContentSingleton {
         if (trainMode) {
 
             // Training Mode ON:
+            mainContent.getUserSolution_Label().setVisibility(View.VISIBLE);
             mainContent.getUserSolution().setVisibility(View.VISIBLE);
             mainContent.getSendMailSolution().setVisibility(View.VISIBLE);
             mainContent.getButtonSolution().setVisibility(View.GONE);
@@ -381,6 +385,7 @@ public class MainContentSingleton {
         } else {
 
             // Training Mode OFF:
+            mainContent.getUserSolution_Label().setVisibility(View.GONE);
             mainContent.getUserSolution().setVisibility(View.GONE);
             mainContent.getSendMailSolution().setVisibility(View.GONE);
             mainContent.getButtonSolution().setVisibility(View.VISIBLE);
@@ -508,6 +513,8 @@ public class MainContentSingleton {
 
         mainContent.getSeekBar().setProgress(idx);
         setImageResource(MATE_COLLECTION, idx);
+
+        setUserSolution(MATE_COLLECTION, idx);
     }
 
 
@@ -524,6 +531,18 @@ public class MainContentSingleton {
 
         mainContent.getImage().setImageResource(res);
 
+    }
+
+    private void setUserSolution(String MATE_COLLECTION, int idx)
+    {
+
+        if (esTraining()) {
+            EditText editText = mainContent.getUserSolution();
+
+            // Set user preload text
+            String userSolution = ChessTrainer.getUserSolution(MATE_COLLECTION, idx);
+            editText.setText(userSolution);
+        }
     }
 
 

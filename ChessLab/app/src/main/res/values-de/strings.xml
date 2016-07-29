@@ -13,6 +13,7 @@ Longitud: 13.4105300
     <string name="menu_mate_en_3">Checkmate in #3</string>
     <string name="menu_mate_en_4">Checkmate in #4</string>
     <string name="menu_train_001">Train #01</string>
+    <string name="menu_train_store">Chess Lab Shop</string>
 
     <string name="navigation_drawer_open">Öffnen Sie die Navigationsleiste</string>
     <string name="navigation_drawer_close">Schließen Sie die Navigationsleiste</string>
