@@ -21,6 +21,10 @@ Longitud: 13.4105300
     <string name="action_about">über</string>
 
 
+    <!-- Text Labels -->
+    <string name="chess_txt_mail_label">Was würden Sie Ihren Umzug sein?</string>
+
+
     <!-- Settings -->
     <string name="pref_language_setting">Sprache</string>
     <string name="pref_language_titulo">Wählen Sie eine Sprache</string>

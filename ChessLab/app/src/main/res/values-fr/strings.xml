@@ -21,6 +21,10 @@ Longitud: 2.3488000
     <string name="action_about">À propos de</string>
 
 
+    <!-- Text Labels -->
+    <string name="chess_txt_mail_label">Quelle serait votre déménagement?</string>
+
+
     <!-- Settings -->
     <string name="pref_language_setting">Langue</string>
     <string name="pref_language_titulo">Sélectionnez la langue</string>

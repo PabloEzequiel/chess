@@ -21,6 +21,10 @@ Longitud: -9.1333300
     <string name="action_about">Sobre</string>
 
 
+    <!-- Text Labels -->
+    <string name="chess_txt_mail_label">Qual seria o seu movimento?</string>
+
+
     <!-- Settings -->
     <string name="pref_language_setting">Idioma</string>
     <string name="pref_language_titulo">Selecione o idioma</string>
