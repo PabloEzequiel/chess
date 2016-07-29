@@ -139,9 +139,14 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_mate4) {
             MainContentSingleton.getInstance().doInit(this, MainContentSingleton.KEY_MATE_4_COLLECTION, 0);
 
-      //  } else if (id == R.id.nav_share) {
+        } else if (id == R.id.train_001) {
+            MainContentSingleton.getInstance().doInit_Training(this, MainContentSingleton.KEY_TRAIN_01_COLLECTION, 0);
 
-      //  } else if (id == R.id.nav_send) {
+    //  } else if (id == R.id.nav_share) {
+
+
+    //  } else if (id == R.id.nav_send) {
+
 
         }
 

@@ -9,10 +9,13 @@ import android.graphics.drawable.Drawable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
@@ -20,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import io.github.pabloezequiel.chesslab.core.ChessSolutions;
+import io.github.pabloezequiel.chesslab.core.ChessTrainer;
 
 /**
  * Created by Pablo Ezequiel on 7/6/16.
@@ -44,6 +48,8 @@ public class MainContentSingleton {
     public static String KEY_MATE_3_COLLECTION = "KEY_MATE_3_COLLECTION";
     public static String KEY_MATE_4_COLLECTION = "KEY_MATE_4_COLLECTION";
 
+    public static String KEY_TRAIN_01_COLLECTION = "KEY_TRAIN_01_COLLECTION";
+
 
     // puntero
     private static String MATE_COLLECTION = KEY_MATE_1_COLLECTION;
@@ -54,6 +60,7 @@ public class MainContentSingleton {
     private static int MAX_MateEn3 = 16;   // Numeros de "00000" a "00016";
     private static int MAX_MateEn4 = 15;   // Numeros de "00000" a "00015";
 
+    private static int MAX_Train_01 =17;   // Numeros de "00000" a "00017";   // chess_train_001_00003.png
 
     private MainContent mainContent;
 
@@ -67,8 +74,11 @@ public class MainContentSingleton {
         private  TextView  textView;
         private  TextView  textViewLeft;
         private  ImageView image;             // Chess Diagram Image
-        private  ImageView buttonSolution;    // Info Solution
+        private  ImageView buttonSolution;    // Icon Question Solution
         private  TextView  chessSolution;
+
+        private  EditText  userSolution;        // Only for training mode
+        private  ImageView sendMailSolution;    // Icon Send Mail with Solutions
 
 
         private  AppCompatActivity activity;
@@ -82,6 +92,10 @@ public class MainContentSingleton {
             image          = (ImageView) activity.findViewById(R.id.chess_board_image);
             buttonSolution = (ImageView) activity.findViewById(R.id.navigation_05_info);
             chessSolution  = (TextView)  activity.findViewById(R.id.chess_solution);
+
+
+            userSolution      = (EditText)  activity.findViewById(R.id.chess_txt_mail);
+            sendMailSolution  = (ImageView) activity.findViewById(R.id.send_mail);
 
         }
 
@@ -118,6 +132,15 @@ public class MainContentSingleton {
             return chessSolution;
         }
 
+
+        // Training Mode
+        public EditText  getUserSolution() {
+            return userSolution;
+        }
+
+        public ImageView getSendMailSolution() {
+            return sendMailSolution;
+        }
     }
 
 
@@ -175,7 +198,6 @@ public class MainContentSingleton {
 
         Log.d(TAG, "doState_recover(): ["+SAVED_COLLECTION+", "+SAVED_IDX+"]");
 
-
         doInit(activity, SAVED_COLLECTION, SAVED_IDX);
     }
 
@@ -195,6 +217,17 @@ public class MainContentSingleton {
         doInit_ChessLab(activity);
 
     }
+
+    public void doInit_Training(AppCompatActivity activity, String MATE_COLLECTION_SELECTED, int SAVED_IDX) {
+
+        // puntero
+        MATE_COLLECTION = MATE_COLLECTION_SELECTED;
+        idx = SAVED_IDX;
+
+        doInit_ChessLab(activity);
+
+    }
+
 
 
     private void doInit_ChessLab(AppCompatActivity activity) {
@@ -252,16 +285,74 @@ public class MainContentSingleton {
         });
 
 
-        mainContent.getButtonSolution().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        if (esTraining()) {
 
-                String chessSolution = ChessSolutions.getSolution(getImageName());
+            // final
+            final AppCompatActivity finalActivity = activity;
 
-                Snackbar.make(view, chessSolution, Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
+            switchTrainigMode(true);
+
+            // Edit text
+            EditText editText = mainContent.getUserSolution();
+
+
+            editText.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    // TODO Auto-generated method stub
+                }
+
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    // TODO Auto-generated method stub
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+
+                    String userSolution = s.toString();
+                    Log.d(TAG, "TRAIN user[Problem "+idx+"]:"  + userSolution);
+
+                    io.github.pabloezequiel.chesslab.core.ChessTrainer.addUserSolution(idx, userSolution);
+
+                }
+            });
+
+
+            // Listeners
+
+            mainContent.getSendMailSolution().setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    // Envio mail
+                    ChessTrainer.enviarEmail(finalActivity);
+                }
+            });
+
+
+        } else {
+
+            switchTrainigMode(false);
+
+            // Listeners
+
+            mainContent.getButtonSolution().setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View view) {
+
+                    String chessSolution = ChessSolutions.getSolution(getImageName());
+
+                    Snackbar.make(view, chessSolution, Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                }
+            });
+
+        }
 
         // init;
         // firstProblem();
@@ -270,6 +361,34 @@ public class MainContentSingleton {
 
     }
 
+
+
+    /**
+     * Switch traing mode ON y OFF
+     * Train Mode OFF: User only watch the solution when press the question icon.
+     * Train Mode ON:  User write the solution and the user can send a mail to chesslab
+     */
+    private void switchTrainigMode(boolean trainMode) {
+
+        Log.d(TAG, "switchTrainigMode(...)");
+
+        if (trainMode) {
+
+            // Training Mode ON:
+            mainContent.getUserSolution().setVisibility(View.VISIBLE);
+            mainContent.getSendMailSolution().setVisibility(View.VISIBLE);
+            mainContent.getButtonSolution().setVisibility(View.GONE);
+
+        } else {
+
+            // Training Mode OFF:
+            mainContent.getUserSolution().setVisibility(View.GONE);
+            mainContent.getSendMailSolution().setVisibility(View.GONE);
+            mainContent.getButtonSolution().setVisibility(View.VISIBLE);
+
+        }
+
+    }
 
 
     //--[Navigate] ----------------------------------------------------------
@@ -456,6 +575,10 @@ public class MainContentSingleton {
             return "chess_mate4_" + sidx;
         }
 
+        if (MATE_COLLECTION.equals(KEY_TRAIN_01_COLLECTION)) {
+            return "chess_train_001_" + sidx;
+        }
+
         return "chess_mate1_" + sidx;
     }
 
@@ -483,6 +606,10 @@ public class MainContentSingleton {
 
         if (MATE_COLLECTION.equals(KEY_MATE_4_COLLECTION)) {
             return KEY_MATE_4_COLLECTION;
+        }
+
+        if (MATE_COLLECTION.equals(KEY_TRAIN_01_COLLECTION)) {
+            return KEY_TRAIN_01_COLLECTION;
         }
 
         return KEY_MATE_1_COLLECTION;
@@ -518,6 +645,10 @@ public class MainContentSingleton {
 
         if (MATE_COLLECTION.equals(KEY_MATE_4_COLLECTION)) {
             return MAX_MateEn4;
+        }
+
+        if (MATE_COLLECTION.equals(KEY_TRAIN_01_COLLECTION)) {
+            return MAX_Train_01;
         }
 
         return MAX_MateEn1;
@@ -556,6 +687,12 @@ public class MainContentSingleton {
         }
 
         if (MATE_COLLECTION.equals(KEY_MATE_4_COLLECTION)) {
+            r_draw = (small)
+                    ? R.drawable.seekbar_36_rey
+                    : R.drawable.pieza01_rey;
+        }
+
+        if (MATE_COLLECTION.equals(KEY_TRAIN_01_COLLECTION)) {
             r_draw = (small)
                     ? R.drawable.seekbar_36_rey
                     : R.drawable.pieza01_rey;
@@ -678,6 +815,23 @@ public class MainContentSingleton {
         // show it
         alertDialog.show();
     }
+
+
+
+
+    /**
+     *
+     * @return true en Training Mpde
+     */
+    private boolean esTraining() {
+
+        if (MATE_COLLECTION.equals(KEY_TRAIN_01_COLLECTION)) {
+            return true;
+        }
+
+        return false;
+    }
+
 
 }
 

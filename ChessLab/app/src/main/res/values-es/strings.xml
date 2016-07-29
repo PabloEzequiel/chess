@@ -12,6 +12,7 @@ Longitud: -3.7025600
     <string name="menu_mate_en_2">Jaque Mate en #2</string>
     <string name="menu_mate_en_3">Jaque Mate en #3</string>
     <string name="menu_mate_en_4">Jaque Mate en #4</string>
+    <string name="menu_train_001">Train #01</string>
 
     <string name="navigation_drawer_open">Abrir la barra de navegación</string>
     <string name="navigation_drawer_close">Cerrar la barra de navegación</string>

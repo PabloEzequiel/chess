@@ -12,6 +12,7 @@ Longitud: 12.5113300
     <string name="menu_mate_en_2">Scacco matto al #2</string>
     <string name="menu_mate_en_3">Scacco matto al #3</string>
     <string name="menu_mate_en_4">Scacco matto al #4</string>
+    <string name="menu_train_001">Train #01</string>
 
     <string name="navigation_drawer_open">Cassetto navigazione Aperto</string>
     <string name="navigation_drawer_close">Chiudere il cassetto di navigazione</string>
