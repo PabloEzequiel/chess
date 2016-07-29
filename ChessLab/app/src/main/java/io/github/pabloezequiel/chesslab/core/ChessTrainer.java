@@ -68,7 +68,7 @@ public class ChessTrainer {
 
         for (int i=0; i<module.getSizeCollection(); i++) {
 
-            String key = getKeyName(this.KEY_COLLECTION, i);
+            String key = module.getKeyToHashMap(i);
             this.userSolutions.put(key, "-");
         }
     }
@@ -90,7 +90,9 @@ public class ChessTrainer {
     class Module {
 
 
-        private String name;
+        private String name;              // Module name: Example ChessModules.KEY_TRAIN_01_COLLECTION = "KEY_TRAIN_01_COLLECTION";
+          // This is the Key in The HashMap Example "PROBLEM_TRAN_01_NRO_0000"
+
         private int    sizeCollection;
 
         private String mailSubject;
@@ -98,9 +100,24 @@ public class ChessTrainer {
         public Module() {
 
 
-            this.name = KEY_COLLECTION;
+            this.name      = KEY_COLLECTION;
 
             this.sizeCollection = ChessModules.getMAX_Mate(KEY_COLLECTION);
+        }
+
+
+        /**
+         * Example  ChessModules.KEY_TRAIN_01_COLLECTION = "KEY_TRAIN_01_COLLECTION" + _  "00001";
+         *
+         * @param idx
+         * @return
+         */
+        public String getKeyToHashMap(int idx) {
+
+            String sidx = String.format("%05d", idx);
+
+            String keyName = getName() + "_" + sidx;
+            return name;
         }
 
 
@@ -116,6 +133,18 @@ public class ChessTrainer {
             this.name = name;
         }
 
+
+        /**
+         * Numero de Problema para el mail
+         */
+        public String getProblemName(int idx) {
+
+            String sidx = String.format("%02d", idx);
+
+            return "Problema #" + sidx + ": ";
+        }
+
+
         public String getMailSubject() {
             return mailSubject;
         }
@@ -126,8 +155,9 @@ public class ChessTrainer {
 
         @Override
         public String toString() {
-            return "ChessTrainerModule{" +
+            return "Module{" +
                     "name='" + name + '\'' +
+                    ", sizeCollection=" + sizeCollection +
                     ", mailSubject='" + mailSubject + '\'' +
                     '}';
         }
@@ -146,7 +176,7 @@ public class ChessTrainer {
 
         Map<String, String> userSolutions = ChessTrainer.getInstance().getUserSolutions();
 
-        String key = "PROBLEM_NRO_" + problema_nro;
+        String key = ChessTrainer.getInstance().getModule().getKeyToHashMap(problema_nro);
 
         userSolutions.put(key, problema_solution);
     }
@@ -159,7 +189,7 @@ public class ChessTrainer {
 
         Map<String, String> userSolutions = ChessTrainer.getInstance().getUserSolutions();
 
-        String key = "PROBLEM_NRO_" + problema_nro;
+        String key = ChessTrainer.getInstance().getModule().getKeyToHashMap(problema_nro);
 
         String user_solution = (String)userSolutions.get(key);
 
@@ -171,7 +201,7 @@ public class ChessTrainer {
      */
     public static String getMail_UserSolution() {
 
-        Log.d(TAG, "Texto del Mail");
+        Log.d(TAG, "getMail_UserSolution()");
 
         Map<String, String>  userSolutions = ChessTrainer.getInstance().getUserSolutions();
 
@@ -181,22 +211,14 @@ public class ChessTrainer {
 
         for (int i=0; i< module.getSizeCollection(); i++) {
 
-            String key   = getKeyName(module.getName(), i);
-            String value = (String) userSolutions.get(key);
+            String keyName = module.getKeyToHashMap(i);
+            String value = (String) userSolutions.get(keyName);
 
-            texto_mail += "\n" + key + ": " + value;
+
+            String problem =  (String) module.getProblemName(i);
+
+            texto_mail += "\n" + problem + ": " + value;
         }
-
-        /*
-        for (Map.Entry<String, String> entry : userSolutions.entrySet()) {
-
-            String key   = entry.getKey();
-            Object value = entry.getValue();
-
-            texto_mail += "\n" + key + ": " + value;
-
-        }
-        */
 
         Log.d(TAG, "Texto del Mail: " + texto_mail);
 
@@ -238,16 +260,6 @@ public class ChessTrainer {
     }
 
 
-    private static String getKeyName(String MATE_COLLECTION, int idx) {
 
-        String sidx = String.format("%02d", idx);
-
-
-        if (MATE_COLLECTION.equals(ChessModules.KEY_TRAIN_01_COLLECTION)) {
-            return "Problem " + sidx + ":";
-        }
-
-        return "Problem " + sidx;
-    }
 
 }
