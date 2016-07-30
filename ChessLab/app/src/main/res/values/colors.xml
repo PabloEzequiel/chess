@@ -47,6 +47,7 @@
 
 
     <!-- Indiog -->
+    <color name="color_00" >#FFFFFF</color>
     <color name="color_50" >#E8EAF6</color>
     <color name="color_100">#C5CAE9</color>
     <color name="color_200">#9FA8DA</color>
@@ -60,6 +61,7 @@
 
 
     <!-- Green -->
+    <color name="green_color_00" >#FFFFFF</color>
     <color name="green_color_50" >#E8F5E9</color>
     <color name="green_color_100">#C8E6C9</color>
     <color name="green_color_200">#A5D6A7</color>

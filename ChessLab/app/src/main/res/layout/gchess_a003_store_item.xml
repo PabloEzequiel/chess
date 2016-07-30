@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="168dp"
+    android:background="@color/color_100" >
+
+    <!--
+    <ImageView
+        android:id="@+id/imagen_chess_pack"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:transitionName="@string/nombre_transicion_imagen" />
+    -->
+
+    <!--
+    android:background="@color/color_50"
+          android:background="@color/color_400"
+
+
+    <LinearLayout
+        android:id="@+id/gchess_a003_layout"
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal|bottom">
+
+    </LinearLayout>
+    -->
+
+        <ImageView
+            android:id="@+id/imagen_chess_pack"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:background="@color/color_50"
+            android:layout_margin="12dp"
+            android:layout_gravity="top|center"
+            android:src="@drawable/pieza06_peon"
+            android:transitionName="@string/nombre_transicion_imagen"
+            />
+
+
+        <TextView
+            android:id="@+id/nombre_chess_pack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@color/green_color_800"
+            android:maxLines="1"
+            android:padding="16dp"
+            android:textStyle="bold|normal"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+            android:textColor="@android:color/white" />
+
+
+
+
+
+</FrameLayout>

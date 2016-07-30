@@ -13,7 +13,7 @@ Longitud: -9.1333300
     <string name="menu_mate_en_3">Checkmate em #3</string>
     <string name="menu_mate_en_4">Checkmate em #4</string>
     <string name="menu_train_001">Train #01</string>
-    <string name="menu_train_store">Chess Lab Loja</string>
+    <string name="menu_train_store">Chess Lab Store</string><!-- Loja -->
 
     <string name="navigation_drawer_open">Abra a barra de navegação</string>
     <string name="navigation_drawer_close">Feche a barra de navegação</string>
@@ -32,6 +32,8 @@ Longitud: -9.1333300
     <string name="pref_list_idiomas_summary">Idioma do aplicativo</string>
 
     <string name="title_activity_display_message">Sobre</string>
+    <string name="title_activity_chesslab_store">Chess Lab Store</string>
+
 
 
     <!-- Links -->
@@ -42,4 +44,11 @@ Longitud: -9.1333300
     <string name="txt_about">Encontre em cada diagrama, a combinação para ganhar o jogo.</string>
     <string name="txt_about_tal">\'Se prohibiesen Xadrez, eu provavelmente Smuggler.\' (Mikhail Tahl)</string>
 
+    <!-- Store -->
+    <string name="nombre_transicion_imagen">chess pack</string>
+
 </resources>
+
+
+
+

@@ -13,7 +13,7 @@ Longitud: 13.4105300
     <string name="menu_mate_en_3">Checkmate in #3</string>
     <string name="menu_mate_en_4">Checkmate in #4</string>
     <string name="menu_train_001">Train #01</string>
-    <string name="menu_train_store">Chess Lab Shop</string>
+    <string name="menu_train_store">Chess Lab Store</string><!-- Shop -->
 
     <string name="navigation_drawer_open">Öffnen Sie die Navigationsleiste</string>
     <string name="navigation_drawer_close">Schließen Sie die Navigationsleiste</string>
@@ -32,6 +32,8 @@ Longitud: 13.4105300
     <string name="pref_list_idiomas_summary">Anwendungssprache</string>
 
     <string name="title_activity_display_message">über</string>
+    <string name="title_activity_chesslab_store">Chess Lab Store</string>
+
 
 
     <!-- Links -->
@@ -42,6 +44,9 @@ Longitud: 13.4105300
     <string name="txt_about">Finden Sie in jedem Diagramm die Kombination, die das Spiel definiert.</string>
     <string name="txt_about_tal">\'Wenn Schach prohibiesen , wahrscheinlich würde ich Schmuggler.\' (Mikhail Tahl)</string>
 
-
+    <!-- Store -->
+    <string name="nombre_transicion_imagen">chess pack</string>
 
 </resources>
+
+

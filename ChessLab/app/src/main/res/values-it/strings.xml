@@ -13,7 +13,7 @@ Longitud: 12.5113300
     <string name="menu_mate_en_3">Scacco matto al #3</string>
     <string name="menu_mate_en_4">Scacco matto al #4</string>
     <string name="menu_train_001">Train #01</string>
-    <string name="menu_train_store">Chess Lab Conservare</string>
+    <string name="menu_train_store">Chess Lab Store</string><!-- Conservare -->
 
     <string name="navigation_drawer_open">Cassetto navigazione Aperto</string>
     <string name="navigation_drawer_close">Chiudere il cassetto di navigazione</string>
@@ -32,6 +32,8 @@ Longitud: 12.5113300
     <string name="pref_list_idiomas_summary">Lingua dell applicazione</string>
 
     <string name="title_activity_display_message">Informazioni</string>
+    <string name="title_activity_chesslab_store">Chess Lab Store</string>
+
 
 
     <!-- Links -->
@@ -42,4 +44,8 @@ Longitud: 12.5113300
     <string name="txt_about">Trovare in ogni schema, la combinazione per vincere la partita.</string>
     <string name="txt_about_tal">\'Se prohibiesen scacchi, probabilmente avrei Smuggler.\' (Mikhail Tahl)</string>
 
+    <!-- Store -->
+    <string name="nombre_transicion_imagen">chess pack</string>
+
 </resources>
+

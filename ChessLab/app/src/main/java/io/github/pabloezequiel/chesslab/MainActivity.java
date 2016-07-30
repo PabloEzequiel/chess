@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import io.github.pabloezequiel.chesslab.core.ChessModules;
+import io.github.pabloezequiel.chesslab.store.ChessPackActivity;
 
 
 public class MainActivity extends AppCompatActivity
@@ -141,19 +142,23 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_mate4) {
             MainContentSingleton.getInstance().doInit(this, ChessModules.KEY_MATE_4_COLLECTION, 0);
 
+         } else if (id == R.id.train_store) {
+
+            // Main Store
+            MainStoreSingleton.getInstance().doInit(this, ChessModules.KEY_TRAIN_01_COLLECTION, 0);
+
         } else if (id == R.id.train_001) {
-            MainContentSingleton.getInstance().doInit_Training(this, ChessModules.KEY_TRAIN_01_COLLECTION, 0);
-
-
-
-            // TODO: Follow there ...
-
-         // } else if (id == R.id.train_store) {
 
 
 
 
-    //  } else if (id == R.id.nav_share) {
+            Intent intent = new Intent(this, ChessPackActivity.class);
+            startActivityForResult(intent, RESULT_SETTINGS);
+
+            // MainContentSingleton.getInstance().doInit_Training(this, ChessModules.KEY_TRAIN_01_COLLECTION, 0);
+
+
+            //  } else if (id == R.id.nav_share) {
 
 
     //  } else if (id == R.id.nav_send) {

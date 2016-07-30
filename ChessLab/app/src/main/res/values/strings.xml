@@ -46,6 +46,8 @@ https://developer.android.com/guide/topics/resources/providing-resources.html#Al
     <string name="pref_list_idiomas_summary">Application Language</string>
 
     <string name="title_activity_display_message">About</string>
+    <string name="title_activity_chesslab_store">Chess Lab Store</string>
+
 
 
     <!-- Links -->
@@ -56,5 +58,7 @@ https://developer.android.com/guide/topics/resources/providing-resources.html#Al
     <string name="txt_about">Find in each diagram, the combination to win the game.</string>
     <string name="txt_about_tal">\'If Chess was forbidden, I probably would smuggler.\' (Mikhail Tahl)</string>
 
+    <!-- Store -->
+    <string name="nombre_transicion_imagen">chess pack</string>
 
 </resources>

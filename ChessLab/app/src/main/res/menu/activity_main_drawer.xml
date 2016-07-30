@@ -20,17 +20,19 @@
             android:title="@string/menu_mate_en_4" />
 
 
+
         <item
             android:id="@+id/train_001"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="@string/menu_train_001" />
 
-        <!--
+
+
         <item
             android:id="@+id/train_store"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="@string/menu_train_store" />
-        -->
+
 
     </group>
 

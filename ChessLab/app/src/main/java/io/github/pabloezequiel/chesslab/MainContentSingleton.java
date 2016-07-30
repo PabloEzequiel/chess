@@ -739,6 +739,7 @@ public class MainContentSingleton {
     }
 
 
+    /*
     private void showAvisoDialogOLD(String titulo, String message) {
 
         Activity context = mainContent.getActivity();
@@ -767,6 +768,7 @@ public class MainContentSingleton {
         // show it
         alertDialog.show();
     }
+    */
 
 
 
