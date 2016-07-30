@@ -44,6 +44,10 @@ Longitud: 13.4105300
     <string name="txt_about">Finden Sie in jedem Diagramm die Kombination, die das Spiel definiert.</string>
     <string name="txt_about_tal">\'Wenn Schach prohibiesen , wahrscheinlich würde ich Schmuggler.\' (Mikhail Tahl)</string>
 
+    <string name="level_nivel_01">Elementar</string>           <!-- 01 Elementary   -->
+    <string name="level_nivel_05">Mittlere</string>            <!-- 05 Intermediate -->
+    <string name="level_nivel_10">Fortgeschritten</string>     <!-- 10 Advanced     -->
+
     <!-- Store -->
     <string name="nombre_transicion_imagen">chess pack</string>
 

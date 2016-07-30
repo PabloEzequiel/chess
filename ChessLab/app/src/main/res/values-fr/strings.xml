@@ -44,6 +44,10 @@ Longitud: 2.3488000
     <string name="txt_about">Dans chaque diagramme, la combinaison pour gagner le match.</string>
     <string name="txt_about_tal">\'Si prohibiesen Chess, je serais probablement Smuggler.\' (Mikhail Tahl)</string>
 
+    <string name="level_nivel_01">Élémentaire</string>       <!-- 01 Elementary   -->
+    <string name="level_nivel_05">Intermédiaire</string>     <!-- 05 Intermediate -->
+    <string name="level_nivel_10">Avancée</string>           <!-- 10 Advanced     -->
+
     <!-- Store -->
     <string name="nombre_transicion_imagen">chess pack</string>
 

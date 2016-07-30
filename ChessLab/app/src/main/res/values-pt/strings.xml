@@ -44,6 +44,10 @@ Longitud: -9.1333300
     <string name="txt_about">Encontre em cada diagrama, a combinação para ganhar o jogo.</string>
     <string name="txt_about_tal">\'Se prohibiesen Xadrez, eu provavelmente Smuggler.\' (Mikhail Tahl)</string>
 
+    <string name="level_nivel_01">Elementar</string>         <!-- 01 Elementary   -->
+    <string name="level_nivel_05">Intermediário</string>     <!-- 05 Intermediate -->
+    <string name="level_nivel_10">Avançado</string>          <!-- 10 Advanced     -->
+
     <!-- Store -->
     <string name="nombre_transicion_imagen">chess pack</string>
 

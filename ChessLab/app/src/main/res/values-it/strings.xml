@@ -44,6 +44,10 @@ Longitud: 12.5113300
     <string name="txt_about">Trovare in ogni schema, la combinazione per vincere la partita.</string>
     <string name="txt_about_tal">\'Se prohibiesen scacchi, probabilmente avrei Smuggler.\' (Mikhail Tahl)</string>
 
+    <string name="level_nivel_01">Elementare</string>       <!-- 01 Elementary   -->
+    <string name="level_nivel_05">Intermedio</string>       <!-- 05 Intermediate -->
+    <string name="level_nivel_10">Avanzate</string>         <!-- 10 Advanced     -->
+
     <!-- Store -->
     <string name="nombre_transicion_imagen">chess pack</string>
 
