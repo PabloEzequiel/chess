@@ -260,7 +260,7 @@ public class MainContentSingleton {
         Resources resources = mainContent.getActivity().getResources();
 
         mainContent.getTextViewLeft().setText(ChessModules.getTextCollectionName(resources, MATE_COLLECTION));
-        mainContent.getTextView().setText(getTextProgressBar(MATE_COLLECTION, idx));
+        mainContent.getTextView().setText(getTextProgressBar(idx));
 
 
         // listener
@@ -526,7 +526,7 @@ public class MainContentSingleton {
         Log.d(TAG, "navigate("+MATE_COLLECTION+"): " + idx);
 
         mainContent.getSeekBar().setProgress(idx);
-        setImageResource(MATE_COLLECTION, idx);
+        setImageResource(idx);
 
         setUserSolution(MATE_COLLECTION, idx);
     }
@@ -535,10 +535,10 @@ public class MainContentSingleton {
 
     //--[Utiles] ----------------------------------------------------------
 
-    private void setImageResource(String MATE_COLLECTION, int idx)
+    private void setImageResource(int idx)
     {
 
-        String imagename = ChessModules.getImageName(MATE_COLLECTION, idx);
+        String imagename = chessPackSelected.getImageName(idx);
 
         int res = mainContent.getActivity().getResources().getIdentifier(imagename, "drawable",
                 mainContent.getActivity().getPackageName());
@@ -560,7 +560,7 @@ public class MainContentSingleton {
     }
 
 
-    private String getTextProgressBar(String MATE_COLLECTION, int idx) {
+    private String getTextProgressBar(int idx) {
 
         String res =  "[ " + idx+ "/" + this.mainContent.getSeekBar().getMax() + " ]";
 
@@ -580,7 +580,7 @@ public class MainContentSingleton {
 
     private String getImageName() {
 
-        return ChessModules.getImageName(MATE_COLLECTION, idx);
+        return chessPackSelected.getImageName(idx);
     }
 
 
@@ -594,27 +594,27 @@ public class MainContentSingleton {
 
         Log.d(TAG, "getNext_MATE_COLLECTION("+MATE_COLLECTION+") ");
 
-        if (MATE_COLLECTION.equals(ChessModules.KEY_MATE_1_COLLECTION)) {
-            return ChessModules.KEY_MATE_2_COLLECTION;
+        if (MATE_COLLECTION.equals(Const.KEY_PACK_G001_001)) {
+            return Const.KEY_PACK_G001_002;
         }
 
-        if (MATE_COLLECTION.equals(ChessModules.KEY_MATE_2_COLLECTION)) {
-            return ChessModules.KEY_MATE_3_COLLECTION;
+        if (MATE_COLLECTION.equals(Const.KEY_PACK_G001_002)) {
+            return Const.KEY_PACK_G001_003;
         }
 
-        if (MATE_COLLECTION.equals(ChessModules.KEY_MATE_3_COLLECTION)) {
-            return ChessModules.KEY_MATE_4_COLLECTION;
+        if (MATE_COLLECTION.equals(Const.KEY_PACK_G001_003)) {
+            return Const.KEY_PACK_G001_004;
         }
 
-        if (MATE_COLLECTION.equals(ChessModules.KEY_MATE_4_COLLECTION)) {
-            return ChessModules.KEY_MATE_4_COLLECTION;
+        if (MATE_COLLECTION.equals(Const.KEY_PACK_G001_004)) {
+            return Const.KEY_PACK_G001_004;
         }
 
-        if (MATE_COLLECTION.equals(ChessModules.KEY_TRAIN_01_COLLECTION)) {
-            return ChessModules.KEY_TRAIN_01_COLLECTION;
+        if (MATE_COLLECTION.equals(Const.KEY_PACK_G002_001)) {
+            return Const.KEY_PACK_G002_001;
         }
 
-        return ChessModules.KEY_MATE_1_COLLECTION;
+        return Const.KEY_PACK_G001_001;
     }
 
 

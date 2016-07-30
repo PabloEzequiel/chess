@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import io.github.pabloezequiel.chesslab.store.ChessPack;
+import io.github.pabloezequiel.chesslab.store.Const;
 
 /**
  * Created by Pablo Ezequiel on 28/7/16.
@@ -37,7 +38,7 @@ public class ChessTrainer {
      */
     private static ChessTrainer getInstance() {
 
-        return getInstance(ChessModules.KEY_TRAIN_01_COLLECTION);   // Default Train Coll
+        return getInstance(Const.KEY_PACK_G002_001);   // Default Train Coll
     }
 
     public static ChessTrainer getInstance(String KEY_COLLECTION) {

@@ -27,15 +27,23 @@ public class ChessPack {
     private int idDrawable;
     private int idDrawable_thumb;
 
+    private String image_prefix;
 
 
-    public ChessPack(String chessPackID, int size, String nombre, int idDrawable,  int idDrawable_thumb, String level) {
+    public ChessPack(String chessPackID,
+                               int size,
+                           String nombre,
+                          int idDrawable,
+                          int idDrawable_thumb,
+                          String image_prefix,
+                          String level) {
 
         this.chessPackID = chessPackID;
         this.size = size;
         this.nombre = nombre;
         this.idDrawable = idDrawable;
         this.idDrawable_thumb = idDrawable_thumb;
+        this.image_prefix = image_prefix;
         this.level = level;
     }
 
@@ -57,6 +65,18 @@ public class ChessPack {
 
     public String getLevel() {
         return level;
+    }
+
+    /**
+     * Ejemplo  "chess_mate1_" + sidx;
+     * @param idx
+     * @return
+     */
+    public String getImageName(int idx) {
+
+        String sidx = String.format("%05d", idx);
+
+        return this.image_prefix + sidx;
     }
 
     public int getSize() {
@@ -172,6 +192,7 @@ public class ChessPack {
                                       "Mates en #1",
                                       R.drawable.pieza06_peon,
                                       R.drawable.seekbar_24_peon,
+                                      "chess_mate1_",
                                       LEVEL_ELEMENTARY);
             return chessPack;
         }
@@ -183,6 +204,7 @@ public class ChessPack {
                                        "Mates en #2",
                                         R.drawable.pieza03_torre,
                                          R.drawable.seekbar_32_torre,
+                                       "chess_mate2_",
                                        LEVEL_INTERMEDIATE);
             return chessPack;
         }
@@ -194,6 +216,7 @@ public class ChessPack {
                                       "Mates en #3",
                                       R.drawable.pieza02_dama,
                                        R.drawable.seekbar_34_dama,
+                                      "chess_mate3_",
                                       LEVEL_INTERMEDIATE);
             return chessPack;
         }
@@ -205,6 +228,7 @@ public class ChessPack {
                                       "Mates en #4",
                                       R.drawable.pieza01_rey,
                                       R.drawable.seekbar_36_rey,
+                                       "chess_mate4_",
                                        LEVEL_ADVANCED);
             return chessPack;
         }
@@ -216,6 +240,7 @@ public class ChessPack {
                                       "Training",
                                        R.drawable.pieza05_caballo,
                                        R.drawable.seekbar_30_caballo,
+                                       "chess_train_001_",
                                          LEVEL_ADVANCED);
             return chessPack;
         }
@@ -225,11 +250,13 @@ public class ChessPack {
                                       Const.KEY_PACK_G001_001_Size,
                                       "Mates en #1",
                                       R.drawable.pieza06_peon,
-                                       R.drawable.seekbar_24_peon,
+                                      R.drawable.seekbar_24_peon,
+                                      "chess_mate1_",
                                       LEVEL_ELEMENTARY);
 
         return chessPack;
     }
+
 
 
 }

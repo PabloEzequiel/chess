@@ -4,6 +4,7 @@ import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
 
 import io.github.pabloezequiel.chesslab.R;
+import io.github.pabloezequiel.chesslab.store.Const;
 
 /**
  * Created by Pablo Ezequiel on 29/7/16.
@@ -15,41 +16,35 @@ import io.github.pabloezequiel.chesslab.R;
  */
 public class ChessModules {
 
+    /*
     public static String KEY_MATE_1_COLLECTION = "KEY_MATE_1_COLLECTION";
     public static String KEY_MATE_2_COLLECTION = "KEY_MATE_2_COLLECTION";
     public static String KEY_MATE_3_COLLECTION = "KEY_MATE_3_COLLECTION";
     public static String KEY_MATE_4_COLLECTION = "KEY_MATE_4_COLLECTION";
 
     public static String KEY_TRAIN_01_COLLECTION = "KEY_TRAIN_01_COLLECTION";
-
-    public static int MAX_MateEn1 = 8;    // Numeros de "00000" a "00008";
-    public static int MAX_MateEn2 = 11;   // Numeros de "00000" a "00011";
-    public static int MAX_MateEn3 = 16;   // Numeros de "00000" a "00016";
-    public static int MAX_MateEn4 = 15;   // Numeros de "00000" a "00015";
-
-    public static int MAX_Train_01 =17;   // Numeros de "00000" a "00017";   // chess_train_001_00003.png
-
+*/
 
     public static String getTextCollectionName(Resources resources, String MATE_COLLECTION) {
 
 
-        if (MATE_COLLECTION.equals(ChessModules.KEY_MATE_1_COLLECTION)) {
+        if (MATE_COLLECTION.equals(Const.KEY_PACK_G001_001)) {
             return i18n(resources, R.string.menu_mate_en_1);
         }
 
-        if (MATE_COLLECTION.equals(ChessModules.KEY_MATE_2_COLLECTION)) {
+        if (MATE_COLLECTION.equals(Const.KEY_PACK_G001_002)) {
             return i18n(resources, R.string.menu_mate_en_2);
         }
 
-        if (MATE_COLLECTION.equals(ChessModules.KEY_MATE_3_COLLECTION)) {
+        if (MATE_COLLECTION.equals(Const.KEY_PACK_G001_003)) {
             return i18n(resources, R.string.menu_mate_en_3);
         }
 
-        if (MATE_COLLECTION.equals(ChessModules.KEY_MATE_4_COLLECTION)) {
+        if (MATE_COLLECTION.equals(Const.KEY_PACK_G001_004)) {
             return i18n(resources, R.string.menu_mate_en_4);
         }
 
-        if (MATE_COLLECTION.equals(ChessModules.KEY_TRAIN_01_COLLECTION)) {
+        if (MATE_COLLECTION.equals(Const.KEY_PACK_G002_001)) {
             return i18n(resources, R.string.menu_train_001);
         }
 
@@ -67,34 +62,6 @@ public class ChessModules {
         String texto = resources.getString(id);
 
         return texto;
-    }
-
-
-    public static String getImageName(String MATE_COLLECTION, int idx) {
-
-        String sidx = String.format("%05d", idx);
-
-        if (MATE_COLLECTION.equals(ChessModules.KEY_MATE_1_COLLECTION)) {
-            return "chess_mate1_" + sidx;
-        }
-
-        if (MATE_COLLECTION.equals(ChessModules.KEY_MATE_2_COLLECTION)) {
-            return "chess_mate2_" + sidx;
-        }
-
-        if (MATE_COLLECTION.equals(ChessModules.KEY_MATE_3_COLLECTION)) {
-            return "chess_mate3_" + sidx;
-        }
-
-        if (MATE_COLLECTION.equals(ChessModules.KEY_MATE_4_COLLECTION)) {
-            return "chess_mate4_" + sidx;
-        }
-
-        if (MATE_COLLECTION.equals(ChessModules.KEY_TRAIN_01_COLLECTION)) {
-            return "chess_train_001_" + sidx;
-        }
-
-        return "chess_mate1_" + sidx;
     }
 
 
