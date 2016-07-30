@@ -15,6 +15,8 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import io.github.pabloezequiel.chesslab.core.ChessModules;
+import io.github.pabloezequiel.chesslab.store.ChessPack;
+import io.github.pabloezequiel.chesslab.store.Const;
 
 /**
  * Created by Pablo Ezequiel on 29/7/16.
@@ -78,13 +80,17 @@ public class MainStoreSingleton {
 
 
 
-    public void doInit(AppCompatActivity activity, String MATE_COLLECTION_SELECTED, int SAVED_IDX) {
+
+    public void doInit(AppCompatActivity activity, ChessPack chessPack, int SAVED_IDX) {
+
+        String MATE_COLLECTION_SELECTED = chessPack.getChessPackID();
 
         mainContent = new MainStoreSingleton.MainContent(activity);
 
         showAvisoDialog();
 
     }
+
 
 
     private void showAvisoDialog() {
@@ -117,7 +123,7 @@ public class MainStoreSingleton {
             @Override
             public void onClick(View v) {
 
-                MainContentSingleton.getInstance().doInit_Training(appActivity, ChessModules.KEY_TRAIN_01_COLLECTION, 0);
+                MainContentSingleton.getInstance().doInit(appActivity, ChessPack.getInstance(Const.KEY_PACK_G002_001), 0);
 
                 dialog.dismiss();
 
@@ -133,7 +139,8 @@ public class MainStoreSingleton {
             @Override
             public void onClick(View v) {
 
-                MainContentSingleton.getInstance().doInit(appActivity, ChessModules.KEY_MATE_2_COLLECTION, 0);
+                MainContentSingleton.getInstance().doInit(appActivity, ChessPack.getInstance(Const.KEY_PACK_G002_001), 0);
+
 
                 dialog.dismiss();
 

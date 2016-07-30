@@ -3,12 +3,10 @@ package io.github.pabloezequiel.chesslab;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -26,6 +24,8 @@ import android.widget.Toast;
 import io.github.pabloezequiel.chesslab.core.ChessModules;
 import io.github.pabloezequiel.chesslab.core.ChessSolutions;
 import io.github.pabloezequiel.chesslab.core.ChessTrainer;
+import io.github.pabloezequiel.chesslab.store.ChessPack;
+import io.github.pabloezequiel.chesslab.store.Const;
 
 /**
  * Created by Pablo Ezequiel on 7/6/16.
@@ -49,7 +49,9 @@ public class MainContentSingleton {
 
 
     // puntero
-    private static String MATE_COLLECTION = ChessModules.KEY_MATE_1_COLLECTION;
+    ChessPack chessPackSelected = ChessPack.getInstance(Const.KEY_PACK_G001_001);
+
+    private static String MATE_COLLECTION = Const.KEY_PACK_G001_001;
     private static int idx = 0;
 
 
@@ -192,13 +194,15 @@ public class MainContentSingleton {
 
         SharedPreferences mySettings = activity.getSharedPreferences(MY_SETTINGS_NAME, Context.MODE_PRIVATE);
 
-        String SAVED_COLLECTION = mySettings.getString(MY_SETTINGS_KEY_COLLECTION, ChessModules.KEY_MATE_1_COLLECTION);
+        String SAVED_COLLECTION = mySettings.getString(MY_SETTINGS_KEY_COLLECTION, Const.KEY_PACK_G001_001);
         int    SAVED_IDX        = mySettings.getInt(MY_SETTINGS_KEY_IDX, 0);
 
         Log.d(TAG, "doState_recover(): ["+SAVED_COLLECTION+", "+SAVED_IDX+"]");
 
-        doInit(activity, SAVED_COLLECTION, SAVED_IDX);
+        doInit(activity, ChessPack.getInstance(SAVED_COLLECTION), SAVED_IDX);
     }
+
+
 
 
     /**
@@ -207,28 +211,37 @@ public class MainContentSingleton {
      *
      * click desde el punto de menu
      **/
-    public void doInit(AppCompatActivity activity, String MATE_COLLECTION_SELECTED, int SAVED_IDX) {
+
+    public void doInit(AppCompatActivity activity, ChessPack chessPack, int SAVED_IDX) {
+
+        this.chessPackSelected = chessPack;
 
         // puntero
-        MATE_COLLECTION = MATE_COLLECTION_SELECTED;
+        MATE_COLLECTION = chessPackSelected.getChessPackID();
         idx = SAVED_IDX;
 
         doInit_ChessLab(activity);
 
     }
 
-    public void doInit_Training(AppCompatActivity activity, String MATE_COLLECTION_SELECTED, int SAVED_IDX) {
+
+
+    public void doInit_Training(AppCompatActivity activity, ChessPack chessPack, int SAVED_IDX) {
+
+        this.chessPackSelected = chessPack;
 
         // puntero
-        MATE_COLLECTION = MATE_COLLECTION_SELECTED;
+        MATE_COLLECTION = chessPackSelected.getChessPackID();
         idx = SAVED_IDX;
 
         // Setup
-        ChessTrainer trainerModulo = (ChessTrainer) ChessTrainer.getInstance(ChessModules.KEY_TRAIN_01_COLLECTION);
+        ChessTrainer trainerModulo = (ChessTrainer) ChessTrainer.getInstance(Const.KEY_PACK_G002_001);
 
         doInit_ChessLab(activity);
 
     }
+
+
 
 
 
@@ -238,10 +251,10 @@ public class MainContentSingleton {
         mainContent = new MainContentSingleton.MainContent(activity);
 
 
-        Drawable thumb = getImageCollection();
+        Drawable thumb = getImageFromId(chessPackSelected.getIdDrawable_thumb()); // getImageCollection();
         mainContent.getSeekBar().setThumb(thumb);
         mainContent.getSeekBar().setProgress(idx);
-        mainContent.getSeekBar().setMax(ChessModules.getMAX_Mate(MATE_COLLECTION));
+        mainContent.getSeekBar().setMax(chessPackSelected.getSize());
 
 
         Resources resources = mainContent.getActivity().getResources();
@@ -420,7 +433,8 @@ public class MainContentSingleton {
 
         Log.d(TAG, "lastProblem("+MATE_COLLECTION+"): " + idx);
 
-        idx = ChessModules.getMAX_Mate(MATE_COLLECTION);
+        idx = chessPackSelected.getSize();
+
         navigate();
     }
 
@@ -448,7 +462,7 @@ public class MainContentSingleton {
 
     private boolean hayNextProblem() {
 
-        boolean hayNext = (idx < ChessModules.getMAX_Mate(MATE_COLLECTION));
+        boolean hayNext = (idx < chessPackSelected.getSize());
 
         return hayNext;
     }
@@ -477,7 +491,7 @@ public class MainContentSingleton {
 
             String NEXT_MATE_COLLECTION = getNext_MATE_COLLECTION();
 
-            MainContentSingleton.getInstance().doInit(mainContent.getActivity(), NEXT_MATE_COLLECTION, 0);
+            MainContentSingleton.getInstance().doInit(mainContent.getActivity(), ChessPack.getInstance(NEXT_MATE_COLLECTION), 0);
 
             showAvisoDialog();
             return;
@@ -548,7 +562,6 @@ public class MainContentSingleton {
 
     private String getTextProgressBar(String MATE_COLLECTION, int idx) {
 
-        // String res = i18n("Ejercicio: ") + "0"+ "/" + this.mainContent.getSeekBar().getMax();
         String res =  "[ " + idx+ "/" + this.mainContent.getSeekBar().getMax() + " ]";
 
         return res;
@@ -615,56 +628,6 @@ public class MainContentSingleton {
     }
 
 
-
-
-    private Drawable getImageCollection() {
-
-        return getImageCollection(true);
-    }
-
-    private Drawable getImageCollection(boolean small) {
-
-
-        int r_draw = R.drawable.seekbar_24_peon;
-
-
-        if (MATE_COLLECTION.equals(ChessModules.KEY_MATE_1_COLLECTION)) {
-            r_draw = (small)
-                    ? R.drawable.seekbar_24_peon
-                    : R.drawable.pieza06_peon;
-        }
-
-        if (MATE_COLLECTION.equals(ChessModules.KEY_MATE_2_COLLECTION)) {
-            r_draw = (small)
-                    ? R.drawable.seekbar_32_torre
-                    : R.drawable.pieza03_torre;
-        }
-
-        if (MATE_COLLECTION.equals(ChessModules.KEY_MATE_3_COLLECTION)) {
-            r_draw = (small)
-                    ? R.drawable.seekbar_34_dama
-                    : R.drawable.pieza02_dama;
-
-        }
-
-        if (MATE_COLLECTION.equals(ChessModules.KEY_MATE_4_COLLECTION)) {
-            r_draw = (small)
-                    ? R.drawable.seekbar_36_rey
-                    : R.drawable.pieza01_rey;
-        }
-
-        if (MATE_COLLECTION.equals(ChessModules.KEY_TRAIN_01_COLLECTION)) {
-            r_draw = (small)
-                    ? R.drawable.seekbar_36_rey
-                    : R.drawable.pieza01_rey;
-        }
-
-        Drawable thumb = mainContent.getActivity().getResources().getDrawable(r_draw);
-
-        return thumb;
-    }
-
-
     private Drawable getImageFromId(int r_draw) {
 
         Drawable thumb = mainContent.getActivity().getResources().getDrawable(r_draw);
@@ -689,7 +652,9 @@ public class MainContentSingleton {
 
     private void showAvisoDialog() {
 
-        showAvisoDialog("", getTextCollectionName(), getImageCollection(false), THEME_STYLE_INDIGO);
+        Drawable image = getImageFromId(chessPackSelected.getIdDrawable());
+
+        showAvisoDialog("", getTextCollectionName(), image, THEME_STYLE_INDIGO);
     }
 
     private void showAvisoDialog(String titulo, String message, Drawable image, String THEME_STYLE) {
@@ -739,38 +704,6 @@ public class MainContentSingleton {
     }
 
 
-    /*
-    private void showAvisoDialogOLD(String titulo, String message) {
-
-        Activity context = mainContent.getActivity();
-
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
-
-        // set title
-        alertDialogBuilder.setTitle(titulo);
-
-        // set dialog message
-        alertDialogBuilder
-                .setMessage(message)
-                .setCancelable(false)
-                .setPositiveButton("DONE",new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog,int id) {
-                        // if this button is clicked, close
-                        // current activity
-                        // MainActivity.this.finish();
-                    }
-                })
-        ;
-
-        // create alert dialog
-        AlertDialog alertDialog = alertDialogBuilder.create();
-
-        // show it
-        alertDialog.show();
-    }
-    */
-
-
 
 
     /**
@@ -779,11 +712,9 @@ public class MainContentSingleton {
      */
     private boolean esTraining() {
 
-        if (MATE_COLLECTION.equals(ChessModules.KEY_TRAIN_01_COLLECTION)) {
-            return true;
-        }
+        return ChessPack.getInstance(MATE_COLLECTION).esTrainingMode();
 
-        return false;
+
     }
 
 

@@ -16,7 +16,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import io.github.pabloezequiel.chesslab.core.ChessModules;
+import io.github.pabloezequiel.chesslab.store.ChessPack;
 import io.github.pabloezequiel.chesslab.store.ChessPackActivity;
+import io.github.pabloezequiel.chesslab.store.Const;
 
 
 public class MainActivity extends AppCompatActivity
@@ -127,41 +129,42 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
+
         int id = item.getItemId();
 
         if (id == R.id.nav_mate1) {
-            MainContentSingleton.getInstance().doInit(this, ChessModules.KEY_MATE_1_COLLECTION, 0);
-            // Handle the camera action
+
+            MainContentSingleton.getInstance().doInit(this, ChessPack.getInstance(Const.KEY_PACK_G001_001), 0);
+
         } else if (id == R.id.nav_mate2) {
-            MainContentSingleton.getInstance().doInit(this, ChessModules.KEY_MATE_2_COLLECTION, 0);
+
+            MainContentSingleton.getInstance().doInit(this, ChessPack.getInstance(Const.KEY_PACK_G001_002), 0);
 
         } else if (id == R.id.nav_mate3) {
-            MainContentSingleton.getInstance().doInit(this, ChessModules.KEY_MATE_3_COLLECTION, 0);
+
+            MainContentSingleton.getInstance().doInit(this, ChessPack.getInstance(Const.KEY_PACK_G001_003), 0);
 
         } else if (id == R.id.nav_mate4) {
-            MainContentSingleton.getInstance().doInit(this, ChessModules.KEY_MATE_4_COLLECTION, 0);
+
+            MainContentSingleton.getInstance().doInit(this, ChessPack.getInstance(Const.KEY_PACK_G001_004), 0);
 
          } else if (id == R.id.train_store) {
 
             // Main Store
-            MainStoreSingleton.getInstance().doInit(this, ChessModules.KEY_TRAIN_01_COLLECTION, 0);
+            MainContentSingleton.getInstance().doInit_Training(this, ChessPack.getInstance(Const.KEY_PACK_G002_001), 0);
 
         } else if (id == R.id.train_001) {
-
-
 
 
             Intent intent = new Intent(this, ChessPackActivity.class);
             startActivityForResult(intent, RESULT_SETTINGS);
 
-            // MainContentSingleton.getInstance().doInit_Training(this, ChessModules.KEY_TRAIN_01_COLLECTION, 0);
+            // MainContentSingleton.getInstance().doInit_Training(this, ChessPack.getInstance(Const.KEY_PACK_G002_001), 0);
+
+         //  } else if (id == R.id.nav_share) {
 
 
-            //  } else if (id == R.id.nav_share) {
-
-
-    //  } else if (id == R.id.nav_send) {
+         //  } else if (id == R.id.nav_send) {
 
 
         }

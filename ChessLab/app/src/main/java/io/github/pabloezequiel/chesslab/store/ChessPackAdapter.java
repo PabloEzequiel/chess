@@ -57,7 +57,8 @@ public class ChessPackAdapter  extends BaseAdapter {
 
 
         ImageView imagenChessPack = (ImageView) view.findViewById(R.id.imagen_chess_pack);
-        TextView nombreChessPack = (TextView) view.findViewById(R.id.nombre_chess_pack);
+        TextView  nombreChessPack = (TextView) view.findViewById(R.id.nombre_chess_pack);
+        TextView  descrChessPack  = (TextView) view.findViewById(R.id.nombre_chess_pack_down);
 
         final ChessPack item = getItem(position);
 
@@ -67,9 +68,37 @@ public class ChessPackAdapter  extends BaseAdapter {
         imagenChessPack.setImageDrawable(thumb);
 
 
+        // Primary Text
         nombreChessPack.setText(item.getNombre());
 
+        // Secondary Text to Level
+        int levelId = getLevelId(item.getLevel());
+
+        String level = imagenChessPack.getContext().getResources().getString(levelId);
+
+        descrChessPack.setText(level);
+
         return view;
+    }
+
+    /**
+     * Levels
+     */
+    private int getLevelId(String level) {
+
+        if (ChessPack.LEVEL_ELEMENTARY.equals(level)) {
+            return R.string.level_nivel_01;
+        }
+
+        if (ChessPack.LEVEL_INTERMEDIATE.equals(level)) {
+            return R.string.level_nivel_05;
+        }
+
+        if (ChessPack.LEVEL_ADVANCED.equals(level)) {
+            return R.string.level_nivel_10;
+        }
+
+        return R.string.level_nivel_01;
     }
 
 }

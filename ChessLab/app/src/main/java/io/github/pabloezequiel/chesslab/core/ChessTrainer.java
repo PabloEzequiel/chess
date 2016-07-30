@@ -8,6 +8,8 @@ import android.widget.Toast;
 import java.util.HashMap;
 import java.util.Map;
 
+import io.github.pabloezequiel.chesslab.store.ChessPack;
+
 /**
  * Created by Pablo Ezequiel on 28/7/16.
  * <p>
@@ -102,7 +104,8 @@ public class ChessTrainer {
 
             this.name      = KEY_COLLECTION;
 
-            this.sizeCollection = ChessModules.getMAX_Mate(KEY_COLLECTION);
+            this.sizeCollection = ChessPack.getInstance(KEY_COLLECTION).getSize();
+            // this.sizeCollection = ChessModules.getMAX_Mate(KEY_COLLECTION);
         }
 
 
@@ -271,7 +274,7 @@ public class ChessTrainer {
         String mail   = "chesslab.mobile@gmail.com";
         String titulo =  "El Titulo";
 
-        String asunto =  "Chess Lab: Módulo de Entrenamiento 01";
+        String asunto =  "Chess Lab: Módulo de Entrmiento 01";
         String texto_mail = "Sus respuestas a los ejercicios: \n\n" +ChessTrainer.getMail_UserSolution();
 
 

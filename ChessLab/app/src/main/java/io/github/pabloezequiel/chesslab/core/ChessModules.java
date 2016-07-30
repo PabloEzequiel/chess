@@ -98,34 +98,7 @@ public class ChessModules {
     }
 
 
-    /*
-     *
-     * */
-    public static int getMAX_Mate(String MATE_COLLECTION) {
 
-        if (MATE_COLLECTION.equals(ChessModules.KEY_MATE_1_COLLECTION)) {
-            return ChessModules.MAX_MateEn1;
-        }
-
-        if (MATE_COLLECTION.equals(ChessModules.KEY_MATE_2_COLLECTION)) {
-            return ChessModules.MAX_MateEn2;
-        }
-
-        if (MATE_COLLECTION.equals(ChessModules.KEY_MATE_3_COLLECTION)) {
-            return ChessModules.MAX_MateEn3 ;
-        }
-
-        if (MATE_COLLECTION.equals(ChessModules.KEY_MATE_4_COLLECTION)) {
-            return ChessModules.MAX_MateEn4;
-        }
-
-        if (MATE_COLLECTION.equals(ChessModules.KEY_TRAIN_01_COLLECTION)) {
-            return ChessModules.MAX_Train_01;
-        }
-
-        return ChessModules.MAX_MateEn1;
-
-    }
 
 
 }
