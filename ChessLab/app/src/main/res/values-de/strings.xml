@@ -41,6 +41,7 @@ Longitud: 13.4105300
 
     <!-- Txt -->
     <string name="txt_finish">Abgeschlossen</string>
+    <string name="txt_finish_down">Demo</string>
     <string name="txt_about">Finden Sie in jedem Diagramm die Kombination, die das Spiel definiert.</string>
     <string name="txt_about_tal">\'Wenn Schach prohibiesen , wahrscheinlich würde ich Schmuggler.\' (Mikhail Tahl)</string>
 
@@ -53,6 +54,7 @@ Longitud: 13.4105300
     <string name="share">Aktie</string>
     <string name="comunicate">kommunizieren</string>
     <string name="store">Store</string>
+
 
 </resources>
 

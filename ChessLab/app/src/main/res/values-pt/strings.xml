@@ -41,6 +41,7 @@ Longitud: -9.1333300
 
     <!-- Txt -->
     <string name="txt_finish">Finalizados</string>
+    <string name="txt_finish_down">Demo</string>
     <string name="txt_about">Encontre em cada diagrama, a combinação para ganhar o jogo.</string>
     <string name="txt_about_tal">\'Se prohibiesen Xadrez, eu provavelmente Smuggler.\' (Mikhail Tahl)</string>
 
@@ -53,6 +54,7 @@ Longitud: -9.1333300
     <string name="share">Ação</string>
     <string name="comunicate">Comunicare</string>
     <string name="store">Store</string>
+
 
 </resources>
 

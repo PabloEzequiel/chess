@@ -1,7 +1,5 @@
 package io.github.pabloezequiel.chesslab.store;
 
-import io.github.pabloezequiel.chesslab.core.ChessModules;
-
 /**
  * Created by Pablo Ezequiel on 30/7/16.
  * <p/>
@@ -26,5 +24,9 @@ public class Const {
 
     protected static int KEY_PACK_G002_001_Size  = 17;   // Numeros de "00000" a "00017";   // chess_train_001_00003.png
 
+    // Level
+    public static String LEVEL_ELEMENTARY   = "01";
+    public static String LEVEL_INTERMEDIATE = "05";
+    public static String LEVEL_ADVANCED     = "10";
 
 }

@@ -1,6 +1,7 @@
 package io.github.pabloezequiel.chesslab.store;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import io.github.pabloezequiel.chesslab.R;
+import io.github.pabloezequiel.chesslab.core.Util;
 
 /**
  * Created by Pablo Ezequiel on 29/7/16.
@@ -62,43 +64,26 @@ public class ChessPackAdapter  extends BaseAdapter {
 
         final ChessPack item = getItem(position);
 
+        // Image
         int r_draw = item.getIdDrawable();
         Drawable thumb = imagenChessPack.getContext().getResources().getDrawable(r_draw);
 
         imagenChessPack.setImageDrawable(thumb);
 
 
-        // Primary Text
-        nombreChessPack.setText(item.getNombre());
+        // Primary and Secondary Text
+        Resources resources = imagenChessPack.getContext().getResources();
 
-        // Secondary Text to Level
-        int levelId = getLevelId(item.getLevel());
+        String packName = Util.getTextCollectionName(resources, item.getChessPackID());
+        String level    =  Util.getLevelString(resources, item.getLevel());
 
-        String level = imagenChessPack.getContext().getResources().getString(levelId);
-
+        nombreChessPack.setText(packName);
         descrChessPack.setText(level);
 
         return view;
     }
 
-    /**
-     * Levels
-     */
-    private int getLevelId(String level) {
-
-        if (ChessPack.LEVEL_ELEMENTARY.equals(level)) {
-            return R.string.level_nivel_01;
-        }
-
-        if (ChessPack.LEVEL_INTERMEDIATE.equals(level)) {
-            return R.string.level_nivel_05;
-        }
-
-        if (ChessPack.LEVEL_ADVANCED.equals(level)) {
-            return R.string.level_nivel_10;
-        }
-
-        return R.string.level_nivel_01;
-    }
 
 }
+
+

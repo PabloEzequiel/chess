@@ -41,6 +41,7 @@ Longitud: 12.5113300
 
     <!-- Txt -->
     <string name="txt_finish">Finalizzato</string>
+    <string name="txt_finish_down">Demo</string>
     <string name="txt_about">Trovare in ogni schema, la combinazione per vincere la partita.</string>
     <string name="txt_about_tal">\'Se prohibiesen scacchi, probabilmente avrei Smuggler.\' (Mikhail Tahl)</string>
 
@@ -53,6 +54,7 @@ Longitud: 12.5113300
     <string name="share">Quota</string>
     <string name="comunicate">Comunicare</string>
     <string name="store">Store</string>
+
 
 </resources>
 

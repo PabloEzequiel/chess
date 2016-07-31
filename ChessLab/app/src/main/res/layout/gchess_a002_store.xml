@@ -5,7 +5,9 @@
     android:background="@color/color_50">
 
 
-    <!-- Invocada desde el menu Chess Store: Funcioan OK.... -->
+    <!-- Invocada desde el menu Chess Store: Funcioan OK....
+
+     -->
 
     <!--
     <TextView

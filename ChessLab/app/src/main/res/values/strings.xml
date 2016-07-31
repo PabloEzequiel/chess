@@ -54,7 +54,8 @@ https://developer.android.com/guide/topics/resources/providing-resources.html#Al
     <string name="txtCredits"><a href="https://pabloezequiel.github.io/chess">pabloezequiel.github.io/chess</a></string>
 
     <!-- Txt -->
-    <string name="txt_finish">finished</string>
+    <string name="txt_finish">Finished</string>
+    <string name="txt_finish_down">Demo</string>
     <string name="txt_about">Find in each diagram, the combination to win the game.</string>
     <string name="txt_about_tal">\'If Chess was forbidden, I probably would smuggler.\' (Mikhail Tahl)</string>
 
@@ -67,5 +68,22 @@ https://developer.android.com/guide/topics/resources/providing-resources.html#Al
     <string name="share">Share</string>
     <string name="comunicate">Communicate</string>
     <string name="store">Store</string>
+
+
+
+    <!-- Attribution -->
+    <string name="txt_about_version"><b>Version:</b>
+        2.0.1
+    </string>
+
+    <string name="txt_about_author"><b>Author:</b>
+         Pablo Ezequiel Inchausti
+    </string>
+
+    <string name="txt_creative_commons"><b>Attribution:</b>
+        Launch and Store icons built with
+        <a href="https://romannurik.github.io/AndroidAssetStudio/index.html">Android Asset Studio</a>
+        and licensed under <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>
+    </string>
 
 </resources>

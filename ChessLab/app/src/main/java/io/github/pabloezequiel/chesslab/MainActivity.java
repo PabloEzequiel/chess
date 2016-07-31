@@ -16,7 +16,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import io.github.pabloezequiel.chesslab.core.ChessModules;
 import io.github.pabloezequiel.chesslab.store.ChessPack;
 import io.github.pabloezequiel.chesslab.store.ChessPackActivity;
 import io.github.pabloezequiel.chesslab.store.Const;
@@ -35,6 +34,12 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        // App Config
+
+
+        // Main UX:
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 

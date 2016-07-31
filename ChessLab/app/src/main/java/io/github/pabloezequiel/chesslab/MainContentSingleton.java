@@ -21,9 +21,9 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import io.github.pabloezequiel.chesslab.core.ChessModules;
 import io.github.pabloezequiel.chesslab.core.ChessSolutions;
 import io.github.pabloezequiel.chesslab.core.ChessTrainer;
+import io.github.pabloezequiel.chesslab.core.Util;
 import io.github.pabloezequiel.chesslab.store.ChessPack;
 import io.github.pabloezequiel.chesslab.store.Const;
 
@@ -94,6 +94,10 @@ public class MainContentSingleton {
 
         public AppCompatActivity getActivity() {
             return activity;
+        }
+
+        public Resources getResources() {
+            return getActivity().getResources();
         }
 
         public void setActivity(AppCompatActivity activity) {
@@ -257,7 +261,7 @@ public class MainContentSingleton {
 
         Resources resources = mainContent.getActivity().getResources();
 
-        mainContent.getTextViewLeft().setText(ChessModules.getTextCollectionName(resources, MATE_COLLECTION));
+        mainContent.getTextViewLeft().setText(Util.getTextCollectionName(resources, MATE_COLLECTION));
         mainContent.getTextView().setText(getTextProgressBar(idx));
 
 
@@ -492,11 +496,13 @@ public class MainContentSingleton {
 
         Resources resources = mainContent.getActivity().getResources();
 
-        // TOAST: LLego al final ...
-        // showAviso("LLego al Final");
-        showAvisoDialog("", i18n(resources, R.string.txt_finish), getImageFromId(R.drawable.pieza05_caballo), THEME_STYLE_GREEN);
+        // LLego al final ...
+        showAvisoDialog("",
+                i18n(resources, R.string.txt_finish),
+                "Chess Lab Demos",
+                getImageFromId(R.drawable.pieza05_caballo), THEME_STYLE_GREEN);
 
-        Log.d(TAG, "LLEGO AL FINAL");
+
         return;
     }
 
@@ -562,12 +568,6 @@ public class MainContentSingleton {
     }
 
 
-    private String getTextCollectionName() {
-
-        Resources resources = mainContent.getActivity().getResources();
-
-        return ChessModules.getTextCollectionName(resources, MATE_COLLECTION);
-    }
 
 
 
@@ -585,29 +585,11 @@ public class MainContentSingleton {
      * */
     private String getNext_MATE_COLLECTION() {
 
-        Log.d(TAG, "getNext_MATE_COLLECTION("+MATE_COLLECTION+") ");
+        String nextChessPack = chessPackSelected.getNextChessPack();
 
-        if (MATE_COLLECTION.equals(Const.KEY_PACK_G001_001)) {
-            return Const.KEY_PACK_G001_002;
-        }
+        Log.d(TAG, "nextChessPack("+MATE_COLLECTION+" -> "+nextChessPack+") ");
 
-        if (MATE_COLLECTION.equals(Const.KEY_PACK_G001_002)) {
-            return Const.KEY_PACK_G001_003;
-        }
-
-        if (MATE_COLLECTION.equals(Const.KEY_PACK_G001_003)) {
-            return Const.KEY_PACK_G001_004;
-        }
-
-        if (MATE_COLLECTION.equals(Const.KEY_PACK_G001_004)) {
-            return Const.KEY_PACK_G001_004;
-        }
-
-        if (MATE_COLLECTION.equals(Const.KEY_PACK_G002_001)) {
-            return Const.KEY_PACK_G002_001;
-        }
-
-        return Const.KEY_PACK_G001_001;
+        return nextChessPack;
     }
 
 
@@ -645,12 +627,18 @@ public class MainContentSingleton {
 
     private void showAvisoDialog() {
 
+        Resources resources = mainContent.getActivity().getResources();
+
         Drawable image = getImageFromId(chessPackSelected.getIdDrawable());
 
-        showAvisoDialog("", getTextCollectionName(), image, THEME_STYLE_INDIGO);
+        String message      =  Util.getTextCollectionName(resources, chessPackSelected.getChessPackID());
+        String message_down =  Util.getLevelString(resources, chessPackSelected.getLevel());
+
+
+        showAvisoDialog("", message, message_down, image, THEME_STYLE_INDIGO);
     }
 
-    private void showAvisoDialog(String titulo, String message, Drawable image, String THEME_STYLE) {
+    private void showAvisoDialog(String titulo, String message, String message_down, Drawable image, String THEME_STYLE) {
 
         Activity context = mainContent.getActivity();
 
@@ -674,10 +662,10 @@ public class MainContentSingleton {
 
 
         // text
-        TextView tv = (TextView) dialog.findViewById(R.id.gchess_a001_txt);
-        tv.setText(message);
+        TextView tv_up = (TextView) dialog.findViewById(R.id.gchess_a001_txt);
+        tv_up.setText(message);
 
-        tv.setOnClickListener(new View.OnClickListener() {
+        tv_up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
@@ -689,10 +677,17 @@ public class MainContentSingleton {
         if (THEME_STYLE_GREEN.equals(THEME_STYLE)) {
             LinearLayout ll = (LinearLayout) dialog.findViewById(R.id.gchess_a001_txt_layout);
             ll.setBackgroundColor(context.getResources().getColor(R.color.green_color_500));
-            tv.setTextColor(context.getResources().getColor(R.color.colorPrimaryText));
+            // tv_up.setTextColor(context.getResources().getColor(R.color.colorPrimaryText));
         }
+
+
+
         // show
         dialog.show();
+
+        // text_down
+        TextView tv_down = (TextView) dialog.findViewById(R.id.gchess_a001_txt_down);
+        tv_down.setText(message_down);
 
     }
 
