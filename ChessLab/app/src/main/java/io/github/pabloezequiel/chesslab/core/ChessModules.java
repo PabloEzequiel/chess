@@ -16,14 +16,7 @@ import io.github.pabloezequiel.chesslab.store.Const;
  */
 public class ChessModules {
 
-    /*
-    public static String KEY_MATE_1_COLLECTION = "KEY_MATE_1_COLLECTION";
-    public static String KEY_MATE_2_COLLECTION = "KEY_MATE_2_COLLECTION";
-    public static String KEY_MATE_3_COLLECTION = "KEY_MATE_3_COLLECTION";
-    public static String KEY_MATE_4_COLLECTION = "KEY_MATE_4_COLLECTION";
 
-    public static String KEY_TRAIN_01_COLLECTION = "KEY_TRAIN_01_COLLECTION";
-*/
 
     public static String getTextCollectionName(Resources resources, String MATE_COLLECTION) {
 

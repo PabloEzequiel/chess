@@ -1,6 +1,7 @@
 package io.github.pabloezequiel.chesslab;
 
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -132,45 +133,75 @@ public class MainActivity extends AppCompatActivity
 
         int id = item.getItemId();
 
+        ChessPack chessPack = ChessPack.getInstance(Const.KEY_PACK_G001_001);  // Default
+
+        boolean playChess = true;
+
         if (id == R.id.nav_mate1) {
 
-            MainContentSingleton.getInstance().doInit(this, ChessPack.getInstance(Const.KEY_PACK_G001_001), 0);
+            chessPack = ChessPack.getInstance(Const.KEY_PACK_G001_001);
+            // MainContentSingleton.getInstance().doInit(this, ChessPack.getInstance(Const.KEY_PACK_G001_001), 0);
 
         } else if (id == R.id.nav_mate2) {
 
-            MainContentSingleton.getInstance().doInit(this, ChessPack.getInstance(Const.KEY_PACK_G001_002), 0);
+             chessPack = ChessPack.getInstance(Const.KEY_PACK_G001_002);
+
+         //   MainContentSingleton.getInstance().doInit(this, ChessPack.getInstance(Const.KEY_PACK_G001_002), 0);
 
         } else if (id == R.id.nav_mate3) {
 
-            MainContentSingleton.getInstance().doInit(this, ChessPack.getInstance(Const.KEY_PACK_G001_003), 0);
+            chessPack = ChessPack.getInstance(Const.KEY_PACK_G001_003);
+
+
+           // MainContentSingleton.getInstance().doInit(this, ChessPack.getInstance(Const.KEY_PACK_G001_003), 0);
 
         } else if (id == R.id.nav_mate4) {
 
-            MainContentSingleton.getInstance().doInit(this, ChessPack.getInstance(Const.KEY_PACK_G001_004), 0);
+            chessPack = ChessPack.getInstance(Const.KEY_PACK_G001_004);
+
+           //  MainContentSingleton.getInstance().doInit(this, ChessPack.getInstance(Const.KEY_PACK_G001_004), 0);
 
          } else if (id == R.id.train_store) {
 
+            chessPack = ChessPack.getInstance(Const.KEY_PACK_G002_001);
+
             // Main Store
-            MainContentSingleton.getInstance().doInit_Training(this, ChessPack.getInstance(Const.KEY_PACK_G002_001), 0);
+            // MainContentSingleton.getInstance().doInit_Training(this, ChessPack.getInstance(Const.KEY_PACK_G002_001), 0);
 
         } else if (id == R.id.train_001) {
 
+
+            playChess = false;
 
             Intent intent = new Intent(this, ChessPackActivity.class);
             startActivityForResult(intent, RESULT_SETTINGS);
 
             // MainContentSingleton.getInstance().doInit_Training(this, ChessPack.getInstance(Const.KEY_PACK_G002_001), 0);
 
-         //  } else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_share) {
 
+            playChess = false;
+
+            invokeShareIntent(this);
 
          //  } else if (id == R.id.nav_send) {
 
 
         }
 
+
+        if (playChess) {
+
+            MainContentSingleton.getInstance().justDoInit(chessPack,  0);
+
+            MainContentSingleton.getInstance().doInit_ChessLab_public(this);
+
+        }
+
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+
         return true;
     }
 
@@ -209,6 +240,24 @@ public class MainActivity extends AppCompatActivity
     }
 
 
+    /**
+     * Share button
+     * @param activity
+     */
+
+    public static void invokeShareIntent(Activity activity) {
+
+        String textToShare = "Chess Lab for Android!";
+        String urlToShare = "https://play.google.com/store/apps/details?id=io.github.pabloezequiel.chesslab";
+        String text = textToShare + "\n" + urlToShare;
+
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(android.content.Intent.EXTRA_TEXT, text);
+        activity.startActivity(intent);
+    }
+
 }
+
 
 

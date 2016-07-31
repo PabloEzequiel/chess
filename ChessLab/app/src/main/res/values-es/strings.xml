@@ -52,5 +52,7 @@ Longitud: -3.7025600
 
     <!-- Store -->
     <string name="nombre_transicion_imagen">chess pack</string>
+    <string name="share">Compartir</string>
+    <string name="comunicate">Comentar</string>
 
 </resources>

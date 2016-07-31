@@ -190,7 +190,7 @@ public class ChessPack {
             chessPack = new ChessPack(Const.KEY_PACK_G001_001,
                                       Const.KEY_PACK_G001_001_Size,
                                       "Mates en #1",
-                                      R.drawable.pieza06_peon,
+                                      R.drawable.pieza06_h550_peon,
                                       R.drawable.seekbar_24_peon,
                                       "chess_mate1_",
                                       LEVEL_ELEMENTARY);
@@ -202,7 +202,7 @@ public class ChessPack {
             chessPack = new ChessPack(Const.KEY_PACK_G001_002,
                                       Const.KEY_PACK_G001_002_Size,
                                        "Mates en #2",
-                                        R.drawable.pieza03_torre,
+                                        R.drawable.pieza03_h550_torre,
                                          R.drawable.seekbar_32_torre,
                                        "chess_mate2_",
                                        LEVEL_INTERMEDIATE);
@@ -214,7 +214,7 @@ public class ChessPack {
             chessPack = new ChessPack(Const.KEY_PACK_G001_003,
                                       Const.KEY_PACK_G001_003_Size,
                                       "Mates en #3",
-                                      R.drawable.pieza02_dama,
+                                      R.drawable.pieza02_h550_dama,
                                        R.drawable.seekbar_34_dama,
                                       "chess_mate3_",
                                       LEVEL_INTERMEDIATE);
@@ -226,7 +226,7 @@ public class ChessPack {
             chessPack = new ChessPack(Const.KEY_PACK_G001_004,
                                       Const.KEY_PACK_G001_004_Size,
                                       "Mates en #4",
-                                      R.drawable.pieza01_rey,
+                                      R.drawable.pieza01_h550_rey,
                                       R.drawable.seekbar_36_rey,
                                        "chess_mate4_",
                                        LEVEL_ADVANCED);
@@ -238,7 +238,7 @@ public class ChessPack {
             chessPack = new ChessPack(Const.KEY_PACK_G002_001,
                                       Const.KEY_PACK_G002_001_Size,
                                       "Training",
-                                       R.drawable.pieza05_caballo,
+                                       R.drawable.pieza05_h550_caballo,
                                        R.drawable.seekbar_30_caballo,
                                        "chess_train_001_",
                                          LEVEL_ADVANCED);
@@ -249,7 +249,7 @@ public class ChessPack {
         chessPack = new ChessPack(Const.KEY_PACK_G001_001,
                                       Const.KEY_PACK_G001_001_Size,
                                       "Mates en #1",
-                                      R.drawable.pieza06_peon,
+                                      R.drawable.pieza06_h550_peon,
                                       R.drawable.seekbar_24_peon,
                                       "chess_mate1_",
                                       LEVEL_ELEMENTARY);

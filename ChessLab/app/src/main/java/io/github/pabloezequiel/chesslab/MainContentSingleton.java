@@ -212,7 +212,12 @@ public class MainContentSingleton {
      * click desde el punto de menu
      **/
 
-    public void doInit(AppCompatActivity activity, ChessPack chessPack, int SAVED_IDX) {
+    public void justDoInit(ChessPack chessPack, int SAVED_IDX) {
+
+        // El tema es que con esto no se si necesito un
+        // Singleton o no y esto no es estático ....
+        // Igualmente NO ES LO MISMO variables de instancia... que singleton ....
+        // con lo cual safo...
 
         this.chessPackSelected = chessPack;
 
@@ -220,7 +225,26 @@ public class MainContentSingleton {
         MATE_COLLECTION = chessPackSelected.getChessPackID();
         idx = SAVED_IDX;
 
+    }
+
+    public void doInit(AppCompatActivity activity, ChessPack chessPack, int SAVED_IDX) {
+
+        this.justDoInit(chessPack,  SAVED_IDX);
+
+        this.doInit_ChessLab_public(activity);
+
+
+        /* fase I
+        this.chessPackSelected = chessPack;
+
+        // puntero
+        MATE_COLLECTION = chessPackSelected.getChessPackID();
+        idx = SAVED_IDX;
+        */
+
+        /* fase II
         doInit_ChessLab(activity);
+        */
 
     }
 
@@ -228,19 +252,38 @@ public class MainContentSingleton {
 
     public void doInit_Training(AppCompatActivity activity, ChessPack chessPack, int SAVED_IDX) {
 
+        this.justDoInit(chessPack,  SAVED_IDX);
+
+        this.doInit_ChessLab_public(activity);
+
+        /* fase I
         this.chessPackSelected = chessPack;
 
         // puntero
         MATE_COLLECTION = chessPackSelected.getChessPackID();
         idx = SAVED_IDX;
+        */
 
+        /* fase II (c/ training)
         // Setup
         ChessTrainer trainerModulo = (ChessTrainer) ChessTrainer.getInstance(Const.KEY_PACK_G002_001);
 
         doInit_ChessLab(activity);
+        */
 
     }
 
+    public void doInit_ChessLab_public(AppCompatActivity activity) {
+
+        boolean isTraining = chessPackSelected.esTrainingMode();
+
+        if (isTraining) {
+            // Setup
+            ChessTrainer trainerModulo = (ChessTrainer) ChessTrainer.getInstance(Const.KEY_PACK_G002_001);
+        }
+
+        doInit_ChessLab(activity);
+    }
 
 
 

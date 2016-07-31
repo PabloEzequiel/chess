@@ -1,5 +1,6 @@
 package io.github.pabloezequiel.chesslab.store;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -7,6 +8,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
+import io.github.pabloezequiel.chesslab.MainActivity;
+import io.github.pabloezequiel.chesslab.MainContentSingleton;
 import io.github.pabloezequiel.chesslab.R;
 
 /**
@@ -48,9 +51,29 @@ public class ChessPackActivity  extends AppCompatActivity
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-        ChessPack item = (ChessPack) parent.getItemAtPosition(position);
+        ChessPack itemChessPack = (ChessPack) parent.getItemAtPosition(position);
 
-        Log.d(TAG, "itemClick " + item);
+        Log.d(TAG, "itemClick " + itemChessPack);
+
+
+        MainContentSingleton.getInstance().justDoInit(itemChessPack,  0);
+
+        // LLamado tambien en onPause() ...
+        MainContentSingleton.getInstance().doState_persist(this);
+
+        // Do a refresh to Main Activity
+        Intent refresh = new Intent(this, MainActivity.class);
+        refresh.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        startActivity(refresh);
+        finish();
+
+        // MainContentSingleton.getInstance().doInit(this, item, 0);
+
+        // Log.d(TAG, "finish " );
+        // this.finish();  // Que hace ??? // Parece que nada ...
+
+
+       // parent.getContext().getActivity().onBackPressed();
 
         /*
         Intent intent = new Intent(this, ActividadDetalle.class);
