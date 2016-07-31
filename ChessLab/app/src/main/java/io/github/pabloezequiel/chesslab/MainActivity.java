@@ -155,22 +155,28 @@ public class MainActivity extends AppCompatActivity
 
             chessPack = ChessPack.getInstance(Const.KEY_PACK_G001_004);
 
+            /*
          } else if (id == R.id.train_store) {
 
             chessPack = ChessPack.getInstance(Const.KEY_PACK_G002_001);
 
-        } else if (id == R.id.train_001) {
+            */
+
+        } else if (id == R.id.chesslab_store) {
 
             playChess = false;
 
             Intent intent = new Intent(this, ChessPackActivity.class);
             startActivityForResult(intent, RESULT_SETTINGS);
 
+
+
         } else if (id == R.id.nav_share) {
 
             playChess = false;
 
             invokeShareIntent(this);
+
 
             //  } else if (id == R.id.nav_send) {
 

@@ -100,24 +100,14 @@ public class ChessPack {
 
     public static ChessPack[] ITEMS = {
 
-        ChessPack.getInstance(Const.KEY_PACK_G001_001),
-        ChessPack.getInstance(Const.KEY_PACK_G001_002),
-        ChessPack.getInstance(Const.KEY_PACK_G001_003),
-        ChessPack.getInstance(Const.KEY_PACK_G001_004),
-        ChessPack.getInstance(Const.KEY_PACK_G002_001),
 
-        // Repetidos
-        ChessPack.getInstance(Const.KEY_PACK_G001_004),
-        ChessPack.getInstance(Const.KEY_PACK_G002_001),
+            ChessPack.getInstance(Const.KEY_PACK_G002_001),
         ChessPack.getInstance(Const.KEY_PACK_G001_001),
         ChessPack.getInstance(Const.KEY_PACK_G001_002),
         ChessPack.getInstance(Const.KEY_PACK_G001_003),
+        ChessPack.getInstance(Const.KEY_PACK_G001_004),
 
-        ChessPack.getInstance(Const.KEY_PACK_G001_003),
-        ChessPack.getInstance(Const.KEY_PACK_G001_004),
-        ChessPack.getInstance(Const.KEY_PACK_G001_001),
-        ChessPack.getInstance(Const.KEY_PACK_G001_002),
-        ChessPack.getInstance(Const.KEY_PACK_G002_001),
+
 
     };
 
@@ -187,72 +177,83 @@ public class ChessPack {
 
         if (Const.KEY_PACK_G001_001.equals(chessPackID)) {
 
-            chessPack = new ChessPack(Const.KEY_PACK_G001_001,
-                                      Const.KEY_PACK_G001_001_Size,
-                                      "Mates en #1",
-                                      R.drawable.pieza06_h550_peon,
-                                      R.drawable.seekbar_24_peon,
-                                      "chess_mate1_",
-                                      LEVEL_ELEMENTARY);
+            chessPack = new ChessPack(
+                    Const.KEY_PACK_G001_001,
+                    Const.KEY_PACK_G001_001_Size,
+                    "Mates en #1",
+                    R.mipmap.ic_store_peon,       //R.drawable.pieza06_h550_peon,
+                    R.drawable.seekbar_24_peon,
+                    "chess_mate1_",
+                    LEVEL_ELEMENTARY);
+
             return chessPack;
         }
 
         if (Const.KEY_PACK_G001_002.equals(chessPackID)) {
 
-            chessPack = new ChessPack(Const.KEY_PACK_G001_002,
-                                      Const.KEY_PACK_G001_002_Size,
-                                       "Mates en #2",
-                                        R.drawable.pieza03_h550_torre,
-                                         R.drawable.seekbar_32_torre,
-                                       "chess_mate2_",
-                                       LEVEL_INTERMEDIATE);
+            chessPack = new ChessPack(
+                    Const.KEY_PACK_G001_002,
+                    Const.KEY_PACK_G001_002_Size,
+                    "Mates en #2",
+                    R.mipmap.ic_store_torre,       // R.drawable.pieza03_h550_torre,
+                    R.drawable.seekbar_32_torre,
+                    "chess_mate2_",
+                    LEVEL_INTERMEDIATE);
+
             return chessPack;
         }
 
         if (Const.KEY_PACK_G001_003.equals(chessPackID)) {
 
-            chessPack = new ChessPack(Const.KEY_PACK_G001_003,
-                                      Const.KEY_PACK_G001_003_Size,
-                                      "Mates en #3",
-                                      R.drawable.pieza02_h550_dama,
-                                       R.drawable.seekbar_34_dama,
-                                      "chess_mate3_",
-                                      LEVEL_INTERMEDIATE);
+            chessPack = new ChessPack(
+                    Const.KEY_PACK_G001_003,
+                    Const.KEY_PACK_G001_003_Size,
+                    "Mates en #3",
+                    R.mipmap.ic_store_dama,       // R.drawable.pieza02_h550_dama,
+                    R.drawable.seekbar_34_dama,
+                    "chess_mate3_",
+                    LEVEL_INTERMEDIATE);
+
             return chessPack;
         }
 
         if (Const.KEY_PACK_G001_004.equals(chessPackID)) {
 
-            chessPack = new ChessPack(Const.KEY_PACK_G001_004,
-                                      Const.KEY_PACK_G001_004_Size,
-                                      "Mates en #4",
-                                      R.drawable.pieza01_h550_rey,
-                                      R.drawable.seekbar_36_rey,
-                                       "chess_mate4_",
-                                       LEVEL_ADVANCED);
+            chessPack = new ChessPack(
+                    Const.KEY_PACK_G001_004,
+                    Const.KEY_PACK_G001_004_Size,
+                    "Mates en #4",
+                    R.mipmap.ic_store_rey,       //  R.drawable.pieza01_h550_rey,
+                    R.drawable.seekbar_36_rey,
+                    "chess_mate4_",
+                    LEVEL_ADVANCED);
+
             return chessPack;
         }
 
         if (Const.KEY_PACK_G002_001.equals(chessPackID)) {
 
-            chessPack = new ChessPack(Const.KEY_PACK_G002_001,
-                                      Const.KEY_PACK_G002_001_Size,
-                                      "Training",
-                                       R.drawable.pieza05_h550_caballo,
-                                       R.drawable.seekbar_30_caballo,
-                                       "chess_train_001_",
-                                         LEVEL_ADVANCED);
+            chessPack = new ChessPack(
+                    Const.KEY_PACK_G002_001,
+                    Const.KEY_PACK_G002_001_Size,
+                    "Training",
+                    R.mipmap.ic_store_caballo,      //R.drawable.pieza05_h550_caballo,
+                    R.drawable.seekbar_30_caballo,
+                    "chess_train_001_",
+                    LEVEL_ELEMENTARY);
+
             return chessPack;
         }
 
         // Antes de que de error, entrego el paquete default
-        chessPack = new ChessPack(Const.KEY_PACK_G001_001,
-                                      Const.KEY_PACK_G001_001_Size,
-                                      "Mates en #1",
-                                      R.drawable.pieza06_h550_peon,
-                                      R.drawable.seekbar_24_peon,
-                                      "chess_mate1_",
-                                      LEVEL_ELEMENTARY);
+        chessPack = new ChessPack(
+                Const.KEY_PACK_G001_001,
+                Const.KEY_PACK_G001_001_Size,
+                "Mates en #1",
+                R.mipmap.ic_store_peon, // R.drawable.pieza06_h550_peon,
+                R.drawable.seekbar_24_peon,
+                "chess_mate1_",
+                LEVEL_ELEMENTARY);
 
         return chessPack;
     }

@@ -52,6 +52,7 @@ Longitud: 2.3488000
     <string name="nombre_transicion_imagen">chess pack</string>
     <string name="share">Partager</string>
     <string name="comunicate">Communiquer</string>
+    <string name="store">Store</string>
 
 </resources>
 

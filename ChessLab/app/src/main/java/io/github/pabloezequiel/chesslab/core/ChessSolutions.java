@@ -17,7 +17,7 @@ public class ChessSolutions {
 
     public static String TAG = ChessSolutions.class.getSimpleName();
 
-    private static Map<String, String> chessProblems;
+
     private static Map<String, String> chessProblems_utf8;
 
     private ChessSolutions() {}
@@ -27,10 +27,9 @@ public class ChessSolutions {
      */
     public static Map getInstance() {
 
-        if( chessProblems == null ) {
+        if( chessProblems_utf8 == null ) {
 
-            chessProblems      = new HashMap<String, String>();
-            chessProblems_utf8 = new HashMap<String, String>();
+             chessProblems_utf8 = new HashMap<String, String>();
 
             init();
         }
@@ -42,7 +41,7 @@ public class ChessSolutions {
     private static void init() {
 
         initUTF8();
-        initNormal();
+
     }
 
     private static void initUTF8() {
@@ -117,56 +116,29 @@ public class ChessSolutions {
         chessProblems_utf8.put("chess_mate4_00014","1. ♖xb8+ ♚a7 2. ♕d4+ ♚xb8 3. ♖e8+ ♚c7 4. ♕d8#       ");
         chessProblems_utf8.put("chess_mate4_00015","1. ♗g5+ ♜f6 2. ♗xf6+ gxf6 3. ♕g7+ ♚e8 4. ♕f7#       ");
 
-    }
-
-
-    private static void initNormal() {
-
-        Log.d(TAG, "init(): ");
-
-        chessProblems.put("chess_mate1_00000","1. Rg8#        ");
-        chessProblems.put("chess_mate1_00001","1. Nd7#        ");
-        chessProblems.put("chess_mate1_00002","1. dxe8=N#     ");
-        chessProblems.put("chess_mate1_00003","1. fxg8=N#     ");
-        chessProblems.put("chess_mate1_00004","1. f8=Q#       ");
-        chessProblems.put("chess_mate1_00005","1. Ng6#        ");
-        chessProblems.put("chess_mate1_00006","1. Nd6#        ");
-        chessProblems.put("chess_mate1_00007","1. Rd8#        ");
-        chessProblems.put("chess_mate1_00008","1. f3#         ");
-        chessProblems.put("chess_mate2_00000","1. Qb8+ Nxb8 2. Rf8#        ");
-        chessProblems.put("chess_mate2_00001","1. Qxa7+ Kxa7 2. Ra3#        ");
-        chessProblems.put("chess_mate2_00002","1. Rxc6+ bxc6 2. Ba6#        ");
-        chessProblems.put("chess_mate2_00003","1. Qxc6+ bxc6 2. Ba6#        ");
-        chessProblems.put("chess_mate2_00004","1. Nb5+ cxb5 2. Nb7#        ");
-        chessProblems.put("chess_mate2_00005","1. Qf6 Qxf6 2. Rxe8#        ");
-        chessProblems.put("chess_mate2_00006","1. Qxf7+ Kxf7 2. Bxe6#        ");
-        chessProblems.put("chess_mate2_00007","1. Qf6 exf6 2. Rxe8#        ");
-        chessProblems.put("chess_mate2_00008","1. Qxf8+ Qxf8 2. Rxh7#        ");
-        chessProblems.put("chess_mate2_00009","1. Qg7+ Nxg7 2. Nh6#        ");
-        chessProblems.put("chess_mate2_00010","1. Qe6+ Nxe6 2. Nh6#        ");
-        chessProblems.put("chess_mate2_00011","1. Qh6+ Kxh6 2. Bf8#        ");
-        chessProblems.put("chess_mate3_00000","1. Qg6 fxg6 2. Rxg7+ Kf8 3. Nxg6#        ");
-        chessProblems.put("chess_mate3_00001","1. Qd8+ Kxd8 2. Nc6+ Ke8 3. Rd8#        ");
-        chessProblems.put("chess_mate3_00002","1. Rg6+ fxg6 2. Qh8+ Kxh8 3. Rxf8#        ");
-        chessProblems.put("chess_mate3_00003","1. Ne7+ Kh8 2. Rxh7+ Kxh7 3. Rh1#        ");
-        chessProblems.put("chess_mate3_00004","1. Qh6+ Bxh6 2. Ng5+ Kh8 3. Rh7#        ");
-        chessProblems.put("chess_mate3_00005","1. Rh8+ Bxh8 2. Qh7+ Kf8 3. Qxh8#        ");
-        chessProblems.put("chess_mate3_00006","1. Nf6+ Bxf6 2. Qxg6+ Bg7 3. Qh7#        ");
-        chessProblems.put("chess_mate3_00007","1. Qd8+ Kxd8 2. Bg5+ Ke8 3. Rd8#        ");
-        chessProblems.put("chess_mate3_00008","1. Qxh4+ Kxh4 2. Rh7+ Kg5 3. h4#        ");
-        chessProblems.put("chess_mate3_00009","1. Nxh7+ Rxh7 2. Qh6+ Rxh6 3. Bxh6#        ");
-        chessProblems.put("chess_mate3_00010","1. Qxd4 Nxd4 2. Nf6+ Kf8 3. Bh6#        ");
-        chessProblems.put("chess_mate3_00011","1. Qh6 Qxe5 2. Qxh7+ Kxh7 3. Kg2#        ");
-        chessProblems.put("chess_mate3_00012","1. Nc7+ Qxc7 2. Qxf7+ Bxf7 3. Bxf7#        ");
-        chessProblems.put("chess_mate3_00013","1. Qg7+ Rxg7 2. hxg7+ Kg8 3. Rh8#        ");
-        chessProblems.put("chess_mate3_00014","1. Qxh7+ Nxh7 2. Bxh7+ Kf8 3. Ng6#        ");
-        chessProblems.put("chess_mate3_00015","1. Bxb7+ Kxb7 2. Qxb5+ Kc8 3. Qc6#        ");
-        chessProblems.put("chess_mate3_00016","1. Rh7+ Kxh7 2. Qh2+ Kg7 3. Qh6#        ");
-        chessProblems.put("chess_mate4_00000","1. g4+ fxg4+ 2. Nxg4+ g5 3. Qe8+ Qg6 4. Nf6#        ");
-        chessProblems.put("chess_mate4_00001","1. Qxh7+ Kxh7 2. Rh3+ Bxh3 3. Rxh3+ Kg6 4. Rh6#     ");
-        chessProblems.put("chess_mate4_00002","1. Qxe5+ Nxe5 2. Bf6+ Kh6 3. Bg7+ Kh5 4. Rh6#       ");
+        chessProblems_utf8.put("chess_train_001_00000","1. ♖h1#      ");
+        chessProblems_utf8.put("chess_train_001_00001","1. ♗a6#      ");
+        chessProblems_utf8.put("chess_train_001_00002","1. ♖h1#      ");
+        chessProblems_utf8.put("chess_train_001_00003","1. ♖d8#      ");
+        chessProblems_utf8.put("chess_train_001_00004","1. ♖g1#      ");
+        chessProblems_utf8.put("chess_train_001_00005","1. ♗xh7#     ");
+        chessProblems_utf8.put("chess_train_001_00006","1. ♕xf7#     ");
+        chessProblems_utf8.put("chess_train_001_00007","1. ♕xh7#     ");
+        chessProblems_utf8.put("chess_train_001_00008","1. ♕h5#      ");
+        chessProblems_utf8.put("chess_train_001_00009","1. ♖d8#      ");
+        chessProblems_utf8.put("chess_train_001_00010","1. ♖e8#      ");
+        chessProblems_utf8.put("chess_train_001_00011","1. ♘g6#      ");
+        chessProblems_utf8.put("chess_train_001_00012","1. fxg8=♘#   ");
+        chessProblems_utf8.put("chess_train_001_00013","1. ♗a6#      ");
+        chessProblems_utf8.put("chess_train_001_00014","1. f8=♕#     ");
+        chessProblems_utf8.put("chess_train_001_00015","1. ♕c6#      ");
+        chessProblems_utf8.put("chess_train_001_00016","1. dxe8=♘#   ");
+        chessProblems_utf8.put("chess_train_001_00017","1. ♘d7#      ");
 
     }
+
+
+
 
     public static String getSolution(String chessProblem) {
 
