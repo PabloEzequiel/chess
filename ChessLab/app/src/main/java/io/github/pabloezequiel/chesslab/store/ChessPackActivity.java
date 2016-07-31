@@ -67,32 +67,6 @@ public class ChessPackActivity  extends AppCompatActivity
         startActivity(refresh);
         finish();
 
-        // MainContentSingleton.getInstance().doInit(this, item, 0);
-
-        // Log.d(TAG, "finish " );
-        // this.finish();  // Que hace ??? // Parece que nada ...
-
-
-       // parent.getContext().getActivity().onBackPressed();
-
-        /*
-        Intent intent = new Intent(this, ActividadDetalle.class);
-        intent.putExtra(ActividadDetalle.EXTRA_PARAM_ID, item.getId());
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-
-            ActivityOptionsCompat activityOptions =
-                    ActivityOptionsCompat.makeSceneTransitionAnimation(
-                            this,
-                            new Pair<View, String>(view.findViewById(R.id.imagen_chess_pack),
-                                    ActividadDetalle.VIEW_NAME_HEADER_IMAGE)
-                    );
-
-            ActivityCompat.startActivity(this, intent, activityOptions.toBundle());
-        } else {
-            startActivity(intent);
-        }
-        */
 
     }
 }

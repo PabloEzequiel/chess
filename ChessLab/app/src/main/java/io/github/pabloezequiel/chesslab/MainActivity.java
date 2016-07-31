@@ -101,9 +101,11 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
+
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
@@ -140,43 +142,29 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_mate1) {
 
             chessPack = ChessPack.getInstance(Const.KEY_PACK_G001_001);
-            // MainContentSingleton.getInstance().doInit(this, ChessPack.getInstance(Const.KEY_PACK_G001_001), 0);
 
         } else if (id == R.id.nav_mate2) {
 
              chessPack = ChessPack.getInstance(Const.KEY_PACK_G001_002);
 
-         //   MainContentSingleton.getInstance().doInit(this, ChessPack.getInstance(Const.KEY_PACK_G001_002), 0);
-
         } else if (id == R.id.nav_mate3) {
 
             chessPack = ChessPack.getInstance(Const.KEY_PACK_G001_003);
-
-
-           // MainContentSingleton.getInstance().doInit(this, ChessPack.getInstance(Const.KEY_PACK_G001_003), 0);
 
         } else if (id == R.id.nav_mate4) {
 
             chessPack = ChessPack.getInstance(Const.KEY_PACK_G001_004);
 
-           //  MainContentSingleton.getInstance().doInit(this, ChessPack.getInstance(Const.KEY_PACK_G001_004), 0);
-
          } else if (id == R.id.train_store) {
 
             chessPack = ChessPack.getInstance(Const.KEY_PACK_G002_001);
 
-            // Main Store
-            // MainContentSingleton.getInstance().doInit_Training(this, ChessPack.getInstance(Const.KEY_PACK_G002_001), 0);
-
         } else if (id == R.id.train_001) {
-
 
             playChess = false;
 
             Intent intent = new Intent(this, ChessPackActivity.class);
             startActivityForResult(intent, RESULT_SETTINGS);
-
-            // MainContentSingleton.getInstance().doInit_Training(this, ChessPack.getInstance(Const.KEY_PACK_G002_001), 0);
 
         } else if (id == R.id.nav_share) {
 
@@ -184,7 +172,7 @@ public class MainActivity extends AppCompatActivity
 
             invokeShareIntent(this);
 
-         //  } else if (id == R.id.nav_send) {
+            //  } else if (id == R.id.nav_send) {
 
 
         }

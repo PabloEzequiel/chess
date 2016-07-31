@@ -44,10 +44,6 @@ public class MainContentSingleton {
     public static String THEME_STYLE_GREEN  = "THEME_STYLE_GREEN";
 
 
-
-
-
-
     // puntero
     ChessPack chessPackSelected = ChessPack.getInstance(Const.KEY_PACK_G001_001);
 
@@ -166,7 +162,7 @@ public class MainContentSingleton {
 
     //--[Init]------------------------------------------------------------
 
-    private static final String MY_SETTINGS_NAME           = "ChessLab03";
+    private static final String MY_SETTINGS_NAME           = "ChessLab";
     private static final String MY_SETTINGS_KEY_COLLECTION = "ChessProblem_Collection";
     private static final String MY_SETTINGS_KEY_IDX        = "ChessProblem_Idx";
 
@@ -199,8 +195,11 @@ public class MainContentSingleton {
 
         Log.d(TAG, "doState_recover(): ["+SAVED_COLLECTION+", "+SAVED_IDX+"]");
 
-        doInit(activity, ChessPack.getInstance(SAVED_COLLECTION), SAVED_IDX);
-    }
+        MainContentSingleton.getInstance().justDoInit( ChessPack.getInstance(SAVED_COLLECTION),  SAVED_IDX);
+
+        MainContentSingleton.getInstance().doInit_ChessLab_public(activity);
+
+     }
 
 
 
@@ -227,58 +226,14 @@ public class MainContentSingleton {
 
     }
 
-    public void doInit(AppCompatActivity activity, ChessPack chessPack, int SAVED_IDX) {
 
-        this.justDoInit(chessPack,  SAVED_IDX);
-
-        this.doInit_ChessLab_public(activity);
-
-
-        /* fase I
-        this.chessPackSelected = chessPack;
-
-        // puntero
-        MATE_COLLECTION = chessPackSelected.getChessPackID();
-        idx = SAVED_IDX;
-        */
-
-        /* fase II
-        doInit_ChessLab(activity);
-        */
-
-    }
-
-
-
-    public void doInit_Training(AppCompatActivity activity, ChessPack chessPack, int SAVED_IDX) {
-
-        this.justDoInit(chessPack,  SAVED_IDX);
-
-        this.doInit_ChessLab_public(activity);
-
-        /* fase I
-        this.chessPackSelected = chessPack;
-
-        // puntero
-        MATE_COLLECTION = chessPackSelected.getChessPackID();
-        idx = SAVED_IDX;
-        */
-
-        /* fase II (c/ training)
-        // Setup
-        ChessTrainer trainerModulo = (ChessTrainer) ChessTrainer.getInstance(Const.KEY_PACK_G002_001);
-
-        doInit_ChessLab(activity);
-        */
-
-    }
 
     public void doInit_ChessLab_public(AppCompatActivity activity) {
 
         boolean isTraining = chessPackSelected.esTrainingMode();
 
         if (isTraining) {
-            // Setup
+            // Setup - El trainer module que va a guardar el mail del usuario.
             ChessTrainer trainerModulo = (ChessTrainer) ChessTrainer.getInstance(Const.KEY_PACK_G002_001);
         }
 
@@ -412,9 +367,6 @@ public class MainContentSingleton {
 
         }
 
-        // init;
-        // firstProblem();
-
         goToProblem(MATE_COLLECTION, idx);
 
     }
@@ -516,10 +468,6 @@ public class MainContentSingleton {
      * Si es el ultimo problem: sube de nivel
      * Si es el ultimo probleme del ultimo nive ... Toast
      */
-    public void superNextProblem_old() {
-        showAvisoDialog();
-    }
-
     public void superNextProblem() {
 
         Log.d(TAG, "superNextProblem("+MATE_COLLECTION+"): " + idx);
@@ -534,7 +482,9 @@ public class MainContentSingleton {
 
             String NEXT_MATE_COLLECTION = getNext_MATE_COLLECTION();
 
-            MainContentSingleton.getInstance().doInit(mainContent.getActivity(), ChessPack.getInstance(NEXT_MATE_COLLECTION), 0);
+            MainContentSingleton.getInstance().justDoInit( ChessPack.getInstance(NEXT_MATE_COLLECTION),  0);
+
+            MainContentSingleton.getInstance().doInit_ChessLab_public(mainContent.getActivity());
 
             showAvisoDialog();
             return;
