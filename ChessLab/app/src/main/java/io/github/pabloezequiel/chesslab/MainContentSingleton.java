@@ -262,7 +262,12 @@ public class MainContentSingleton {
         Resources resources = mainContent.getActivity().getResources();
 
         mainContent.getTextViewLeft().setText(Util.getTextCollectionName(resources, MATE_COLLECTION));
-        mainContent.getTextView().setText(getTextProgressBar(idx));
+
+        String textoProgressBar = MainContentSingleton.getTextProgressBar_static(idx, mainContent.getSeekBar().getMax());
+
+        mainContent.getTextView().setText(textoProgressBar);
+
+
 
 
         // listener
@@ -281,7 +286,9 @@ public class MainContentSingleton {
                 progress = progresValue;
 
                 // Cambio el problema mientras se desliza la SeekBar
-                mainContent.getTextView().setText("[ " + progress + "/" + seekBar.getMax() + " ]");
+                String txtProgressBar = MainContentSingleton.getTextProgressBar_static(progress, seekBar.getMax());
+                mainContent.getTextView().setText(txtProgressBar);
+
                 idx = progresValue;
                 navigate();
             }
@@ -291,7 +298,9 @@ public class MainContentSingleton {
             public void onStopTrackingTouch(SeekBar seekBar) {
 
                 // Cambio el problema cuando se suelta la seekBar
-                mainContent.getTextView().setText("[ " + progress + "/" + seekBar.getMax() + " ]");
+                String txtProgressBar = MainContentSingleton.getTextProgressBar_static(progress, seekBar.getMax());
+                mainContent.getTextView().setText(txtProgressBar);
+
                 idx = progress;
                 navigate();
 
@@ -559,14 +568,6 @@ public class MainContentSingleton {
     }
 
 
-    private String getTextProgressBar(int idx) {
-
-        String res =  "[ " + idx+ "/" + this.mainContent.getSeekBar().getMax() + " ]";
-
-        return res;
-
-    }
-
 
 
 
@@ -704,6 +705,21 @@ public class MainContentSingleton {
 
 
     }
+
+
+    //--[Static Util Funciotns ]------
+
+    private static String getTextProgressBar_static(int idx, int max) {
+
+        int actual = idx + 1;
+        int total  = max + 1;
+
+        String res =  "[ " + actual + "/" + total + " ]";
+
+        return res;
+    }
+
+
 
 
 

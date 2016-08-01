@@ -72,15 +72,15 @@ https://developer.android.com/guide/topics/resources/providing-resources.html#Al
 
 
     <!-- Attribution -->
-    <string name="txt_about_version"><b>Version:</b>
-        2.0.1
+    <string name="txt_about_version" translatable="false"><b>Version:</b>
+        3.1.0
     </string>
 
-    <string name="txt_about_author"><b>Author:</b>
+    <string name="txt_about_author" translatable="false"><b>Author:</b>
          Pablo Ezequiel Inchausti
     </string>
 
-    <string name="txt_creative_commons"><b>Attribution:</b>
+    <string name="txt_creative_commons" translatable="false"><b>Attribution:</b>
         Launch and Store icons built with
         <a href="https://romannurik.github.io/AndroidAssetStudio/index.html">Android Asset Studio</a>
         and licensed under <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>
