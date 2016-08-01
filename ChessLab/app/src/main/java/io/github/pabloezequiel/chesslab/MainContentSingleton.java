@@ -499,7 +499,7 @@ public class MainContentSingleton {
         // LLego al final ...
         showAvisoDialog("",
                 i18n(resources, R.string.txt_finish),
-                "Chess Lab Demos",
+                "Store Demo",
                 getImageFromId(R.drawable.pieza05_caballo), THEME_STYLE_GREEN);
 
 

@@ -135,6 +135,25 @@ public class ChessSolutions {
         chessProblems_utf8.put("chess_train_001_00016","1. dxe8=♘#   ");
         chessProblems_utf8.put("chess_train_001_00017","1. ♘d7#      ");
 
+        chessProblems_utf8.put("chess_train_002_00000","1 ... ♞f3#   ");
+        chessProblems_utf8.put("chess_train_002_00001","1 ... ♛xc2#   ");
+        chessProblems_utf8.put("chess_train_002_00002","1 ... ♝h3+ 2. ♔xh3 ♛f1#   ");
+        chessProblems_utf8.put("chess_train_002_00003","1 ... ♞f4+ 2. ♘xf4 ♛h1#   ");
+        chessProblems_utf8.put("chess_train_002_00004","1 ... ♜xh3+ 2. gxh3 ♛h2#   ");
+        chessProblems_utf8.put("chess_train_002_00005","1 ... ♛xh3+ 2. ♔xh3 ♜h1#   ");
+        chessProblems_utf8.put("chess_train_002_00006","1 ... ♛xe4+ 2. ♕xe4 ♜6f2#   ");
+        chessProblems_utf8.put("chess_train_002_00007","1 ... ♛g1+ 2. ♔xg1 ♜e1#   ");
+        chessProblems_utf8.put("chess_train_002_00008","1 ... ♛g2+ 2. ♔xg2 ♜xg3#   ");
+        chessProblems_utf8.put("chess_train_002_00009","1 ... ♜xe2 2. ♕xe2 ♛c3#   ");
+        chessProblems_utf8.put("chess_train_002_00010","1 ... ♜a4+ 2. ♗xa4 b4#   ");
+        chessProblems_utf8.put("chess_train_002_00011","1 ... ♛g1+ 2. ♖xg1 ♞f2#   ");
+        chessProblems_utf8.put("chess_train_002_00012","1 ... ♛h3 2. gxh3 ♞xh3#   ");
+        chessProblems_utf8.put("chess_train_002_00013","1 ... ♛f3+ 2. ♘xf3 exf3+ 3. ♔f1 ♜d1#   ");
+        chessProblems_utf8.put("chess_train_002_00014","1 ... ♛f1+ 2. ♗g1 ♛f3+ 3. ♗xf3 ♝xf3#   ");
+        chessProblems_utf8.put("chess_train_002_00015","1 ... ♝xg5+ 2. ♔xg5 f6+ 3. ♔g6 ♛g4#   ");
+        chessProblems_utf8.put("chess_train_002_00016","1 ... ♛g2+ 2. ♕xg2 ♜xe1+ 3. ♕f1 ♜xf1#   ");
+        chessProblems_utf8.put("chess_train_002_00017","1 ... ♜c1+ 2. ♔xc1 ♜e1+ 3. ♘xe1 ♛xe1#   ");
+
     }
 
 

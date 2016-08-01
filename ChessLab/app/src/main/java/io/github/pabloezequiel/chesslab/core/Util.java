@@ -82,6 +82,10 @@ public class Util {
             return resources.getString(R.string.menu_train_001);
         }
 
+        if (MATE_COLLECTION.equals(Const.KEY_PACK_G002_002)) {
+            return resources.getString(R.string.menu_train_002);
+        }
+
         return "";
 
     }

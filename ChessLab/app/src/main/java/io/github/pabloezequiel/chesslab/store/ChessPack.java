@@ -116,6 +116,7 @@ public class ChessPack {
     public static ChessPack[] ITEMS = {
 
             ChessPack.getInstance(Const.KEY_PACK_G002_001),
+            ChessPack.getInstance(Const.KEY_PACK_G002_002),
             ChessPack.getInstance(Const.KEY_PACK_G001_001),
             ChessPack.getInstance(Const.KEY_PACK_G001_002),
             ChessPack.getInstance(Const.KEY_PACK_G001_003),
@@ -250,7 +251,7 @@ public class ChessPack {
             chessPack = new ChessPack(
                     Const.KEY_PACK_G002_001,
                     Const.KEY_PACK_G002_001_Size,
-                    R.mipmap.ic_store_caballo,      //R.drawable.pieza05_h550_caballo,
+                    R.mipmap.ic_store_frances,      //R.drawable.pieza05_h550_caballo,
                     R.drawable.seekbar_30_caballo,
                     "chess_train_001_",
                     null,      // Next Chess Pack to Train
@@ -258,6 +259,21 @@ public class ChessPack {
 
             return chessPack;
         }
+
+        if (Const.KEY_PACK_G002_002.equals(chessPackID)) {
+
+            chessPack = new ChessPack(
+                    Const.KEY_PACK_G002_002,
+                    Const.KEY_PACK_G002_002_Size,
+                    R.mipmap.ic_store_alfil,      //R.drawable.pieza05_h550_caballo,
+                    R.drawable.seekbar_30_alfil,
+                    "chess_train_002_",
+                    null,      // Next Chess Pack to Train
+                    Const.LEVEL_INTERMEDIATE);
+
+            return chessPack;
+        }
+
 
         // Antes de que de error, entrego el paquete default
         chessPack = new ChessPack(

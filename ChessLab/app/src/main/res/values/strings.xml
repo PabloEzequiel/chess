@@ -85,5 +85,6 @@ https://developer.android.com/guide/topics/resources/providing-resources.html#Al
         <a href="https://romannurik.github.io/AndroidAssetStudio/index.html">Android Asset Studio</a>
         and licensed under <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>
     </string>
+    <string name="menu_train_002">Black Checkmates</string>
 
 </resources>

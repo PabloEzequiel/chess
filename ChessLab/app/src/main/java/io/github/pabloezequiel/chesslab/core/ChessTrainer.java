@@ -38,7 +38,7 @@ public class ChessTrainer {
      */
     private static ChessTrainer getInstance() {
 
-        return getInstance(Const.KEY_PACK_G002_001);   // Default Train Coll
+        return getInstance(Const.KEY_PACK_G001_001);   // Default Train Coll
     }
 
     public static ChessTrainer getInstance(String KEY_COLLECTION) {
