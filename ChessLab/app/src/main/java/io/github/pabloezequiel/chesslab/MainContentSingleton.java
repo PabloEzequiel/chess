@@ -3,16 +3,18 @@ package io.github.pabloezequiel.chesslab;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
@@ -20,6 +22,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import io.github.pabloezequiel.chesslab.core.ChessSolutions;
+import io.github.pabloezequiel.chesslab.core.ChessTrainer;
+import io.github.pabloezequiel.chesslab.core.Util;
+import io.github.pabloezequiel.chesslab.store.ChessPack;
+import io.github.pabloezequiel.chesslab.store.Const;
 
 /**
  * Created by Pablo Ezequiel on 7/6/16.
@@ -32,27 +38,17 @@ import io.github.pabloezequiel.chesslab.core.ChessSolutions;
 public class MainContentSingleton {
 
     public static String TAG = MainContentSingleton.class.getSimpleName();
-    // public static String TAG = "MainContentSingleton";
 
 
     public static String THEME_STYLE_INDIGO = "THEME_STYLE_INDIGO";
     public static String THEME_STYLE_GREEN  = "THEME_STYLE_GREEN";
 
 
-    public static String KEY_MATE_1_COLLECTION = "KEY_MATE_1_COLLECTION";
-    public static String KEY_MATE_2_COLLECTION = "KEY_MATE_2_COLLECTION";
-    public static String KEY_MATE_3_COLLECTION = "KEY_MATE_3_COLLECTION";
-    public static String KEY_MATE_4_COLLECTION = "KEY_MATE_4_COLLECTION";
-
-
     // puntero
-    private static String MATE_COLLECTION = KEY_MATE_1_COLLECTION;
-    private static int idx = 0;
+    ChessPack chessPackSelected = ChessPack.getInstance(Const.KEY_PACK_G001_001);
 
-    private static int MAX_MateEn1 = 8;    // Numeros de "00000" a "00008";
-    private static int MAX_MateEn2 = 11;   // Numeros de "00000" a "00011";
-    private static int MAX_MateEn3 = 16;   // Numeros de "00000" a "00016";
-    private static int MAX_MateEn4 = 15;   // Numeros de "00000" a "00015";
+    private static String MATE_COLLECTION = Const.KEY_PACK_G001_001;
+    private static int idx = 0;
 
 
     private MainContent mainContent;
@@ -67,8 +63,12 @@ public class MainContentSingleton {
         private  TextView  textView;
         private  TextView  textViewLeft;
         private  ImageView image;             // Chess Diagram Image
-        private  ImageView buttonSolution;    // Info Solution
+        private  ImageView buttonSolution;    // Icon Question Solution
         private  TextView  chessSolution;
+
+        private  TextView  userSolution_lbl;     // Only for training mode
+        private  EditText  userSolution;        // Only for training mode
+        private  ImageView sendMailSolution;    // Icon Send Mail with Solutions
 
 
         private  AppCompatActivity activity;
@@ -83,11 +83,21 @@ public class MainContentSingleton {
             buttonSolution = (ImageView) activity.findViewById(R.id.navigation_05_info);
             chessSolution  = (TextView)  activity.findViewById(R.id.chess_solution);
 
+
+
+            userSolution_lbl  = (TextView)  activity.findViewById(R.id.chess_txt_mail_label);
+            userSolution      = (EditText)  activity.findViewById(R.id.chess_txt_mail);
+            sendMailSolution  = (ImageView) activity.findViewById(R.id.send_mail);
+
         }
 
 
         public AppCompatActivity getActivity() {
             return activity;
+        }
+
+        public Resources getResources() {
+            return getActivity().getResources();
         }
 
         public void setActivity(AppCompatActivity activity) {
@@ -118,6 +128,20 @@ public class MainContentSingleton {
             return chessSolution;
         }
 
+
+        // Training Mode
+
+        public TextView  getUserSolution_Label() {
+            return userSolution_lbl;
+        }
+
+        public EditText  getUserSolution() {
+            return userSolution;
+        }
+
+        public ImageView getSendMailSolution() {
+            return sendMailSolution;
+        }
     }
 
 
@@ -142,7 +166,7 @@ public class MainContentSingleton {
 
     //--[Init]------------------------------------------------------------
 
-    private static final String MY_SETTINGS_NAME           = "ChessLab03";
+    private static final String MY_SETTINGS_NAME           = "ChessLab";
     private static final String MY_SETTINGS_KEY_COLLECTION = "ChessProblem_Collection";
     private static final String MY_SETTINGS_KEY_IDX        = "ChessProblem_Idx";
 
@@ -170,14 +194,18 @@ public class MainContentSingleton {
 
         SharedPreferences mySettings = activity.getSharedPreferences(MY_SETTINGS_NAME, Context.MODE_PRIVATE);
 
-        String SAVED_COLLECTION = mySettings.getString(MY_SETTINGS_KEY_COLLECTION, KEY_MATE_1_COLLECTION);
+        String SAVED_COLLECTION = mySettings.getString(MY_SETTINGS_KEY_COLLECTION, Const.KEY_PACK_G001_001);
         int    SAVED_IDX        = mySettings.getInt(MY_SETTINGS_KEY_IDX, 0);
 
         Log.d(TAG, "doState_recover(): ["+SAVED_COLLECTION+", "+SAVED_IDX+"]");
 
+        MainContentSingleton.getInstance().justDoInit( ChessPack.getInstance(SAVED_COLLECTION),  SAVED_IDX);
 
-        doInit(activity, SAVED_COLLECTION, SAVED_IDX);
-    }
+        MainContentSingleton.getInstance().doInit_ChessLab_public(activity);
+
+     }
+
+
 
 
     /**
@@ -186,15 +214,37 @@ public class MainContentSingleton {
      *
      * click desde el punto de menu
      **/
-    public void doInit(AppCompatActivity activity, String MATE_COLLECTION_SELECTED, int SAVED_IDX) {
+
+    public void justDoInit(ChessPack chessPack, int SAVED_IDX) {
+
+        // El tema es que con esto no se si necesito un
+        // Singleton o no y esto no es estático ....
+        // Igualmente NO ES LO MISMO variables de instancia... que singleton ....
+        // con lo cual safo...
+
+        this.chessPackSelected = chessPack;
 
         // puntero
-        MATE_COLLECTION = MATE_COLLECTION_SELECTED;
+        MATE_COLLECTION = chessPackSelected.getChessPackID();
         idx = SAVED_IDX;
 
-        doInit_ChessLab(activity);
-
     }
+
+
+
+    public void doInit_ChessLab_public(AppCompatActivity activity) {
+
+        boolean isTraining = chessPackSelected.esTrainingMode();
+
+        if (isTraining) {
+            // Setup - El trainer module que va a guardar el mail del usuario.
+            ChessTrainer trainerModulo = (ChessTrainer) ChessTrainer.getInstance(Const.KEY_PACK_G002_001);
+        }
+
+        doInit_ChessLab(activity);
+    }
+
+
 
 
     private void doInit_ChessLab(AppCompatActivity activity) {
@@ -203,19 +253,21 @@ public class MainContentSingleton {
         mainContent = new MainContentSingleton.MainContent(activity);
 
 
-        Drawable thumb = getImageCollection();
+        Drawable thumb = getImageFromId(chessPackSelected.getIdDrawable_thumb()); // getImageCollection();
         mainContent.getSeekBar().setThumb(thumb);
         mainContent.getSeekBar().setProgress(idx);
-        mainContent.getSeekBar().setMax(getMAX_Mate(MATE_COLLECTION));
+        mainContent.getSeekBar().setMax(chessPackSelected.getSize());
 
 
-        mainContent.getTextViewLeft().setText(getTextCollectionName(MATE_COLLECTION));
-        mainContent.getTextView().setText(getTextProgressBar(MATE_COLLECTION, idx));
+        Resources resources = mainContent.getActivity().getResources();
+
+        mainContent.getTextViewLeft().setText(Util.getTextCollectionName(resources, MATE_COLLECTION));
+
+        String textoProgressBar = MainContentSingleton.getTextProgressBar_static(idx, mainContent.getSeekBar().getMax());
+
+        mainContent.getTextView().setText(textoProgressBar);
 
 
-
-        //Al final parece que no lo uso ...
-        mainContent.getChessSolution().setText("");
 
 
         // listener
@@ -234,7 +286,9 @@ public class MainContentSingleton {
                 progress = progresValue;
 
                 // Cambio el problema mientras se desliza la SeekBar
-                mainContent.getTextView().setText("[ " + progress + "/" + seekBar.getMax() + " ]");
+                String txtProgressBar = MainContentSingleton.getTextProgressBar_static(progress, seekBar.getMax());
+                mainContent.getTextView().setText(txtProgressBar);
+
                 idx = progresValue;
                 navigate();
             }
@@ -244,7 +298,9 @@ public class MainContentSingleton {
             public void onStopTrackingTouch(SeekBar seekBar) {
 
                 // Cambio el problema cuando se suelta la seekBar
-                mainContent.getTextView().setText("[ " + progress + "/" + seekBar.getMax() + " ]");
+                String txtProgressBar = MainContentSingleton.getTextProgressBar_static(progress, seekBar.getMax());
+                mainContent.getTextView().setText(txtProgressBar);
+
                 idx = progress;
                 navigate();
 
@@ -252,24 +308,112 @@ public class MainContentSingleton {
         });
 
 
-        mainContent.getButtonSolution().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        if (esTraining()) {
 
-                String chessSolution = ChessSolutions.getSolution(getImageName());
+            // final
+            final AppCompatActivity finalActivity = activity;
 
-                Snackbar.make(view, chessSolution, Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
-        // init;
-        // firstProblem();
+            switchTrainigMode(true);
+
+
+            // Edit text
+            EditText editText = mainContent.getUserSolution();
+
+            // Set user preload text
+            setUserSolution(MATE_COLLECTION, idx);
+
+            editText.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    // TODO Auto-generated method stub
+                }
+
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    // TODO Auto-generated method stub
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+
+                    String userSolution = s.toString();
+                    Log.d(TAG, "TRAIN user[Problem "+idx+"]:"  + userSolution);
+
+                    ChessTrainer.addUserSolution(MATE_COLLECTION, idx, userSolution);
+
+                }
+            });
+
+
+            // Listeners
+
+            mainContent.getSendMailSolution().setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    // Envio mail
+                    ChessTrainer.enviarEmail(finalActivity);
+                }
+            });
+
+
+        } else {
+
+            switchTrainigMode(false);
+
+            // Listeners
+
+            mainContent.getButtonSolution().setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View view) {
+
+                    String chessSolution = ChessSolutions.getSolution(getImageName());
+
+                    Snackbar.make(view, chessSolution, Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                }
+            });
+
+        }
 
         goToProblem(MATE_COLLECTION, idx);
 
     }
 
+
+
+    /**
+     * Switch traing mode ON y OFF
+     * Train Mode OFF: User only watch the solution when press the question icon.
+     * Train Mode ON:  User write the solution and the user can send a mail to chesslab
+     */
+    private void switchTrainigMode(boolean trainMode) {
+
+        Log.d(TAG, "switchTrainigMode(...)");
+
+        if (trainMode) {
+
+            // Training Mode ON:
+            mainContent.getUserSolution_Label().setVisibility(View.VISIBLE);
+            mainContent.getUserSolution().setVisibility(View.VISIBLE);
+            mainContent.getSendMailSolution().setVisibility(View.VISIBLE);
+            mainContent.getButtonSolution().setVisibility(View.GONE);
+
+        } else {
+
+            // Training Mode OFF:
+            mainContent.getUserSolution_Label().setVisibility(View.GONE);
+            mainContent.getUserSolution().setVisibility(View.GONE);
+            mainContent.getSendMailSolution().setVisibility(View.GONE);
+            mainContent.getButtonSolution().setVisibility(View.VISIBLE);
+
+        }
+
+    }
 
 
     //--[Navigate] ----------------------------------------------------------
@@ -297,7 +441,8 @@ public class MainContentSingleton {
 
         Log.d(TAG, "lastProblem("+MATE_COLLECTION+"): " + idx);
 
-        idx = getMAX_Mate(MATE_COLLECTION);
+        idx = chessPackSelected.getSize();
+
         navigate();
     }
 
@@ -325,7 +470,7 @@ public class MainContentSingleton {
 
     private boolean hayNextProblem() {
 
-        boolean hayNext = (idx < getMAX_Mate(MATE_COLLECTION));
+        boolean hayNext = (idx < chessPackSelected.getSize());
 
         return hayNext;
     }
@@ -336,10 +481,6 @@ public class MainContentSingleton {
      * Si es el ultimo problem: sube de nivel
      * Si es el ultimo probleme del ultimo nive ... Toast
      */
-    public void superNextProblem_old() {
-        showAvisoDialog();
-    }
-
     public void superNextProblem() {
 
         Log.d(TAG, "superNextProblem("+MATE_COLLECTION+"): " + idx);
@@ -354,18 +495,37 @@ public class MainContentSingleton {
 
             String NEXT_MATE_COLLECTION = getNext_MATE_COLLECTION();
 
-            MainContentSingleton.getInstance().doInit(mainContent.getActivity(), NEXT_MATE_COLLECTION, 0);
+            MainContentSingleton.getInstance().justDoInit( ChessPack.getInstance(NEXT_MATE_COLLECTION),  0);
+
+            MainContentSingleton.getInstance().doInit_ChessLab_public(mainContent.getActivity());
 
             showAvisoDialog();
             return;
         }
 
-        // TOAST: LLego al final ...
-        // showAviso("LLego al Final");
-        showAvisoDialog("", i18n(R.string.txt_finish), getImageFromId(R.drawable.pieza05_caballo), THEME_STYLE_GREEN);
+        Resources resources = mainContent.getActivity().getResources();
 
-        Log.d(TAG, "LLEGO AL FINAL");
+        // LLego al final ...
+        showAvisoDialog("",
+                i18n(resources, R.string.txt_finish),
+                "Store Demo",
+                getImageFromId(R.drawable.pieza05_caballo), THEME_STYLE_GREEN);
+
+
         return;
+    }
+
+
+        /*
+     * Pensando en el futuro
+     * */
+
+    private static String i18n(Resources resources, int id) {
+
+
+        String texto = resources.getString(id);
+
+        return texto;
     }
 
 
@@ -374,17 +534,19 @@ public class MainContentSingleton {
         Log.d(TAG, "navigate("+MATE_COLLECTION+"): " + idx);
 
         mainContent.getSeekBar().setProgress(idx);
-        setImageResource(MATE_COLLECTION, idx);
+        setImageResource(idx);
+
+        setUserSolution(MATE_COLLECTION, idx);
     }
 
 
 
     //--[Utiles] ----------------------------------------------------------
 
-    private void setImageResource(String MATE_COLLECTION, int idx)
+    private void setImageResource(int idx)
     {
 
-        String imagename = getImageName(MATE_COLLECTION, idx);
+        String imagename = chessPackSelected.getImageName(idx);
 
         int res = mainContent.getActivity().getResources().getIdentifier(imagename, "drawable",
                 mainContent.getActivity().getPackageName());
@@ -393,71 +555,28 @@ public class MainContentSingleton {
 
     }
 
+    private void setUserSolution(String MATE_COLLECTION, int idx)
+    {
 
-    private String getTextProgressBar(String MATE_COLLECTION, int idx) {
+        if (esTraining()) {
+            EditText editText = mainContent.getUserSolution();
 
-        // String res = i18n("Ejercicio: ") + "0"+ "/" + this.mainContent.getSeekBar().getMax();
-        String res =  "[ " + idx+ "/" + this.mainContent.getSeekBar().getMax() + " ]";
-
-        return res;
-
+            // Set user preload text
+            String userSolution = ChessTrainer.getUserSolution(MATE_COLLECTION, idx);
+            editText.setText(userSolution);
+        }
     }
 
 
-    private String getTextCollectionName() {
-        return getTextCollectionName(MATE_COLLECTION);
-    }
-
-    private String getTextCollectionName(String MATE_COLLECTION) {
 
 
-        if (MATE_COLLECTION.equals(KEY_MATE_1_COLLECTION)) {
-            return i18n(R.string.menu_mate_en_1);
-        }
 
-        if (MATE_COLLECTION.equals(KEY_MATE_2_COLLECTION)) {
-            return i18n(R.string.menu_mate_en_2);
-        }
-
-        if (MATE_COLLECTION.equals(KEY_MATE_3_COLLECTION)) {
-            return i18n(R.string.menu_mate_en_3);
-        }
-
-        if (MATE_COLLECTION.equals(KEY_MATE_4_COLLECTION)) {
-            return i18n(R.string.menu_mate_en_4);
-        }
-
-        return "";
-
-    }
 
     private String getImageName() {
 
-        return getImageName(MATE_COLLECTION, idx);
+        return chessPackSelected.getImageName(idx);
     }
 
-    private String getImageName(String MATE_COLLECTION, int idx) {
-
-        String sidx = String.format("%05d", idx);
-
-        if (MATE_COLLECTION.equals(KEY_MATE_1_COLLECTION)) {
-            return "chess_mate1_" + sidx;
-        }
-
-        if (MATE_COLLECTION.equals(KEY_MATE_2_COLLECTION)) {
-            return "chess_mate2_" + sidx;
-        }
-
-        if (MATE_COLLECTION.equals(KEY_MATE_3_COLLECTION)) {
-            return "chess_mate3_" + sidx;
-        }
-
-        if (MATE_COLLECTION.equals(KEY_MATE_4_COLLECTION)) {
-            return "chess_mate4_" + sidx;
-        }
-
-        return "chess_mate1_" + sidx;
-    }
 
 
     /**
@@ -467,25 +586,11 @@ public class MainContentSingleton {
      * */
     private String getNext_MATE_COLLECTION() {
 
-        Log.d(TAG, "getNext_MATE_COLLECTION("+MATE_COLLECTION+") ");
+        String nextChessPack = chessPackSelected.getNextChessPack();
 
-        if (MATE_COLLECTION.equals(KEY_MATE_1_COLLECTION)) {
-            return KEY_MATE_2_COLLECTION;
-        }
+        Log.d(TAG, "nextChessPack("+MATE_COLLECTION+" -> "+nextChessPack+") ");
 
-        if (MATE_COLLECTION.equals(KEY_MATE_2_COLLECTION)) {
-            return KEY_MATE_3_COLLECTION;
-        }
-
-        if (MATE_COLLECTION.equals(KEY_MATE_3_COLLECTION)) {
-            return KEY_MATE_4_COLLECTION;
-        }
-
-        if (MATE_COLLECTION.equals(KEY_MATE_4_COLLECTION)) {
-            return KEY_MATE_4_COLLECTION;
-        }
-
-        return KEY_MATE_1_COLLECTION;
+        return nextChessPack;
     }
 
 
@@ -499,74 +604,6 @@ public class MainContentSingleton {
     }
 
 
-    /*
-    * Le sumo 1 porque arranco en cero
-    * */
-    private int getMAX_Mate(String MATE_COLLECTION) {
-
-        if (MATE_COLLECTION.equals(KEY_MATE_1_COLLECTION)) {
-            return MAX_MateEn1;
-        }
-
-        if (MATE_COLLECTION.equals(KEY_MATE_2_COLLECTION)) {
-            return MAX_MateEn2;
-        }
-
-        if (MATE_COLLECTION.equals(KEY_MATE_3_COLLECTION)) {
-            return MAX_MateEn3 ;
-        }
-
-        if (MATE_COLLECTION.equals(KEY_MATE_4_COLLECTION)) {
-            return MAX_MateEn4;
-        }
-
-        return MAX_MateEn1;
-
-    }
-
-
-    private Drawable getImageCollection() {
-
-        return getImageCollection(true);
-    }
-
-    private Drawable getImageCollection(boolean small) {
-
-
-        int r_draw = R.drawable.seekbar_24_peon;
-
-
-        if (MATE_COLLECTION.equals(KEY_MATE_1_COLLECTION)) {
-            r_draw = (small)
-                    ? R.drawable.seekbar_24_peon
-                    : R.drawable.pieza06_peon;
-        }
-
-        if (MATE_COLLECTION.equals(KEY_MATE_2_COLLECTION)) {
-            r_draw = (small)
-                    ? R.drawable.seekbar_32_torre
-                    : R.drawable.pieza03_torre;
-        }
-
-        if (MATE_COLLECTION.equals(KEY_MATE_3_COLLECTION)) {
-            r_draw = (small)
-                    ? R.drawable.seekbar_34_dama
-                    : R.drawable.pieza02_dama;
-
-        }
-
-        if (MATE_COLLECTION.equals(KEY_MATE_4_COLLECTION)) {
-            r_draw = (small)
-                    ? R.drawable.seekbar_36_rey
-                    : R.drawable.pieza01_rey;
-        }
-
-        Drawable thumb = mainContent.getActivity().getResources().getDrawable(r_draw);
-
-        return thumb;
-    }
-
-
     private Drawable getImageFromId(int r_draw) {
 
         Drawable thumb = mainContent.getActivity().getResources().getDrawable(r_draw);
@@ -574,16 +611,7 @@ public class MainContentSingleton {
         return thumb;
     }
 
-    /*
-    * Pensando en el futuro
-    * */
 
-    private String i18n(int id) {
-
-        String texto = mainContent.getActivity().getResources().getString(id);
-
-        return texto;
-    }
 
 
 
@@ -600,10 +628,18 @@ public class MainContentSingleton {
 
     private void showAvisoDialog() {
 
-        showAvisoDialog("", getTextCollectionName(), getImageCollection(false), THEME_STYLE_INDIGO);
+        Resources resources = mainContent.getActivity().getResources();
+
+        Drawable image = getImageFromId(chessPackSelected.getIdDrawable());
+
+        String message      =  Util.getTextCollectionName(resources, chessPackSelected.getChessPackID());
+        String message_down =  Util.getLevelString(resources, chessPackSelected.getLevel());
+
+
+        showAvisoDialog("", message, message_down, image, THEME_STYLE_INDIGO);
     }
 
-    private void showAvisoDialog(String titulo, String message, Drawable image, String THEME_STYLE) {
+    private void showAvisoDialog(String titulo, String message, String message_down, Drawable image, String THEME_STYLE) {
 
         Activity context = mainContent.getActivity();
 
@@ -627,10 +663,10 @@ public class MainContentSingleton {
 
 
         // text
-        TextView tv = (TextView) dialog.findViewById(R.id.gchess_a001_txt);
-        tv.setText(message);
+        TextView tv_up = (TextView) dialog.findViewById(R.id.gchess_a001_txt);
+        tv_up.setText(message);
 
-        tv.setOnClickListener(new View.OnClickListener() {
+        tv_up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
@@ -642,42 +678,51 @@ public class MainContentSingleton {
         if (THEME_STYLE_GREEN.equals(THEME_STYLE)) {
             LinearLayout ll = (LinearLayout) dialog.findViewById(R.id.gchess_a001_txt_layout);
             ll.setBackgroundColor(context.getResources().getColor(R.color.green_color_500));
-            tv.setTextColor(context.getResources().getColor(R.color.colorPrimaryText));
+            // tv_up.setTextColor(context.getResources().getColor(R.color.colorPrimaryText));
         }
+
+
+
         // show
         dialog.show();
 
+        // text_down
+        TextView tv_down = (TextView) dialog.findViewById(R.id.gchess_a001_txt_down);
+        tv_down.setText(message_down);
+
     }
 
 
-    private void showAvisoDialogOLD(String titulo, String message) {
 
-        Activity context = mainContent.getActivity();
 
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+    /**
+     *
+     * @return true en Training Mpde
+     */
+    private boolean esTraining() {
 
-        // set title
-        alertDialogBuilder.setTitle(titulo);
+        return ChessPack.getInstance(MATE_COLLECTION).esTrainingMode();
 
-        // set dialog message
-        alertDialogBuilder
-                .setMessage(message)
-                .setCancelable(false)
-                .setPositiveButton("DONE",new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog,int id) {
-                        // if this button is clicked, close
-                        // current activity
-                        // MainActivity.this.finish();
-                    }
-                })
-        ;
 
-        // create alert dialog
-        AlertDialog alertDialog = alertDialogBuilder.create();
-
-        // show it
-        alertDialog.show();
     }
+
+
+    //--[Static Util Funciotns ]------
+
+    private static String getTextProgressBar_static(int idx, int max) {
+
+        int actual = idx + 1;
+        int total  = max + 1;
+
+        String res =  "[ " + actual + "/" + total + " ]";
+
+        return res;
+    }
+
+
+
+
+
 
 }
 

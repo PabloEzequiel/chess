@@ -12,6 +12,8 @@ Longitud: -9.1333300
     <string name="menu_mate_en_2">Checkmate em #2</string>
     <string name="menu_mate_en_3">Checkmate em #3</string>
     <string name="menu_mate_en_4">Checkmate em #4</string>
+    <string name="menu_train_001">Trem com WGA</string>
+    <string name="menu_train_store">Chess Lab Store</string><!-- Loja -->
 
     <string name="navigation_drawer_open">Abra a barra de navegação</string>
     <string name="navigation_drawer_close">Feche a barra de navegação</string>
@@ -20,12 +22,18 @@ Longitud: -9.1333300
     <string name="action_about">Sobre</string>
 
 
+    <!-- Text Labels -->
+    <string name="chess_txt_mail_label">Qual seria o seu movimento?</string>
+
+
     <!-- Settings -->
     <string name="pref_language_setting">Idioma</string>
     <string name="pref_language_titulo">Selecione o idioma</string>
     <string name="pref_list_idiomas_summary">Idioma do aplicativo</string>
 
     <string name="title_activity_display_message">Sobre</string>
+    <string name="title_activity_chesslab_store">Chess Lab Store</string>
+
 
 
     <!-- Links -->
@@ -33,7 +41,26 @@ Longitud: -9.1333300
 
     <!-- Txt -->
     <string name="txt_finish">Finalizados</string>
+    <string name="txt_finish_down">Demo</string>
     <string name="txt_about">Encontre em cada diagrama, a combinação para ganhar o jogo.</string>
     <string name="txt_about_tal">\'Se prohibiesen Xadrez, eu provavelmente Smuggler.\' (Mikhail Tahl)</string>
 
+    <string name="level_nivel_01">Elementar</string>         <!-- 01 Elementary   -->
+    <string name="level_nivel_05">Intermediário</string>     <!-- 05 Intermediate -->
+    <string name="level_nivel_10">Avançado</string>          <!-- 10 Advanced     -->
+
+    <!-- Store -->
+    <string name="nombre_transicion_imagen">chess pack</string>
+    <string name="share">Ação</string>
+    <string name="comunicate">Comunicare</string>
+    <string name="store">Store</string>
+    <string name="menu_train_002">Preto Checkmate</string>
+
+    <string name="menu_train_003">Vitórias brancas (I) </string>
+    <string name="menu_train_004">Vitórias brancas (II)</string>
+
 </resources>
+
+
+
+

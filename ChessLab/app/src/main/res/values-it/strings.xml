@@ -12,6 +12,8 @@ Longitud: 12.5113300
     <string name="menu_mate_en_2">Scacco matto al #2</string>
     <string name="menu_mate_en_3">Scacco matto al #3</string>
     <string name="menu_mate_en_4">Scacco matto al #4</string>
+    <string name="menu_train_001">Treno con WGA</string>
+    <string name="menu_train_store">Chess Lab Store</string><!-- Conservare -->
 
     <string name="navigation_drawer_open">Cassetto navigazione Aperto</string>
     <string name="navigation_drawer_close">Chiudere il cassetto di navigazione</string>
@@ -20,12 +22,18 @@ Longitud: 12.5113300
     <string name="action_about">Informazioni</string>
 
 
+    <!-- Text Labels -->
+    <string name="chess_txt_mail_label">Quale sarebbe il vostro movimento?</string>
+
+
     <!-- Settings -->
     <string name="pref_language_setting">lingua</string>
     <string name="pref_language_titulo">Scegli la lingua</string>
     <string name="pref_list_idiomas_summary">Lingua dell applicazione</string>
 
     <string name="title_activity_display_message">Informazioni</string>
+    <string name="title_activity_chesslab_store">Chess Lab Store</string>
+
 
 
     <!-- Links -->
@@ -33,7 +41,22 @@ Longitud: 12.5113300
 
     <!-- Txt -->
     <string name="txt_finish">Finalizzato</string>
+    <string name="txt_finish_down">Demo</string>
     <string name="txt_about">Trovare in ogni schema, la combinazione per vincere la partita.</string>
     <string name="txt_about_tal">\'Se prohibiesen scacchi, probabilmente avrei Smuggler.\' (Mikhail Tahl)</string>
 
+    <string name="level_nivel_01">Elementare</string>       <!-- 01 Elementary   -->
+    <string name="level_nivel_05">Intermedio</string>       <!-- 05 Intermediate -->
+    <string name="level_nivel_10">Avanzate</string>         <!-- 10 Advanced     -->
+
+    <!-- Store -->
+    <string name="nombre_transicion_imagen">chess pack</string>
+    <string name="share">Quota</string>
+    <string name="comunicate">Comunicare</string>
+    <string name="store">Store</string>
+    <string name="menu_train_002">Nero Checkmates</string>
+
+    <string name="menu_train_003">Vittorie bianchi (I) </string>
+    <string name="menu_train_004">Vittorie bianchi (II)</string>
 </resources>
+

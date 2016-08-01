@@ -136,6 +136,8 @@ public class UserSettingsActivity extends PreferenceActivity
         Configuration conf = res.getConfiguration();
         conf.locale = locale;
         res.updateConfiguration(conf, dm);
+
+        // Do a refresh to Main Activity
         Intent refresh = new Intent(this, MainActivity.class);
         refresh.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(refresh);
@@ -144,40 +146,5 @@ public class UserSettingsActivity extends PreferenceActivity
     }
 
 
-    /*
-    MenuItem nav_mate1;
-    MenuItem nav_mate2;
-    MenuItem nav_mate3;
-    MenuItem nav_mate4;
-
-    MenuItem action_about;
-    MenuItem action_settings;
-
-    private void updateUI() {
-
-        Resources resources = getResources();
-
-        // Menu Left
-        nav_mate1 = (MenuItem) findViewById(R.id.nav_mate1);   // Es todo null ?? Por que?
-        nav_mate2 = (MenuItem) findViewById(R.id.nav_mate2);
-        nav_mate3 = (MenuItem) findViewById(R.id.nav_mate3);
-        nav_mate4 = (MenuItem) findViewById(R.id.nav_mate4);
-
-        nav_mate1.setTitle(resources.getString(R.string.menu_mate_en_1));
-        nav_mate2.setTitle(resources.getString(R.string.menu_mate_en_2));
-        nav_mate3.setTitle(resources.getString(R.string.menu_mate_en_3));
-        nav_mate4.setTitle(resources.getString(R.string.menu_mate_en_4));
-
-        // Menu Toolbar
-        action_settings = (MenuItem) findViewById(R.id.action_settings);
-        action_settings.setTitle(resources.getString(R.string.action_settings));
-
-        action_about    = (MenuItem) findViewById(R.id.action_about);
-        action_about.setTitle(resources.getString(R.string.action_about));
-
-
-
-    }
-    */
 
 }

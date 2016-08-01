@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="188dp"
+    android:background="@color/color_100" >
+
+
+
+    <!--
+                android:background="@color/color_50"
+    -->
+
+    <ImageView
+        android:id="@+id/imagen_chess_pack"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_margin="4dp"
+        android:layout_gravity="top|center"
+        android:src="@drawable/pieza06_peon"
+        android:transitionName="@string/nombre_transicion_imagen"
+        />
+
+
+    <LinearLayout
+        android:id="@+id/imagen_chess_pack_layout"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="68dp"
+        android:background="@color/green_color_800"
+        android:layout_gravity="center_horizontal|bottom">
+
+
+        <TextView
+            android:id="@+id/nombre_chess_pack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:maxLines="1"
+            android:paddingLeft="16dp"
+            android:paddingTop="16dp"
+            android:textSize="16sp"
+            android:textStyle="bold|normal"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:id="@+id/nombre_chess_pack_down"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:maxLines="1"
+            android:paddingLeft="16dp"
+            android:paddingBottom="16dp"
+            android:textSize="12sp"
+            android:textStyle="normal"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+            android:textColor="@android:color/white"
+            android:text="Nivel Facil"/>
+
+    </LinearLayout>
+
+
+
+
+
+    <!--
+    Single Line of 48
+    <TextView
+        android:id="@+id/nombre_chess_pack"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@color/green_color_800"
+        android:maxLines="1"
+        android:paddingLeft="16dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:textSize="16sp"
+        android:textStyle="bold|normal"
+        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+        android:textColor="@android:color/white" />
+     -->
+
+</FrameLayout>

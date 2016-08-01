@@ -20,12 +20,26 @@
             </intent-filter>
         </activity>
 
+
+        <activity
+            android:name=".store.ChessPackActivity"
+            android:label="@string/title_activity_chesslab_store"
+            android:configChanges="locale"
+            android:parentActivityName="io.github.pabloezequiel.chesslab.store.ChessPackActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".store.ChessPackActivity" />
+        </activity>
+
         <activity
             android:name=".UserSettingsActivity"
             android:label="@string/pref_language_titulo"
-            android:configChanges="locale">
+            android:configChanges="locale"
+            android:parentActivityName="io.github.pabloezequiel.chesslab.UserSettingsActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".UserSettingsActivity" />
         </activity>
-
 
         <activity
             android:name=".AboutActivity"
@@ -38,5 +52,13 @@
         </activity>
 
     </application>
+
+
+    <!-- Inicio Permisos requeridos -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
+    <!-- Final  Permisos requeridos -->
 
 </manifest>

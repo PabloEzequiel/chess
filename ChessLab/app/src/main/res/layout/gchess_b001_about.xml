@@ -47,7 +47,7 @@
         android:layout_height="wrap_content"
         android:textSize="@dimen/typography_body"
         android:layout_marginTop="@dimen/typography_mtop_body"
-        android:text="Versión: 1.0.1"/>
+        android:text="@string/txt_about_version"/>
 
 
 
@@ -56,7 +56,7 @@
         android:layout_height="wrap_content"
         android:textSize="@dimen/typography_body"
         android:layout_marginTop="@dimen/typography_mtop_body"
-        android:text="Author: Pablo Ezequiel"/>
+        android:text="@string/txt_about_author"/>
 
 
 
@@ -79,6 +79,16 @@
         android:autoLink="web"
         android:text="@string/txtCredits"/>
 
+
+    <TextView
+        android:id="@+id/txt_creative_commons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="50dp"
+        android:textSize="@dimen/typography_body"
+        android:layout_marginTop="@dimen/typography_mtop_body"
+        android:autoLink="web"
+        android:text="@string/txt_creative_commons"/>
 
 
 </LinearLayout>

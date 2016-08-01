@@ -12,6 +12,8 @@ Longitud: 2.3488000
     <string name="menu_mate_en_2">Checkmate à #2</string>
     <string name="menu_mate_en_3">Checkmate à #3</string>
     <string name="menu_mate_en_4">Checkmate à #4</string>
+    <string name="menu_train_001">Train with WGA</string>
+    <string name="menu_train_store">Chess Lab Store</string><!-- Magasin -->
 
     <string name="navigation_drawer_open">Ouvrez la barre de navigation</string>
     <string name="navigation_drawer_close">Fermez la barre de navigation</string>
@@ -20,19 +22,42 @@ Longitud: 2.3488000
     <string name="action_about">À propos de</string>
 
 
+    <!-- Text Labels -->
+    <string name="chess_txt_mail_label">Quelle serait votre déménagement?</string>
+
+
     <!-- Settings -->
     <string name="pref_language_setting">Langue</string>
     <string name="pref_language_titulo">Sélectionnez la langue</string>
     <string name="pref_list_idiomas_summary">Application Language</string>
 
     <string name="title_activity_display_message">À propos de</string>
+    <string name="title_activity_chesslab_store">Chess Lab Store</string>
+
+
 
     <!-- Links -->
+    <string name="txtCredits"><a href="https://pabloezequiel.github.io/chess">pabloezequiel.github.io/chess</a></string>
 
     <!-- Txt -->
     <string name="txt_finish">Finalisé</string>
+    <string name="txt_finish_down">Demo</string>
     <string name="txt_about">Dans chaque diagramme, la combinaison pour gagner le match.</string>
     <string name="txt_about_tal">\'Si prohibiesen Chess, je serais probablement Smuggler.\' (Mikhail Tahl)</string>
-    <string name="txtCredits"><a href="https://pabloezequiel.github.io/chess">pabloezequiel.github.io/chess</a></string>
 
+    <string name="level_nivel_01">Élémentaire</string>       <!-- 01 Elementary   -->
+    <string name="level_nivel_05">Intermédiaire</string>     <!-- 05 Intermediate -->
+    <string name="level_nivel_10">Avancée</string>           <!-- 10 Advanced     -->
+
+    <!-- Store -->
+    <string name="nombre_transicion_imagen">chess pack</string>
+    <string name="share">Partager</string>
+    <string name="comunicate">Communiquer</string>
+    <string name="store">Store</string>
+    <string name="menu_train_002">Checkmate noir</string>
+
+    <string name="menu_train_003">Victoires blanches (I) </string>
+    <string name="menu_train_004">Victoires blanches (II)</string>
 </resources>
+
+

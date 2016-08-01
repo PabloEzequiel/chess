@@ -25,6 +25,9 @@ https://developer.android.com/guide/topics/resources/providing-resources.html#Al
     <string name="menu_mate_en_2">Checkmate at #2</string>
     <string name="menu_mate_en_3">Checkmate at #3</string>
     <string name="menu_mate_en_4">Checkmate at #4</string>
+    <string name="menu_train_001">Train with WGA</string>
+    <string name="menu_train_store">Chess Lab Store</string>
+
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -33,21 +36,56 @@ https://developer.android.com/guide/topics/resources/providing-resources.html#Al
     <string name="action_about">About</string>
 
 
+    <!-- Text Labels -->
+    <string name="chess_txt_mail_label">What would be your move?</string>
+
+
     <!-- Settings -->
     <string name="pref_language_setting">Language</string>
     <string name="pref_language_titulo">Select Language</string>
     <string name="pref_list_idiomas_summary">Application Language</string>
 
     <string name="title_activity_display_message">About</string>
+    <string name="title_activity_chesslab_store">Chess Lab Store</string>
+
 
 
     <!-- Links -->
     <string name="txtCredits"><a href="https://pabloezequiel.github.io/chess">pabloezequiel.github.io/chess</a></string>
 
     <!-- Txt -->
-    <string name="txt_finish">finished</string>
+    <string name="txt_finish">Finished</string>
+    <string name="txt_finish_down">Demo</string>
     <string name="txt_about">Find in each diagram, the combination to win the game.</string>
     <string name="txt_about_tal">\'If Chess was forbidden, I probably would smuggler.\' (Mikhail Tahl)</string>
 
+    <string name="level_nivel_01">Elementary</string>       <!-- 01 Elementary   -->
+    <string name="level_nivel_05">Intermediate</string>     <!-- 05 Intermediate -->
+    <string name="level_nivel_10">Advanced</string>         <!-- 10 Advanced     -->
 
+    <!-- Store -->
+    <string name="nombre_transicion_imagen">chess pack</string>
+    <string name="share">Share</string>
+    <string name="comunicate">Communicate</string>
+    <string name="store">Store</string>
+
+
+
+    <!-- Attribution -->
+    <string name="txt_about_version" translatable="false"><b>Version:</b>
+        3.1.0
+    </string>
+
+    <string name="txt_about_author" translatable="false"><b>Author:</b>
+         Pablo Ezequiel Inchausti
+    </string>
+
+    <string name="txt_creative_commons" translatable="false"><b>Attribution:</b>
+        Launch and Store icons built with
+        <a href="https://romannurik.github.io/AndroidAssetStudio/index.html">Android Asset Studio</a>
+        and licensed under <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>
+    </string>
+    <string name="menu_train_002">Black Checkmates</string>
+    <string name="menu_train_003">White Win (I) </string>
+    <string name="menu_train_004">White Win (II)</string>
 </resources>

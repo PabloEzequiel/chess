@@ -1,6 +1,7 @@
 package io.github.pabloezequiel.chesslab;
 
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -14,6 +15,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import io.github.pabloezequiel.chesslab.store.ChessPack;
+import io.github.pabloezequiel.chesslab.store.ChessPackActivity;
+import io.github.pabloezequiel.chesslab.store.Const;
 
 
 public class MainActivity extends AppCompatActivity
@@ -29,6 +34,12 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        // App Config
+
+
+        // Main UX:
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -95,9 +106,11 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
+
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
@@ -124,29 +137,70 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
+
         int id = item.getItemId();
 
+        ChessPack chessPack = ChessPack.getInstance(Const.KEY_PACK_G001_001);  // Default
+
+        boolean playChess = true;
+
         if (id == R.id.nav_mate1) {
-            MainContentSingleton.getInstance().doInit(this, MainContentSingleton.KEY_MATE_1_COLLECTION, 0);
-            // Handle the camera action
+
+            chessPack = ChessPack.getInstance(Const.KEY_PACK_G001_001);
+
         } else if (id == R.id.nav_mate2) {
-            MainContentSingleton.getInstance().doInit(this, MainContentSingleton.KEY_MATE_2_COLLECTION, 0);
+
+             chessPack = ChessPack.getInstance(Const.KEY_PACK_G001_002);
 
         } else if (id == R.id.nav_mate3) {
-            MainContentSingleton.getInstance().doInit(this, MainContentSingleton.KEY_MATE_3_COLLECTION, 0);
+
+            chessPack = ChessPack.getInstance(Const.KEY_PACK_G001_003);
 
         } else if (id == R.id.nav_mate4) {
-            MainContentSingleton.getInstance().doInit(this, MainContentSingleton.KEY_MATE_4_COLLECTION, 0);
 
-      //  } else if (id == R.id.nav_share) {
+            chessPack = ChessPack.getInstance(Const.KEY_PACK_G001_004);
 
-      //  } else if (id == R.id.nav_send) {
+            /*
+         } else if (id == R.id.train_store) {
+
+            chessPack = ChessPack.getInstance(Const.KEY_PACK_G002_001);
+
+            */
+
+        } else if (id == R.id.chesslab_store) {
+
+            playChess = false;
+
+            Intent intent = new Intent(this, ChessPackActivity.class);
+            startActivityForResult(intent, RESULT_SETTINGS);
+
+
+
+        } else if (id == R.id.nav_share) {
+
+            playChess = false;
+
+            invokeShareIntent(this);
+
+
+            //  } else if (id == R.id.nav_send) {
+
 
         }
 
+
+        if (playChess) {
+
+            MainContentSingleton.getInstance().justDoInit(chessPack,  0);
+
+            MainContentSingleton.getInstance().doInit_ChessLab_public(this);
+
+        }
+
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+
         return true;
     }
 
@@ -185,6 +239,24 @@ public class MainActivity extends AppCompatActivity
     }
 
 
+    /**
+     * Share button
+     * @param activity
+     */
+
+    public static void invokeShareIntent(Activity activity) {
+
+        String textToShare = "Chess Lab for Android!";
+        String urlToShare = "https://play.google.com/store/apps/details?id=io.github.pabloezequiel.chesslab";
+        String text = textToShare + "\n" + urlToShare;
+
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(android.content.Intent.EXTRA_TEXT, text);
+        activity.startActivity(intent);
+    }
+
 }
+
 
 

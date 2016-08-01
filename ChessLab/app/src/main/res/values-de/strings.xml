@@ -12,6 +12,8 @@ Longitud: 13.4105300
     <string name="menu_mate_en_2">Checkmate in #2</string>
     <string name="menu_mate_en_3">Checkmate in #3</string>
     <string name="menu_mate_en_4">Checkmate in #4</string>
+    <string name="menu_train_001">Zug mit WGA</string>
+    <string name="menu_train_store">Chess Lab Store</string><!-- Shop -->
 
     <string name="navigation_drawer_open">Öffnen Sie die Navigationsleiste</string>
     <string name="navigation_drawer_close">Schließen Sie die Navigationsleiste</string>
@@ -20,12 +22,18 @@ Longitud: 13.4105300
     <string name="action_about">über</string>
 
 
+    <!-- Text Labels -->
+    <string name="chess_txt_mail_label">Was würden Sie Ihren Umzug sein?</string>
+
+
     <!-- Settings -->
     <string name="pref_language_setting">Sprache</string>
     <string name="pref_language_titulo">Wählen Sie eine Sprache</string>
     <string name="pref_list_idiomas_summary">Anwendungssprache</string>
 
     <string name="title_activity_display_message">über</string>
+    <string name="title_activity_chesslab_store">Chess Lab Store</string>
+
 
 
     <!-- Links -->
@@ -33,9 +41,24 @@ Longitud: 13.4105300
 
     <!-- Txt -->
     <string name="txt_finish">Abgeschlossen</string>
+    <string name="txt_finish_down">Demo</string>
     <string name="txt_about">Finden Sie in jedem Diagramm die Kombination, die das Spiel definiert.</string>
     <string name="txt_about_tal">\'Wenn Schach prohibiesen , wahrscheinlich würde ich Schmuggler.\' (Mikhail Tahl)</string>
 
+    <string name="level_nivel_01">Elementar</string>           <!-- 01 Elementary   -->
+    <string name="level_nivel_05">Mittlere</string>            <!-- 05 Intermediate -->
+    <string name="level_nivel_10">Fortgeschritten</string>     <!-- 10 Advanced     -->
 
+    <!-- Store -->
+    <string name="nombre_transicion_imagen">chess pack</string>
+    <string name="share">Aktie</string>
+    <string name="comunicate">kommunizieren</string>
+    <string name="store">Store</string>
+    <string name="menu_train_002">Schwarz Checkmates</string>
+
+    <string name="menu_train_003">Weiß gewinnt (I) </string>
+    <string name="menu_train_004">Weiß gewinnt (II)</string>
 
 </resources>
+
+
