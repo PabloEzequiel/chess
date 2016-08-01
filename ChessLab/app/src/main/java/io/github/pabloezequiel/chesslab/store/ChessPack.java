@@ -117,13 +117,13 @@ public class ChessPack {
 
             ChessPack.getInstance(Const.KEY_PACK_G002_001),
             ChessPack.getInstance(Const.KEY_PACK_G002_002),
+            ChessPack.getInstance(Const.KEY_PACK_G002_003),
+            ChessPack.getInstance(Const.KEY_PACK_G002_004),
+
             ChessPack.getInstance(Const.KEY_PACK_G001_001),
             ChessPack.getInstance(Const.KEY_PACK_G001_002),
             ChessPack.getInstance(Const.KEY_PACK_G001_003),
             ChessPack.getInstance(Const.KEY_PACK_G001_004),
-
-
-
     };
 
     @Override
@@ -274,6 +274,33 @@ public class ChessPack {
             return chessPack;
         }
 
+        if (Const.KEY_PACK_G002_003.equals(chessPackID)) {
+
+            chessPack = new ChessPack(
+                    Const.KEY_PACK_G002_003,
+                    Const.KEY_PACK_G002_003_Size,
+                    R.mipmap.ic_store_caballo,      //R.drawable.pieza05_h550_caballo,
+                    R.drawable.seekbar_30_caballo,
+                    "chess_train_003_",
+                    Const.KEY_PACK_G002_004,      // Next Chess Pack to Train
+                    Const.LEVEL_INTERMEDIATE);
+
+            return chessPack;
+        }
+
+        if (Const.KEY_PACK_G002_004.equals(chessPackID)) {
+
+            chessPack = new ChessPack(
+                    Const.KEY_PACK_G002_004,
+                    Const.KEY_PACK_G002_004_Size,
+                    R.mipmap.ic_store_caballo,      //R.drawable.pieza05_h550_caballo,
+                    R.drawable.seekbar_30_caballo,
+                    "chess_train_004_",
+                    null,      // Next Chess Pack to Train
+                    Const.LEVEL_ADVANCED);
+
+            return chessPack;
+        }
 
         // Antes de que de error, entrego el paquete default
         chessPack = new ChessPack(

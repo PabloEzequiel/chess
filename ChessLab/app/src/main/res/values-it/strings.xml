@@ -12,7 +12,7 @@ Longitud: 12.5113300
     <string name="menu_mate_en_2">Scacco matto al #2</string>
     <string name="menu_mate_en_3">Scacco matto al #3</string>
     <string name="menu_mate_en_4">Scacco matto al #4</string>
-    <string name="menu_train_001">Train #01</string>
+    <string name="menu_train_001">Treno con WGA</string>
     <string name="menu_train_store">Chess Lab Store</string><!-- Conservare -->
 
     <string name="navigation_drawer_open">Cassetto navigazione Aperto</string>
@@ -56,6 +56,7 @@ Longitud: 12.5113300
     <string name="store">Store</string>
     <string name="menu_train_002">Nero Checkmates</string>
 
-
+    <string name="menu_train_003">Vittorie bianchi (I) </string>
+    <string name="menu_train_004">Vittorie bianchi (II)</string>
 </resources>
 

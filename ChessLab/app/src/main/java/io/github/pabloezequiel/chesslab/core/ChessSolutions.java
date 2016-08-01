@@ -154,6 +154,48 @@ public class ChessSolutions {
         chessProblems_utf8.put("chess_train_002_00016","1 ... ♛g2+ 2. ♕xg2 ♜xe1+ 3. ♕f1 ♜xf1#   ");
         chessProblems_utf8.put("chess_train_002_00017","1 ... ♜c1+ 2. ♔xc1 ♜e1+ 3. ♘xe1 ♛xe1#   ");
 
+
+        chessProblems_utf8.put("chess_train_003_00000"," 1. ♖c1 ♛xa4 2. ♖xc8#    ");
+        chessProblems_utf8.put("chess_train_003_00001"," 1. ♖d7 ♛xd7 2. ♘f6+ ♚h8 3. ♘xd7    ");
+        chessProblems_utf8.put("chess_train_003_00002"," 1. ♗d6 ♚g8 2. ♖e8    ");
+        chessProblems_utf8.put("chess_train_003_00003"," 1. f5 ♜xg3 2. f6    ");
+        chessProblems_utf8.put("chess_train_003_00004"," 1. ♖e8+ ♚h7 2. ♕xd5 ♜xd5 3. ♖xc8    ");
+        chessProblems_utf8.put("chess_train_003_00005"," 1. g7 ♚xg7 2. ♘f5+    ");
+        chessProblems_utf8.put("chess_train_003_00006"," 1. d4+ cxd4 2. ♖a5+ ♚e6 3. ♖a6+    ");
+        chessProblems_utf8.put("chess_train_003_00007"," 1. b6 cxb6 2. a6 bxa6 3. c6 ♚f6 4. c7 ♚e7 5. c8=Q    ");
+        chessProblems_utf8.put("chess_train_003_00008"," 1. ♕g1+ ♛xg1 2. g8=Q+    ");
+        chessProblems_utf8.put("chess_train_003_00009"," 1. ♖e8 ♜xc7 2. ♔d6+    ");
+        chessProblems_utf8.put("chess_train_003_00010"," 1. ♘f6+ gxf6 2. ♗e6+    ");
+        chessProblems_utf8.put("chess_train_003_00011"," 1. ♘h6+ ♚h8 2. ♕xe5 ♛xe5 3. ♘xf7+ ♚g8 4. ♘xe5    ");
+        chessProblems_utf8.put("chess_train_003_00012"," 1. ♕a3+ ♚xa3 2. ♘c2#    ");
+        chessProblems_utf8.put("chess_train_003_00013"," 1. ♗d6 ♛xb3 2. ♖f8#    ");
+        chessProblems_utf8.put("chess_train_003_00014"," 1. ♖b1 ♛xc5 2. ♖xb7#    ");
+        chessProblems_utf8.put("chess_train_003_00015"," 1. ♕b3+ ♛xb3 2. ♖e8+ ♚f7 3. ♖f8#    ");
+        chessProblems_utf8.put("chess_train_003_00016"," 1. ♕xd7 ♜xd7 2. ♖e8+ ♚h7 3. ♖cc8 ♛c1+ 4. ♖xc1    ");
+        chessProblems_utf8.put("chess_train_003_00017"," 1. ♖h8+ ♚xh8 2. ♗xg7+ ♜xg7 3. ♕xd5    ");
+        chessProblems_utf8.put("chess_train_003_00018"," 1. ♘e7+ ♛xe7 2. ♕xh7+ ♚xh7 3. ♖h5+ ♚g8 4. ♖h8#    ");
+
+        chessProblems_utf8.put("chess_train_004_00000"," 1. ♕g4 ♛xg4 2. ♖xe8+ ♝f8 3. ♘e7+ ♚h8 4. ♖xf8#      ");
+        chessProblems_utf8.put("chess_train_004_00001"," 1. ♖e8+ ♝f8 2. ♖xf8+ ♚xf8 3. ♘f5+ ♚g8 4. ♕f8+ ♚xf8 5. ♖d8#      ");
+        chessProblems_utf8.put("chess_train_004_00002"," 1. ♘g5 ♝xc2 2. ♗xb7      ");
+        chessProblems_utf8.put("chess_train_004_00003"," 1. ♘h6+ ♚f8 2. ♘f5 exf5 3. ♖xh7      ");
+        chessProblems_utf8.put("chess_train_004_00004"," 1. ♘xd5 cxd5 2. ♕xh7+ ♚xh7 3. ♖h5+ ♚g8 4. ♖h8#      ");
+        chessProblems_utf8.put("chess_train_004_00005"," 1. ♖xd8 ♛xd8 2. ♖d1 ♛e7 3. ♖d7 ♛xd7 4. ♕f6      ");
+        chessProblems_utf8.put("chess_train_004_00006"," 1. e6 ♝xe6 2. ♗d4 f6 3. ♕g4 ♚f7 4. ♖fe1      ");
+        chessProblems_utf8.put("chess_train_004_00007"," 1. ♖xe5 ♛xe5 2. ♘g6 ♛xh2 3. ♘de7#      ");
+        chessProblems_utf8.put("chess_train_004_00008"," 1. b4 ♛d8 2. ♕xf6+ ♚xf6 3. ♗b2#      ");
+        chessProblems_utf8.put("chess_train_004_00009"," 1. ♘f6+ gxf6 2. exf6 ♛g4 3. ♕xf8+ ♚xf8 4. ♖d8#      ");
+        chessProblems_utf8.put("chess_train_004_00010"," 1. ♘a6+ ♚a8 2. ♘xc7+ ♚b8 3. ♘a6+ ♚a8 4. ♖b7 ♜xc2 5. ♖b8+ ♜xb8 6. ♘c7#      ");
+        chessProblems_utf8.put("chess_train_004_00011"," 1. ♗g8 ♜xg8 2. ♔f7 ♜xg6 3. fxg6 h5 4. g7+ ♚h7 5. g8=Q+ ♚h6 6. ♕g6#      ");
+        chessProblems_utf8.put("chess_train_004_00012"," 1. axb5 axb5 2. d5 ♝xf2+ 3. ♔xf2 ♞d8 4. ♕d3      ");
+        chessProblems_utf8.put("chess_train_004_00013"," 1. ♕xh6+ gxh6 2. ♖g7+ ♚h8 3. ♗g8 ♜xg8 4. ♖xg8+ ♚h7 5. ♖1g7#      ");
+        chessProblems_utf8.put("chess_train_004_00014"," 1. ♖xb2 ♛xb2 2. ♕xc8+ ♞xc8 3. d7 ♞b6 4. d8=Q+      ");
+        chessProblems_utf8.put("chess_train_004_00015"," 1. ♖xd3 ♛xd3 2. ♖e8+ ♚h7 3. ♕xd3+ ♜xd3 4. ♖xa8      ");
+        chessProblems_utf8.put("chess_train_004_00016"," 1. ♖e7 ♛b7+ 2. ♗e4 ♛xe4+ 3. ♖gxe4 ♝xe7 4. ♖xe7      ");
+        chessProblems_utf8.put("chess_train_004_00017"," 1. ♖h4 ♛a3 2. ♕xg7+ ♚xg7 3. h8=Q+ ♜xh8 4. ♖g4+ ♚h6 5. ♖h1#      ");
+        chessProblems_utf8.put("chess_train_004_00018"," 1. ♖xg7+ ♚xg7 2. ♖g1+ ♚h8 3. ♕xe5+ dxe5 4. ♗xe5+ f6 5. ♗xf6+ ♜xf6 6. ♖g8#      ");
+
+
     }
 
 

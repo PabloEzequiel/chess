@@ -25,7 +25,7 @@ https://developer.android.com/guide/topics/resources/providing-resources.html#Al
     <string name="menu_mate_en_2">Checkmate at #2</string>
     <string name="menu_mate_en_3">Checkmate at #3</string>
     <string name="menu_mate_en_4">Checkmate at #4</string>
-    <string name="menu_train_001">Train #01</string>
+    <string name="menu_train_001">Train with WGA</string>
     <string name="menu_train_store">Chess Lab Store</string>
 
 
@@ -86,5 +86,6 @@ https://developer.android.com/guide/topics/resources/providing-resources.html#Al
         and licensed under <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>
     </string>
     <string name="menu_train_002">Black Checkmates</string>
-
+    <string name="menu_train_003">White Win (I) </string>
+    <string name="menu_train_004">White Win (II)</string>
 </resources>

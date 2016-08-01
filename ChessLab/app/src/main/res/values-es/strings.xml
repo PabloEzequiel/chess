@@ -12,7 +12,7 @@ Longitud: -3.7025600
     <string name="menu_mate_en_2">Jaque Mate en #2</string>
     <string name="menu_mate_en_3">Jaque Mate en #3</string>
     <string name="menu_mate_en_4">Jaque Mate en #4</string>
-    <string name="menu_train_001">Train #01</string>
+    <string name="menu_train_001">Entrena con WGA</string>
     <string name="menu_train_store">Chess Lab Store</string><!-- Tienda -->
 
     <string name="navigation_drawer_open">Abrir la barra de navegación</string>
@@ -58,5 +58,7 @@ Longitud: -3.7025600
     <string name="store">Store</string>
     <string name="menu_train_002">Jaque Mate de Negras</string>
 
+    <string name="menu_train_003">Blancas Ganan (I) </string>
+    <string name="menu_train_004">Blancas Ganan (II)</string>
 
 </resources>

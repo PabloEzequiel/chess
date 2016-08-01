@@ -86,6 +86,14 @@ public class Util {
             return resources.getString(R.string.menu_train_002);
         }
 
+        if (MATE_COLLECTION.equals(Const.KEY_PACK_G002_003)) {
+            return resources.getString(R.string.menu_train_003);
+        }
+
+        if (MATE_COLLECTION.equals(Const.KEY_PACK_G002_004)) {
+            return resources.getString(R.string.menu_train_004);
+        }
+
         return "";
 
     }

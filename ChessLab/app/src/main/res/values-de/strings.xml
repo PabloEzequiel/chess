@@ -12,7 +12,7 @@ Longitud: 13.4105300
     <string name="menu_mate_en_2">Checkmate in #2</string>
     <string name="menu_mate_en_3">Checkmate in #3</string>
     <string name="menu_mate_en_4">Checkmate in #4</string>
-    <string name="menu_train_001">Train #01</string>
+    <string name="menu_train_001">Zug mit WGA</string>
     <string name="menu_train_store">Chess Lab Store</string><!-- Shop -->
 
     <string name="navigation_drawer_open">Öffnen Sie die Navigationsleiste</string>
@@ -56,6 +56,8 @@ Longitud: 13.4105300
     <string name="store">Store</string>
     <string name="menu_train_002">Schwarz Checkmates</string>
 
+    <string name="menu_train_003">Weiß gewinnt (I) </string>
+    <string name="menu_train_004">Weiß gewinnt (II)</string>
 
 </resources>
 

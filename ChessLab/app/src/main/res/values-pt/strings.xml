@@ -12,7 +12,7 @@ Longitud: -9.1333300
     <string name="menu_mate_en_2">Checkmate em #2</string>
     <string name="menu_mate_en_3">Checkmate em #3</string>
     <string name="menu_mate_en_4">Checkmate em #4</string>
-    <string name="menu_train_001">Train #01</string>
+    <string name="menu_train_001">Trem com WGA</string>
     <string name="menu_train_store">Chess Lab Store</string><!-- Loja -->
 
     <string name="navigation_drawer_open">Abra a barra de navegação</string>
@@ -56,6 +56,8 @@ Longitud: -9.1333300
     <string name="store">Store</string>
     <string name="menu_train_002">Preto Checkmate</string>
 
+    <string name="menu_train_003">Vitórias brancas (I) </string>
+    <string name="menu_train_004">Vitórias brancas (II)</string>
 
 </resources>
 
